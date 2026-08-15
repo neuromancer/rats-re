@@ -1,0 +1,14 @@
+Function: FUN_0040b93d
+Address: 0x0040B93D
+
+PUSH EBP
+MOV ECX,dword ptr [ESP + 0x8]
+MOV EBP,dword ptr [ECX]
+MOV EAX,dword ptr [ECX + 0x1c]
+PUSH EAX
+MOV EAX,dword ptr [ECX + 0x18]
+PUSH EAX
+CALL 0x0040ABE2
+ADD ESP,0x8
+POP EBP
+RET 0x4

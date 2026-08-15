@@ -1,0 +1,94 @@
+Function: FUN_0040499f
+Address: 0x0040499F
+
+
+void __cdecl FUN_0040499f(HDC param_1,undefined4 param_2,int param_3)
+
+{
+  HGDIOBJ pvVar1;
+  bool bVar2;
+  uint local_1c;
+  uint local_18;
+  tagRECT local_14;
+  
+  pvVar1 = GetStockObject(1);
+  SelectObject(param_1,pvVar1);
+  bVar2 = param_3 != 1;
+  if (bVar2) {
+    pvVar1 = GetStockObject(7);
+    SelectObject(param_1,pvVar1);
+  }
+  else {
+    SelectObject(param_1,DAT_0041ec18);
+  }
+  local_18 = (uint)!bVar2;
+  local_1c = (uint)!bVar2;
+  GetClientRect(DAT_00414978,&local_14);
+  switch(param_2) {
+  case 0:
+    Rectangle(param_1,0,0x17,0x17,local_14.bottom + -0x17);
+    FUN_00404e3b(DAT_00414990,local_18 + 2,local_1c + (local_14.bottom + -0x28) / 2 + 0xc,0x10,0x10)
+    ;
+    if (param_3 == 0) {
+      pvVar1 = GetStockObject(6);
+      SelectObject(param_1,pvVar1);
+    }
+    else {
+      pvVar1 = GetStockObject(7);
+      SelectObject(param_1,pvVar1);
+    }
+    MoveToEx(param_1,0,local_14.bottom + -0x18,(LPPOINT)0x0);
+    LineTo(param_1,0,0x17);
+    LineTo(param_1,0x16,0x17);
+    break;
+  case 1:
+    Rectangle(param_1,0x17,local_14.bottom + -0x17,local_14.right + -0x9b,local_14.bottom);
+    FUN_00404e3b(DAT_0041498c,local_18 + (local_14.right + -0xac) / 2 + 0xc,
+                 local_1c + local_14.bottom + -0x15,0x10,0x10);
+    if (param_3 == 0) {
+      pvVar1 = GetStockObject(6);
+      SelectObject(param_1,pvVar1);
+    }
+    else {
+      pvVar1 = GetStockObject(7);
+      SelectObject(param_1,pvVar1);
+    }
+    MoveToEx(param_1,0x17,local_14.bottom + -1,(LPPOINT)0x0);
+    LineTo(param_1,0x17,local_14.bottom + -0x17);
+    LineTo(param_1,local_14.right + -0x9c,local_14.bottom + -0x17);
+    break;
+  case 2:
+    Rectangle(param_1,local_14.right + -0x9b,0x17,local_14.right + -0x84,local_14.bottom + -0x17);
+    FUN_00404e3b(DAT_00414994,local_18 + local_14.right + -0x99,
+                 local_1c + (local_14.bottom + -0x28) / 2 + 0xc,0x10,0x10);
+    if (param_3 == 0) {
+      pvVar1 = GetStockObject(6);
+      SelectObject(param_1,pvVar1);
+    }
+    else {
+      pvVar1 = GetStockObject(7);
+      SelectObject(param_1,pvVar1);
+    }
+    MoveToEx(param_1,local_14.right + -0x9b,local_14.bottom + -0x18,(LPPOINT)0x0);
+    LineTo(param_1,local_14.right + -0x9b,0x17);
+    LineTo(param_1,local_14.right + -0x84,0x17);
+    break;
+  case 3:
+    Rectangle(param_1,0x17,0,local_14.right + -0x9b,0x17);
+    FUN_00404e3b(DAT_00414988,local_18 + (local_14.right + -0xac) / 2 + 0xc,local_1c + 2,0x10,0x10);
+    if (param_3 == 0) {
+      pvVar1 = GetStockObject(6);
+      SelectObject(param_1,pvVar1);
+    }
+    else {
+      pvVar1 = GetStockObject(7);
+      SelectObject(param_1,pvVar1);
+    }
+    MoveToEx(param_1,0x17,0x16,(LPPOINT)0x0);
+    LineTo(param_1,0x17,0);
+    LineTo(param_1,local_14.right + -0x9b,0);
+  }
+  return;
+}
+
+

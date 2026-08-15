@@ -1,0 +1,12 @@
+Function: FUN_0040ab60
+Address: 0x0040AB60
+
+
+void FUN_0040ab60(void)
+
+{
+  __lock(0xd);
+  return;
+}
+
+

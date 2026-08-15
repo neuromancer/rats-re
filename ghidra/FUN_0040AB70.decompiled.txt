@@ -1,0 +1,12 @@
+Function: FUN_0040ab70
+Address: 0x0040AB70
+
+
+void FUN_0040ab70(void)
+
+{
+  FUN_0040bc90(0xd);
+  return;
+}
+
+

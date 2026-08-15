@@ -1,0 +1,81 @@
+Function: storeTimeFmt
+Address: 0x0040E8A0
+
+
+/* Library Function - Single Match
+    _storeTimeFmt
+   
+   Library: Visual Studio 1998 Release */
+
+uint __cdecl storeTimeFmt(int param_1,int param_2)
+
+{
+  char cVar1;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  undefined1 *puVar5;
+  char *pcVar6;
+  char *pcVar7;
+  void *unaff_EDI;
+  char *local_c;
+  int local_8;
+  int local_4;
+  
+  local_4 = 0;
+  local_8 = 0;
+  uVar2 = ___getlocaleinfo((_locale_t)0x0,param_1,(LPCWSTR)0x23,(LCTYPE)&local_4,unaff_EDI);
+  uVar3 = ___getlocaleinfo((_locale_t)0x0,param_1,(LPCWSTR)0x25,(LCTYPE)&local_8,unaff_EDI);
+  uVar4 = ___getlocaleinfo((_locale_t)0x1,param_1,(LPCWSTR)0x1e,(LCTYPE)&local_c,unaff_EDI);
+  uVar4 = uVar2 | uVar3 | uVar4;
+  if (uVar4 != 0) {
+    return uVar4;
+  }
+  puVar5 = (undefined1 *)FUN_0040c9b0(0xd);
+  *(undefined1 **)(param_2 + 0xa8) = puVar5;
+  if (local_4 == 0) {
+    *puVar5 = 0x68;
+    pcVar7 = puVar5 + 1;
+    if (local_8 == 0) goto LAB_0040e93b;
+    *pcVar7 = 'h';
+  }
+  else {
+    *puVar5 = 0x48;
+    pcVar7 = puVar5 + 1;
+    if (local_8 == 0) goto LAB_0040e93b;
+    *pcVar7 = 'H';
+  }
+  pcVar7 = puVar5 + 2;
+LAB_0040e93b:
+  cVar1 = *local_c;
+  pcVar6 = local_c;
+  while (cVar1 != '\0') {
+    cVar1 = *pcVar6;
+    pcVar6 = pcVar6 + 1;
+    *pcVar7 = cVar1;
+    pcVar7 = pcVar7 + 1;
+    cVar1 = *pcVar6;
+  }
+  *pcVar7 = 'm';
+  pcVar6 = pcVar7 + 1;
+  if (local_8 != 0) {
+    *pcVar6 = 'm';
+    pcVar6 = pcVar7 + 2;
+  }
+  cVar1 = *local_c;
+  pcVar7 = local_c;
+  while (cVar1 != '\0') {
+    cVar1 = *pcVar7;
+    pcVar7 = pcVar7 + 1;
+    *pcVar6 = cVar1;
+    pcVar6 = pcVar6 + 1;
+    cVar1 = *pcVar7;
+  }
+  *pcVar6 = 's';
+  pcVar6[1] = 's';
+  pcVar6[2] = '\0';
+  FUN_0040bd90(local_c);
+  return 0;
+}
+
+

@@ -1,0 +1,21 @@
+Function: __amsg_exit
+Address: 0x0040A220
+
+
+/* Library Function - Single Match
+    __amsg_exit
+   
+   Library: Visual Studio 1998 Release */
+
+void __cdecl __amsg_exit(int param_1)
+
+{
+  if (DAT_00412f48 == 1) {
+    __FF_MSGBANNER();
+  }
+  FUN_0040b9a0(param_1);
+  (*(code *)PTR___exit_00412f44)(0xff);
+  return;
+}
+
+

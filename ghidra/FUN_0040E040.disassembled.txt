@@ -1,0 +1,48 @@
+Function: __flush
+Address: 0x0040E040
+
+PUSH EBX
+PUSH ESI
+MOV ESI,dword ptr [ESP + 0xc]
+PUSH EDI
+XOR EDI,EDI
+MOV EAX,dword ptr [ESI + 0xc]
+MOV ECX,EAX
+AND CL,0x3
+CMP CL,0x2
+JNZ      LAB_0040E092
+TEST EAX,0x108
+JZ       LAB_0040E092
+MOV EAX,dword ptr [ESI + 0x8]
+MOV EBX,dword ptr [ESI]
+SUB EBX,EAX
+TEST EBX,EBX
+JLE      LAB_0040E092
+PUSH EBX
+PUSH EAX
+MOV EAX,dword ptr [ESI + 0x10]
+PUSH EAX
+CALL 0x0040F710
+ADD ESP,0xc
+CMP EAX,EBX
+JNZ      LAB_0040E089
+MOV EAX,dword ptr [ESI + 0xc]
+TEST AL,0x80
+JZ       LAB_0040E092
+AND EAX,0xfffffffd
+MOV dword ptr [ESI + 0xc],EAX
+JMP      LAB_0040E092
+
+LAB_0040E089:
+OR dword ptr [ESI + 0xc],0x20
+MOV EDI,0xffffffff
+
+LAB_0040E092:
+MOV EAX,dword ptr [ESI + 0x8]
+MOV dword ptr [ESI],EAX
+MOV EAX,EDI
+MOV dword ptr [ESI + 0x4],0x0
+POP EDI
+POP ESI
+POP EBX
+RET

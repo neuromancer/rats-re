@@ -1,0 +1,27 @@
+Function: FUN_0040546b
+Address: 0x0040546B
+
+
+void __cdecl FUN_0040546b(int param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  HDC hdc;
+  HGDIOBJ pvVar3;
+  tagRECT local_14;
+  
+  GetClientRect(DAT_00414978,&local_14);
+  iVar1 = local_14.right + param_1 * 0x16;
+  iVar2 = (param_2 * 0xe8) / 7;
+  hdc = GetDC(DAT_00414978);
+  pvVar3 = GetStockObject(8);
+  SelectObject(hdc,pvVar3);
+  pvVar3 = GetStockObject(2);
+  SelectObject(hdc,pvVar3);
+  Rectangle(hdc,iVar1 + -0x7c,iVar2 + 0xaa,iVar1 + -0x67,iVar2 + 0xbf);
+  ReleaseDC(DAT_00414978,hdc);
+  return;
+}
+
+

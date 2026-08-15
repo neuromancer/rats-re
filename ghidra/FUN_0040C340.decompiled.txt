@@ -1,0 +1,55 @@
+Function: __ShrMan
+Address: 0x0040C340
+
+
+/* Library Function - Single Match
+    __ShrMan
+   
+   Library: Visual Studio 1998 Release */
+
+void __cdecl __ShrMan(uint *param_1,int param_2)
+
+{
+  uint uVar1;
+  byte bVar2;
+  int iVar3;
+  uint uVar4;
+  uint *puVar5;
+  int iVar6;
+  uint *puVar7;
+  uint uVar8;
+  
+  iVar3 = (int)(param_2 + (param_2 >> 0x1f & 0x1fU)) >> 5;
+  bVar2 = (byte)(param_2 >> 0x1f);
+  bVar2 = (((byte)param_2 ^ bVar2) - bVar2 & 0x1f ^ bVar2) - bVar2;
+  iVar6 = 3;
+  uVar4 = 0;
+  puVar5 = param_1;
+  do {
+    uVar1 = *puVar5;
+    uVar8 = uVar1 >> (bVar2 & 0x1f);
+    *puVar5 = uVar8;
+    uVar8 = uVar8 | uVar4;
+    uVar4 = (uVar1 & ~(-1 << (bVar2 & 0x1f))) << (0x20 - bVar2 & 0x1f);
+    iVar6 = iVar6 + -1;
+    *puVar5 = uVar8;
+    puVar5 = puVar5 + 1;
+  } while (iVar6 != 0);
+  iVar6 = 2;
+  puVar7 = param_1 + 2;
+  puVar5 = param_1 + (2 - iVar3);
+  do {
+    if (iVar6 < iVar3) {
+      *puVar7 = 0;
+    }
+    else {
+      *puVar7 = *puVar5;
+    }
+    puVar5 = puVar5 + -1;
+    puVar7 = puVar7 + -1;
+    iVar6 = iVar6 + -1;
+  } while (-1 < iVar6);
+  return;
+}
+
+

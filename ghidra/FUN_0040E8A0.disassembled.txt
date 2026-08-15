@@ -1,0 +1,114 @@
+Function: storeTimeFmt
+Address: 0x0040E8A0
+
+SUB ESP,0xc
+LEA EAX,[ESP + 0x8]
+PUSH ESI
+MOV dword ptr [ESP + 0xc],0x0
+MOV dword ptr [ESP + 0x8],0x0
+PUSH EDI
+PUSH EAX
+MOV EDI,dword ptr [ESP + 0x1c]
+PUSH 0x23
+PUSH EDI
+PUSH 0x0
+CALL 0x0040F990
+ADD ESP,0x10
+MOV ESI,EAX
+LEA EAX,[ESP + 0xc]
+PUSH EAX
+PUSH 0x25
+PUSH EDI
+PUSH 0x0
+CALL 0x0040F990
+ADD ESP,0x10
+OR ESI,EAX
+LEA EAX,[ESP + 0x8]
+PUSH EAX
+PUSH 0x1e
+PUSH EDI
+PUSH 0x1
+CALL 0x0040F990
+ADD ESP,0x10
+OR ESI,EAX
+JZ       LAB_0040E8FF
+MOV EAX,ESI
+POP EDI
+POP ESI
+ADD ESP,0xc
+RET
+
+LAB_0040E8FF:
+MOV EDI,dword ptr [ESP + 0x1c]
+PUSH 0xd
+CALL 0x0040C9B0
+ADD ESP,0x4
+MOV EDX,EAX
+MOV dword ptr [EDI + 0xa8],EAX
+CMP dword ptr [ESP + 0x10],0x0
+JZ       LAB_0040E92C
+MOV byte ptr [EDX],0x48
+INC EDX
+CMP dword ptr [ESP + 0xc],0x0
+JZ       LAB_0040E93B
+MOV byte ptr [EDX],0x48
+JMP      LAB_0040E93A
+
+LAB_0040E92C:
+MOV byte ptr [EDX],0x68
+INC EDX
+CMP dword ptr [ESP + 0xc],0x0
+JZ       LAB_0040E93B
+MOV byte ptr [EDX],0x68
+
+LAB_0040E93A:
+INC EDX
+
+LAB_0040E93B:
+MOV EAX,dword ptr [ESP + 0x8]
+CMP byte ptr [EAX],0x0
+JZ       LAB_0040E94F
+
+LAB_0040E944:
+MOV CL,byte ptr [EAX]
+INC EAX
+MOV byte ptr [EDX],CL
+INC EDX
+CMP byte ptr [EAX],0x0
+JNZ      LAB_0040E944
+
+LAB_0040E94F:
+MOV byte ptr [EDX],0x6d
+INC EDX
+CMP dword ptr [ESP + 0xc],0x0
+JZ       LAB_0040E95E
+MOV byte ptr [EDX],0x6d
+INC EDX
+
+LAB_0040E95E:
+MOV EAX,dword ptr [ESP + 0x8]
+CMP byte ptr [EAX],0x0
+JZ       LAB_0040E972
+
+LAB_0040E967:
+MOV CL,byte ptr [EAX]
+INC EAX
+MOV byte ptr [EDX],CL
+INC EDX
+CMP byte ptr [EAX],0x0
+JNZ      LAB_0040E967
+
+LAB_0040E972:
+MOV byte ptr [EDX],0x73
+MOV byte ptr [EDX + 0x1],0x73
+INC EDX
+MOV byte ptr [EDX + 0x1],0x0
+MOV EAX,dword ptr [ESP + 0x8]
+PUSH EAX
+CALL 0x0040BD90
+ADD ESP,0x4
+MOV EAX,ESI
+POP EDI
+POP ESI
+ADD ESP,0xc
+RET

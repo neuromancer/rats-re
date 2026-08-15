@@ -1,0 +1,33 @@
+Function: FUN_00405c52
+Address: 0x00405C52
+
+
+undefined4 FUN_00405c52(HWND param_1,int param_2,int param_3)
+
+{
+  tagRECT local_24;
+  tagRECT local_14;
+  
+  if (param_2 != 0xf) {
+    if (param_2 == 0x110) {
+      GetWindowRect(DAT_00414978,&local_24);
+      GetWindowRect(param_1,&local_14);
+      MoveWindow(param_1,(local_24.left + (local_24.right - local_24.left) / 2) -
+                         (local_14.right - local_14.left) / 2,
+                 (local_24.top + (local_24.bottom - local_24.top) / 2) -
+                 (local_14.bottom - local_14.top) / 2,local_14.right - local_14.left,
+                 local_14.bottom - local_14.top,1);
+      *(undefined4 *)(&DAT_004166a8 + DAT_00416688 * 0x1c) = DAT_0041560c;
+      *(short *)(&DAT_004166a6 + DAT_00416688 * 0x1c) = (short)DAT_0041e86c;
+      return 1;
+    }
+    if ((param_2 == 0x111) && (param_3 == 1)) {
+      GetDlgItemTextA(param_1,0x65,&DAT_00416690 + DAT_00416688 * 0x1c,0x13);
+      EndDialog(param_1,1);
+      return 1;
+    }
+  }
+  return 0;
+}
+
+

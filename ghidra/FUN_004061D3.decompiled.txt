@@ -1,0 +1,128 @@
+Function: FUN_004061d3
+Address: 0x004061D3
+
+
+// WARNING: Globals starting with '_' overlap smaller symbols at the same address
+
+undefined4 FUN_004061d3(HWND param_1,int param_2,int param_3)
+
+{
+  HDC hDC;
+  HBRUSH hbr;
+  int iVar1;
+  longlong lVar2;
+  int hDest;
+  HDC hdcSrc;
+  int xSrc;
+  int ySrc;
+  int wSrc;
+  int hSrc;
+  CHAR *pCVar3;
+  DWORD rop;
+  CHAR local_60 [52];
+  int local_2c;
+  tagRECT local_28;
+  HDC local_18;
+  tagRECT local_14;
+  
+  if (param_2 == 0xf) {
+    hDC = GetDC(param_1);
+    GetClientRect(param_1,&local_14);
+    hbr = GetStockObject(2);
+    FillRect(hDC,&local_14,hbr);
+    local_18 = CreateCompatibleDC(hDC);
+    iVar1 = GetMapMode(hDC);
+    SetMapMode(local_18,iVar1);
+    SelectObject(local_18,DAT_0041ebb8);
+    BitBlt(hDC,local_14.right / 2 + -0x32,6,100,0x28,local_18,0,0,0xcc0020);
+    SelectObject(local_18,DAT_00415644);
+    rop = 0xcc0020;
+    hSrc = 0x14;
+    wSrc = 0x14;
+    ySrc = 0;
+    xSrc = 0;
+    hDest = 0x3c;
+    iVar1 = 0x3c;
+    hdcSrc = local_18;
+    lVar2 = __ftol();
+    StretchBlt(hDC,local_14.right / 2 + -0x1e,(int)lVar2 + -0x1e,iVar1,hDest,hdcSrc,xSrc,ySrc,wSrc,
+               hSrc,rop);
+    DeleteDC(local_18);
+    SetTextAlign(hDC,6);
+    SetTextColor(hDC,0xffffff);
+    SetBkMode(hDC,1);
+    iVar1 = wsprintfA(local_60,&DAT_00412550);
+    pCVar3 = local_60;
+    local_2c = iVar1;
+    lVar2 = __ftol();
+    TextOutA(hDC,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    iVar1 = wsprintfA(local_60,s_http___www_cityscape_co_uk_users_0041256c);
+    pCVar3 = local_60;
+    local_2c = iVar1;
+    lVar2 = __ftol();
+    TextOutA(hDC,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    iVar1 = wsprintfA(local_60,s_This_is_a_free_8_level_demo__00412594);
+    pCVar3 = local_60;
+    local_2c = iVar1;
+    lVar2 = __ftol();
+    TextOutA(hDC,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    iVar1 = wsprintfA(local_60,s_Click_on_the__Order__button_for_004125b4);
+    pCVar3 = local_60;
+    local_2c = iVar1;
+    lVar2 = __ftol();
+    TextOutA(hDC,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    iVar1 = wsprintfA(local_60,s_details_on_buying_the_full_versi_004125d4);
+    pCVar3 = local_60;
+    local_2c = iVar1;
+    lVar2 = __ftol();
+    TextOutA(hDC,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    ReleaseDC(param_1,hDC);
+  }
+  else {
+    if (param_2 == 0x110) {
+      DAT_00414960 = 1;
+      _DAT_0041561c = 0x1e;
+      DAT_0041e870 = param_1;
+      DAT_0041ec28 = 1;
+      GetWindowRect(DAT_00414978,&local_28);
+      GetWindowRect(param_1,&local_14);
+      MoveWindow(param_1,(local_28.left + (local_28.right - local_28.left) / 2) -
+                         (local_14.right - local_14.left) / 2,
+                 (local_28.top + (local_28.bottom - local_28.top) / 2) -
+                 (local_14.bottom - local_14.top) / 2,local_14.right - local_14.left,
+                 local_14.bottom - local_14.top,1);
+      if ((DAT_0041ec24 == 0) && (DAT_0041e888 == 0)) {
+        SendMessageA(DAT_00414978,0x102,0x50,0);
+      }
+      return 1;
+    }
+    if (param_2 == 0x111) {
+      if (param_3 == 1) {
+        EndDialog(param_1,1);
+        DAT_00414960 = 0;
+        return 1;
+      }
+      if (param_3 == 800) {
+        if (DAT_0041ec20 == 1) {
+          WinHelpA(DAT_00414978,s_rats_hlp_00412624,1,0x104);
+        }
+        else {
+          MessageBoxA(DAT_00414978,s_Help_file_is_corrupt__00412638,&DAT_00412630,0x30);
+        }
+        return 1;
+      }
+      if (param_3 == 0x321) {
+        if (DAT_0041ec20 == 1) {
+          WinHelpA(DAT_00414978,s_rats_hlp_004125f8,3,0);
+        }
+        else {
+          MessageBoxA(DAT_00414978,s_Help_file_is_corrupt__0041260c,&DAT_00412604,0x30);
+        }
+        return 1;
+      }
+    }
+  }
+  return 0;
+}
+
+

@@ -1,0 +1,50 @@
+Function: FUN_0040591a
+Address: 0x0040591A
+
+
+void __cdecl FUN_0040591a(int param_1)
+
+{
+  int iVar1;
+  HDC hdc;
+  HDC hdc_00;
+  int iVar2;
+  int iVar3;
+  int local_14;
+  
+  iVar1 = *(int *)(&DAT_0041e8a4 + param_1 * 0x14) * 8 + 0x1e;
+  hdc = GetDC(DAT_00414978);
+  hdc_00 = CreateCompatibleDC(hdc);
+  SelectObject(hdc_00,DAT_00414940);
+  iVar2 = GetMapMode(hdc);
+  SetMapMode(hdc_00,iVar2);
+  SelectObject(hdc_00,DAT_0041ebc0);
+  Ellipse(hdc_00,(*(int *)(&DAT_0041e898 + param_1 * 0x14) + 10) - iVar1,
+          (*(int *)(&DAT_0041e89c + param_1 * 0x14) + 10) - iVar1,
+          *(int *)(&DAT_0041e898 + param_1 * 0x14) + iVar1 + 10,
+          *(int *)(&DAT_0041e89c + param_1 * 0x14) + iVar1 + 10);
+  DeleteDC(hdc_00);
+  ReleaseDC(DAT_00414978,hdc);
+  FUN_00404ece();
+  if (DAT_00415624 == 1) {
+    if (DAT_004149e0 == 1) {
+      sndPlaySoundA(s_NUCLEAR_WAV_004124c4,1);
+    }
+    else {
+      MessageBeep(0xffffffff);
+    }
+  }
+  for (local_14 = 0; local_14 < 0x32; local_14 = local_14 + 1) {
+    iVar2 = (*(int *)(&DAT_0041e898 + param_1 * 0x14) + 10) -
+            *(int *)(&DAT_00414df8 + local_14 * 0x28);
+    iVar3 = (*(int *)(&DAT_0041e89c + param_1 * 0x14) + 10) -
+            *(int *)(&DAT_00414dfc + local_14 * 0x28);
+    if ((((-iVar1 < iVar2) && (iVar2 < iVar1)) && (-iVar1 < iVar3)) && (iVar3 < iVar1)) {
+      *(undefined4 *)(&DAT_00414e1c + local_14 * 0x28) = 1;
+      *(undefined4 *)(&DAT_00414e10 + local_14 * 0x28) = 0;
+    }
+  }
+  return;
+}
+
+

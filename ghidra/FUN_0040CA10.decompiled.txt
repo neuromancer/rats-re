@@ -1,0 +1,12 @@
+Function: FUN_0040ca10
+Address: 0x0040CA10
+
+
+void __cdecl FUN_0040ca10(SIZE_T param_1)
+
+{
+  HeapAlloc(DAT_0041fe94,0,param_1);
+  return;
+}
+
+

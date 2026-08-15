@@ -1,0 +1,14 @@
+Function: FUN_0040bd90
+Address: 0x0040BD90
+
+MOV EAX,dword ptr [ESP + 0x4]
+TEST EAX,EAX
+JZ       LAB_0040BDA7
+PUSH EAX
+PUSH 0x0
+MOV EAX,[0x0041fe94]
+PUSH EAX
+CALL dword ptr [0x004202ec]
+
+LAB_0040BDA7:
+RET

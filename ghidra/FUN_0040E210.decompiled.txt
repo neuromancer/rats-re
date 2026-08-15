@@ -1,0 +1,14 @@
+Function: FUN_0040e210
+Address: 0x0040E210
+
+
+int * FUN_0040e210(void)
+
+{
+  _ptiddata p_Var1;
+  
+  p_Var1 = __getptd();
+  return &p_Var1->_terrno;
+}
+
+

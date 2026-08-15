@@ -1,0 +1,37 @@
+Function: FUN_00405af5
+Address: 0x00405AF5
+
+
+void FUN_00405af5(void)
+
+{
+  HDC hDC;
+  HBRUSH pHVar1;
+  RECT local_3c;
+  CHAR local_2c [20];
+  int local_18;
+  tagRECT local_14;
+  
+  hDC = GetDC(DAT_00414978);
+  GetClientRect(DAT_00414978,&local_14);
+  local_3c.left = (local_14.right + -0xb2) / 2 + -0x49;
+  local_3c.top = (local_14.bottom + -0x2e) / 2 + -0x21;
+  local_3c.right = (local_14.right + -0xb2) / 2 + 0x7f;
+  local_3c.bottom = (local_14.bottom + -0x2e) / 2 + 0x57;
+  pHVar1 = GetStockObject(4);
+  FillRect(hDC,&local_3c,pHVar1);
+  local_3c.left = (local_14.right + -0xb2) / 2 + -0x4d;
+  local_3c.top = (local_14.bottom + -0x2e) / 2 + -0x25;
+  local_3c.right = (local_14.right + -0xb2) / 2 + 0x7b;
+  local_3c.bottom = (local_14.bottom + -0x2e) / 2 + 0x53;
+  pHVar1 = GetStockObject(0);
+  FillRect(hDC,&local_3c,pHVar1);
+  SetTextAlign(hDC,6);
+  local_18 = wsprintfA(local_2c,s_Paused_004124d0);
+  TextOutA(hDC,(local_14.right + -0xb2) / 2 + 0x17,(local_14.bottom + -0x2e) / 2 + 0xd,local_2c,
+           local_18);
+  ReleaseDC(DAT_00414978,hDC);
+  return;
+}
+
+

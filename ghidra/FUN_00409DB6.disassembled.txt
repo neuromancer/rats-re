@@ -1,0 +1,71 @@
+Function: FUN_00409db6
+Address: 0x00409DB6
+
+PUSH EBP
+MOV EBP,ESP
+SUB ESP,0xa0
+PUSH EBX
+PUSH ESI
+PUSH EDI
+PUSH 0x2000
+LEA EAX,[EBP + 0xffffff78]
+PUSH EAX
+PUSH 0x412f08
+CALL dword ptr [0x004202b0]
+MOV dword ptr [EBP + 0xffffff60],EAX
+CMP dword ptr [EBP + 0xffffff60],0x0
+JNZ      LAB_00409DF3
+XOR EAX,EAX
+JMP      LAB_00409EAB
+
+LAB_00409DF3:
+PUSH 0x0
+PUSH 0x382a
+MOV EAX,dword ptr [EBP + 0xffffff60]
+PUSH EAX
+CALL dword ptr [0x004202a8]
+PUSH 0x7
+LEA EAX,[EBP + 0xffffff64]
+PUSH EAX
+MOV EAX,dword ptr [EBP + 0xffffff60]
+PUSH EAX
+CALL dword ptr [0x004202b4]
+MOVSX EAX,byte ptr [EBP + 0xffffff64]
+CMP EAX,0x74
+JNZ      LAB_00409E8D
+MOVSX EAX,byte ptr [EBP + 0xffffff65]
+CMP EAX,0x6f
+JNZ      LAB_00409E8D
+MOVSX EAX,byte ptr [EBP + 0xffffff66]
+CMP EAX,0x20
+JNZ      LAB_00409E8D
+MOVSX EAX,byte ptr [EBP + 0xffffff67]
+CMP EAX,0x53
+JNZ      LAB_00409E8D
+MOVSX EAX,byte ptr [EBP + 0xffffff68]
+CMP EAX,0x65
+JNZ      LAB_00409E8D
+MOVSX EAX,byte ptr [EBP + 0xffffff69]
+CMP EAX,0x61
+JNZ      LAB_00409E8D
+MOVSX EAX,byte ptr [EBP + 0xffffff6a]
+CMP EAX,0x6e
+JZ       LAB_00409E94
+
+LAB_00409E8D:
+XOR EAX,EAX
+JMP      LAB_00409EAB
+
+LAB_00409E94:
+MOV EAX,dword ptr [EBP + 0xffffff60]
+PUSH EAX
+CALL dword ptr [0x004202b8]
+MOV EAX,0x1
+JMP      LAB_00409EAB
+
+LAB_00409EAB:
+POP EDI
+POP ESI
+POP EBX
+LEAVE
+RET

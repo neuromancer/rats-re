@@ -1,0 +1,15 @@
+Function: FUN_00409fa0
+Address: 0x00409FA0
+
+
+void __cdecl FUN_00409fa0(ulong param_1)
+
+{
+  _ptiddata p_Var1;
+  
+  p_Var1 = __getptd();
+  p_Var1->_holdrand = param_1;
+  return;
+}
+
+

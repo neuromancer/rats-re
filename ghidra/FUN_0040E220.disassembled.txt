@@ -1,0 +1,6 @@
+Function: FUN_0040e220
+Address: 0x0040E220
+
+CALL 0x0040A2D0
+ADD EAX,0xc
+RET

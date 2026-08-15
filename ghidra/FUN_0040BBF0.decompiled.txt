@@ -1,0 +1,22 @@
+Function: __mtinitlocks
+Address: 0x0040BBF0
+
+
+/* Library Function - Single Match
+    __mtinitlocks
+   
+   Library: Visual Studio 1998 Release */
+
+int __cdecl __mtinitlocks(void)
+
+{
+  int extraout_EAX;
+  
+  InitializeCriticalSection((LPCRITICAL_SECTION)PTR_DAT_0041336c);
+  InitializeCriticalSection((LPCRITICAL_SECTION)PTR_DAT_0041335c);
+  InitializeCriticalSection((LPCRITICAL_SECTION)PTR_DAT_0041334c);
+  InitializeCriticalSection((LPCRITICAL_SECTION)PTR_DAT_0041332c);
+  return extraout_EAX;
+}
+
+

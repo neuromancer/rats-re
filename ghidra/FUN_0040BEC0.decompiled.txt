@@ -1,0 +1,16 @@
+Function: __hw_cw
+Address: 0x0040BEC0
+
+
+/* Library Function - Single Match
+    __hw_cw
+   
+   Library: Visual Studio 1998 Release */
+
+void __hw_cw(void)
+
+{
+  return;
+}
+
+

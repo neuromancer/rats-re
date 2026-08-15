@@ -1,0 +1,14 @@
+Function: RtlUnwind
+Address: 0x0041036C
+
+
+void RtlUnwind(PVOID TargetFrame,PVOID TargetIp,PEXCEPTION_RECORD ExceptionRecord,PVOID ReturnValue)
+
+{
+// WARNING: Could not recover jumptable at 0x0041036c. Too many branches
+// WARNING: Treating indirect jump as call
+  RtlUnwind(TargetFrame,TargetIp,ExceptionRecord,ReturnValue);
+  return;
+}
+
+

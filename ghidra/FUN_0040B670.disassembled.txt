@@ -1,0 +1,7 @@
+Function: ___initmbctable
+Address: 0x0040B670
+
+PUSH -0x3
+CALL 0x0040B360
+ADD ESP,0x4
+RET

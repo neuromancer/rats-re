@@ -34,8 +34,28 @@ make run-original    # launch the preserved original RATS.EXE
 make test            # bounded DREAMM smoke test of the rebuilt executable
 make test-original   # bounded DREAMM smoke test of the original executable
 make debug           # start the rebuilt executable in DREAMM's debugger
+make compare-func FUNC=SaveHighScores ADDR=00409092
 ```
 
 wibo's compatible `msvcrt40.dll` and DREAMM `4.0x21` are downloaded on demand.
 They remain local build dependencies and are not committed. The checked-in
 `RATS.EXE` is never overwritten; rebuilt programs are placed under `out/`.
+
+## Function reconstruction
+
+The checked-in `ghidra/` directory contains assembly and decompiler exports for
+all 177 internal functions discovered in the executable. Assembly is the
+comparison authority; decompiler output is supplied to weaker local models as a
+semantic hint.
+
+Install [`binary-recons`](https://github.com/gg-sl-oss/binary-recons) once, then
+it can be run from this or any other directory:
+
+```sh
+python3 -m pip install -e /path/to/binary-recons
+binary-recons --project-root /path/to/rats-re --address 0x409092 --dry-run-prompt
+```
+
+`binary-recons.toml` selects the shared `c89` and `msvc4-od` rule profiles and
+connects the model loop to the project's `binary-comp` target. No local model
+is needed for prompt inspection or for the package's CI tests.

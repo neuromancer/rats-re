@@ -1,0 +1,40 @@
+Function: __getptd
+Address: 0x0040A2D0
+
+
+/* Library Function - Single Match
+    __getptd
+   
+   Library: Visual Studio 1998 Release */
+
+_ptiddata __cdecl __getptd(void)
+
+{
+  DWORD dwErrCode;
+  _ptiddata _Ptd;
+  BOOL BVar1;
+  DWORD DVar2;
+  pthreadlocinfo unaff_EDI;
+  
+  dwErrCode = GetLastError();
+  _Ptd = TlsGetValue(DAT_00412f50);
+  if (_Ptd == (_ptiddata)0x0) {
+    _Ptd = FUN_0040bb90(1,0x74);
+    if (_Ptd != (_ptiddata)0x0) {
+      BVar1 = TlsSetValue(DAT_00412f50,_Ptd);
+      if (BVar1 != 0) {
+        __initptd(_Ptd,unaff_EDI);
+        DVar2 = GetCurrentThreadId();
+        _Ptd->_tid = DVar2;
+        _Ptd->_thandle = 0xffffffff;
+        goto LAB_0040a333;
+      }
+    }
+    __amsg_exit(0x10);
+  }
+LAB_0040a333:
+  SetLastError(dwErrCode);
+  return _Ptd;
+}
+
+

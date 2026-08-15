@@ -1,0 +1,30 @@
+Function: FUN_00404d6e
+Address: 0x00404D6E
+
+
+void __cdecl
+FUN_00404d6e(HGDIOBJ param_1,HGDIOBJ param_2,int param_3,int param_4,int param_5,int param_6)
+
+{
+  HDC hdc;
+  HDC hdc_00;
+  int iVar1;
+  HDC hdc_01;
+  
+  hdc = GetDC(DAT_00414978);
+  hdc_00 = CreateCompatibleDC(hdc);
+  SelectObject(hdc_00,param_1);
+  iVar1 = GetMapMode(hdc);
+  SetMapMode(hdc_00,iVar1);
+  hdc_01 = CreateCompatibleDC(hdc_00);
+  SelectObject(hdc_01,param_2);
+  iVar1 = GetMapMode(hdc_00);
+  SetMapMode(hdc_01,iVar1);
+  BitBlt(hdc_00,param_3,param_4,param_5,param_6,hdc_01,0,0,0xcc0020);
+  DeleteDC(hdc_01);
+  DeleteDC(hdc_00);
+  ReleaseDC(DAT_00414978,hdc);
+  return;
+}
+
+

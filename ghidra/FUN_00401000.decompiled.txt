@@ -1,0 +1,372 @@
+Function: FUN_00401000
+Address: 0x00401000
+
+
+// WARNING: Globals starting with '_' overlap smaller symbols at the same address
+
+undefined4 FUN_00401000(HINSTANCE param_1,int param_2,undefined4 param_3,int param_4)
+
+{
+  HBITMAP pHVar1;
+  bool bVar2;
+  DWORD DVar3;
+  int iVar4;
+  int iVar5;
+  undefined3 extraout_var;
+  UINT_PTR UVar6;
+  BOOL BVar7;
+  HGDIOBJ pvVar8;
+  int iVar9;
+  int iVar10;
+  HWND pHVar11;
+  HMENU hMenu;
+  LPVOID lpParam;
+  tagMSG local_5c;
+  WNDCLASSA local_40;
+  HDC local_18;
+  int local_14;
+  int local_10;
+  int local_c;
+  int local_8;
+  
+  DVar3 = GetTickCount();
+  FUN_00409fa0(DVar3);
+  DAT_004149b8 = param_1;
+  DAT_00414980 = param_1;
+  DAT_0041ec4c = LoadCursorA((HINSTANCE)0x0,(LPCSTR)0x7f00);
+  DAT_0041ec50 = LoadCursorA((HINSTANCE)0x0,(LPCSTR)0x7f02);
+  _DAT_0041ec30 = LoadCursorA(DAT_00414980,s_CURS_BOMB_00412058);
+  _DAT_0041ec34 = LoadCursorA(DAT_00414980,s_CURS_GAS_00412064);
+  _DAT_0041ec38 = LoadCursorA(DAT_00414980,s_CURS_NUCLEAR_00412070);
+  _DAT_0041ec3c = LoadCursorA(DAT_00414980,s_CURS_POISON_00412080);
+  _DAT_0041ec40 = LoadCursorA(DAT_00414980,s_CURS_MALE_0041208c);
+  _DAT_0041ec44 = LoadCursorA(DAT_00414980,s_CURS_FEMALE_00412098);
+  _DAT_0041ec48 = LoadCursorA(DAT_00414980,s_CURS_BLOCK_004120a4);
+  DAT_0041ebb8 = LoadBitmapA(DAT_004149b8,s_BMP_TITLE_004120b0);
+  DAT_004149dc = LoadBitmapA(DAT_004149b8,s_BMP_WEWIN_004120bc);
+  DAT_00414df0 = LoadBitmapA(DAT_004149b8,s_BMP_TUNNEL_004120c8);
+  _DAT_0041ebd8 = LoadBitmapA(DAT_004149b8,s_BMP_MALE_UP_004120d4);
+  _DAT_0041ebdc = LoadBitmapA(DAT_004149b8,s_BMP_MALE_DOWN_004120e0);
+  DAT_0041ebe0 = LoadBitmapA(DAT_004149b8,s_BMP_MALE_LEFT_004120f0);
+  DAT_0041ebe4 = LoadBitmapA(DAT_004149b8,s_BMP_MALE_RIGHT_00412100);
+  _DAT_0041ebe8 = LoadBitmapA(DAT_004149b8,s_BMP_FEMALE_UP_00412110);
+  DAT_0041ebec = LoadBitmapA(DAT_004149b8,s_BMP_FEMALE_DOWN_00412120);
+  DAT_0041ebf0 = LoadBitmapA(DAT_004149b8,s_BMP_FEMALE_LEFT_00412130);
+  DAT_0041ebf4 = LoadBitmapA(DAT_004149b8,s_BMP_FEMALE_RIGHT_00412140);
+  _DAT_0041ebf8 = LoadBitmapA(DAT_004149b8,s_BMP_BABY_UP_00412154);
+  DAT_0041ebfc = LoadBitmapA(DAT_004149b8,s_BMP_BABY_DOWN_00412160);
+  _DAT_0041ec00 = LoadBitmapA(DAT_004149b8,s_BMP_BABY_LEFT_00412170);
+  _DAT_0041ec04 = LoadBitmapA(DAT_004149b8,s_BMP_BABY_RIGHT_00412180);
+  _DAT_00415638 = LoadBitmapA(DAT_004149b8,s_BMP_BOMB4_00412190);
+  _DAT_0041563c = LoadBitmapA(DAT_004149b8,s_BMP_GAS_0041219c);
+  _DAT_00415640 = LoadBitmapA(DAT_004149b8,s_BMP_NUCLEAR_004121a4);
+  DAT_00415644 = LoadBitmapA(DAT_004149b8,s_BMP_POISON_004121b0);
+  _DAT_00415648 = LoadBitmapA(DAT_004149b8,s_BMP_MALE_004121bc);
+  _DAT_0041564c = LoadBitmapA(DAT_004149b8,s_BMP_FEMALE_004121c8);
+  _DAT_00415650 = LoadBitmapA(DAT_004149b8,s_BMP_BLOCK_0_004121d4);
+  DAT_0041ebbc = LoadBitmapA(DAT_004149b8,s_BMP_EXPLOSION_004121e0);
+  DAT_00414988 = LoadBitmapA(DAT_004149b8,s_BMP_ARROW_UP_004121f0);
+  DAT_0041498c = LoadBitmapA(DAT_004149b8,s_BMP_ARROW_DOWN_00412200);
+  DAT_00414990 = LoadBitmapA(DAT_004149b8,s_BMP_ARROW_LEFT_00412210);
+  DAT_00414994 = LoadBitmapA(DAT_004149b8,s_BMP_ARROW_RIGHT_00412220);
+  _DAT_0041e878 = LoadBitmapA(DAT_004149b8,s_BMP_BOMB1_00412230);
+  _DAT_0041e87c = LoadBitmapA(DAT_004149b8,s_BMP_BOMB2_0041223c);
+  _DAT_0041e880 = LoadBitmapA(DAT_004149b8,s_BMP_BOMB3_00412248);
+  _DAT_0041e884 = LoadBitmapA(DAT_004149b8,s_BMP_BOMB4_00412254);
+  _DAT_004149a0 = LoadBitmapA(DAT_004149b8,s_BMP_BONUS_5_00412260);
+  _DAT_004149a4 = LoadBitmapA(DAT_004149b8,s_BMP_BONUS_10_0041226c);
+  _DAT_004149a8 = LoadBitmapA(DAT_004149b8,s_BMP_BONUS_20_0041227c);
+  _DAT_004149ac = LoadBitmapA(DAT_004149b8,s_BMP_BONUS_40_0041228c);
+  _DAT_004149b0 = LoadBitmapA(DAT_004149b8,s_BMP_BONUS_80_0041229c);
+  _DAT_004149b4 = LoadBitmapA(DAT_004149b8,s_BMP_BONUS_160_004122ac);
+  _DAT_0041ec08 = LoadBitmapA(DAT_004149b8,s_BMP_BLOCK_0_004122bc);
+  _DAT_0041ec0c = LoadBitmapA(DAT_004149b8,s_BMP_BLOCK_1_004122c8);
+  _DAT_0041ec10 = LoadBitmapA(DAT_004149b8,s_BMP_BLOCK_2_004122d4);
+  _DAT_0041ec14 = LoadBitmapA(DAT_004149b8,s_BMP_BLOCK_3_004122e0);
+  DAT_0041e86c = 0;
+  FUN_0040910c(1);
+  DAT_0041e7c0 = CreatePen(0,1,0x8000);
+  DAT_0041e88c = CreatePen(0,2,0xff);
+  DAT_00414964 = CreatePen(0,2,0xffffff);
+  DAT_0041ec18 = CreatePen(0,1,0x808080);
+  DAT_00415618 = CreateSolidBrush(0);
+  DAT_0041562c = CreateSolidBrush(0x8080ff);
+  DAT_00415604 = CreateSolidBrush(0xff0000);
+  DAT_0041ebc0 = CreateSolidBrush(0xff00ff);
+  DAT_00414dec = CreateSolidBrush(0xff00);
+  DAT_00415614 = CreateSolidBrush(0x808000);
+  DAT_00414968 = CreateSolidBrush(0x80ff);
+  DAT_00414de8 = CreateSolidBrush(0xff00);
+  DAT_004149d0 = CreateSolidBrush(0xffff);
+  DAT_00414958 = CreateSolidBrush(0xffffff);
+  DAT_004155c8 = CreateSolidBrush(0x80);
+  DAT_0041e7c4 = 0x17;
+  DAT_0041496c = 0x13;
+  if (param_2 == 0) {
+    local_40.style = 0x2003;
+    local_40.lpfnWndProc = FUN_00406674;
+    local_40.cbClsExtra = 0;
+    local_40.cbWndExtra = 0;
+    local_40.hInstance = param_1;
+    local_40.hIcon = LoadIconA(param_1,s_ICON_1_004122ec);
+    local_40.hCursor = (HCURSOR)0x0;
+    local_40.hbrBackground = GetStockObject(2);
+    local_40.lpszMenuName = s_MENU_1_004122f4;
+    local_40.lpszClassName = &DAT_00412050;
+    RegisterClassA(&local_40);
+  }
+  lpParam = (LPVOID)0x0;
+  hMenu = (HMENU)0x0;
+  pHVar11 = (HWND)0x0;
+  iVar10 = 0x1e0;
+  iVar9 = 0x280;
+  iVar4 = GetSystemMetrics(1);
+  iVar4 = (iVar4 + -0x1e0) / 2;
+  iVar5 = GetSystemMetrics(0);
+  DAT_00414978 = CreateWindowExA(0,&DAT_00412050,s_Rats__004122fc,0xca0000,(iVar5 + -0x280) / 2,
+                                 iVar4,iVar9,iVar10,pHVar11,hMenu,param_1,lpParam);
+  DAT_0041497c = GetMenu(DAT_00414978);
+  SetCursor(DAT_0041ec50);
+  DAT_0041e86c = 0;
+  DAT_0041560c = 0;
+  bVar2 = FUN_00408e6a();
+  if (CONCAT31(extraout_var,bVar2) == 0) {
+    return 0;
+  }
+  iVar4 = FUN_00408f02();
+  if (iVar4 == 0) {
+    MessageBoxA(DAT_00414978,s_Invalid_high_score_table_0041230c,s_Error___00412304,0x30);
+    for (local_c = 0; local_c < 10; local_c = local_c + 1) {
+      *(int *)(&DAT_004166a8 + local_c * 0x1c) = local_c * -10 + 100;
+      *(undefined2 *)(&DAT_004166a6 + local_c * 0x1c) = 0;
+      FID_conflict___mbscpy(&DAT_00416690 + local_c * 0x1c,s_nobody_00412328);
+    }
+    FUN_00409092();
+  }
+  do {
+    UVar6 = SetTimer(DAT_00414978,1,0x2d,(TIMERPROC)0x0);
+    if (UVar6 != 0) {
+      do {
+        UVar6 = SetTimer(DAT_00414978,2,1000,(TIMERPROC)0x0);
+        if (UVar6 != 0) {
+          local_18 = GetDC(DAT_00414978);
+          DAT_00415620 = CreateCompatibleBitmap(local_18,0x280,0x280);
+          DAT_00414940 = CreateCompatibleBitmap(local_18,0x280,0x280);
+          DAT_0041495c = CreateCompatibleBitmap(local_18,0x280,0x280);
+          DAT_0041665c = CreateCompatibleBitmap(local_18,0x60,0x60);
+          ReleaseDC(DAT_00414978,local_18);
+          DAT_0041e888 = 1;
+          DAT_0041ec24 = 1;
+          DAT_00415608 = 0;
+          DAT_0041e894 = 999;
+          DAT_00415624 = 1;
+          DAT_00414960 = 0;
+          FUN_00408ad3();
+          FUN_00403840();
+          EnableMenuItem(DAT_0041497c,0xd2,0);
+          EnableMenuItem(DAT_0041497c,0xd3,1);
+          EnableMenuItem(DAT_0041497c,0xd4,1);
+          EnableMenuItem(DAT_0041497c,0xd5,1);
+          ShowWindow(DAT_00414978,param_4);
+          UpdateWindow(DAT_00414978);
+          BVar7 = sndPlaySoundA(s_VICTORY_WAV_00412358,1);
+          DAT_004149e0 = (uint)(BVar7 != 0);
+          SetCursor(DAT_0041ec4c);
+          PostMessageA(DAT_00414978,0x111,0x386,0);
+          FUN_00408a51();
+          DAT_0041ec20 = 1;
+          do {
+            BVar7 = PeekMessageA(&local_5c,(HWND)0x0,0,0,1);
+            if (BVar7 != 0) {
+              if (local_5c.message == 0x12) {
+                return local_5c.wParam;
+              }
+              TranslateMessage(&local_5c);
+              DispatchMessageA(&local_5c);
+            }
+            pHVar11 = GetActiveWindow();
+            if (pHVar11 == DAT_00414978) {
+              if (DAT_00415608 == 1) {
+                DAT_00415608 = 0;
+                SendMessageA(DAT_00414978,0x102,0x50,0);
+              }
+            }
+            else if (DAT_0041ec24 == 0) {
+              SendMessageA(DAT_00414978,0x102,0x50,0);
+              DAT_00415608 = 1;
+            }
+            if ((DAT_0041e888 == 0) && (DAT_0041ec24 == 0)) {
+              switch(DAT_00414df4) {
+              case 0:
+                FUN_00404d6e(DAT_0041495c,DAT_00415620,0,0,0x280,0x280);
+                DAT_00414df4 = DAT_00414df4 + 1;
+                local_c = 0;
+                break;
+              case 1:
+                for (; (*(int *)(&DAT_00414e0c + local_c * 0x28) < 1 && (local_c < 0x32));
+                    local_c = local_c + 1) {
+                }
+                if (local_c < 0x32) {
+                  if ((&DAT_004149e8)
+                      [(*(int *)(&DAT_00414dfc + local_c * 0x28) / 0x14) * 0x20 +
+                       *(int *)(&DAT_00414df8 + local_c * 0x28) / 0x14] == '\0') {
+                    if ((*(int *)(&DAT_00414e00 + local_c * 0x28) == 0) ||
+                       (*(int *)(&DAT_00414e00 + local_c * 0x28) == 2)) {
+                      iVar10 = 10;
+                      iVar9 = 0x14;
+                      iVar4 = *(int *)(&DAT_00414dfc + local_c * 0x28) + -5;
+                      iVar5 = *(int *)(&DAT_00414df8 + local_c * 0x28) + -10;
+                      pvVar8 = (HGDIOBJ)FUN_00402ee7(local_c);
+                      FUN_00404d6e(DAT_0041495c,pvVar8,iVar5,iVar4,iVar9,iVar10);
+                    }
+                    else {
+                      iVar10 = 0x14;
+                      iVar9 = 10;
+                      iVar4 = *(int *)(&DAT_00414dfc + local_c * 0x28) + -10;
+                      iVar5 = *(int *)(&DAT_00414df8 + local_c * 0x28) + -5;
+                      pvVar8 = (HGDIOBJ)FUN_00402ee7(local_c);
+                      FUN_00404d6e(DAT_0041495c,pvVar8,iVar5,iVar4,iVar9,iVar10);
+                    }
+                  }
+                  local_c = local_c + 1;
+                }
+                else {
+                  DAT_00414df4 = DAT_00414df4 + 1;
+                  local_c = 0;
+                }
+                break;
+              case 2:
+                for (; (*(int *)(&DAT_0041e8a0 + local_c * 0x14) == 999 && (local_c < 0x28));
+                    local_c = local_c + 1) {
+                }
+                if (local_c < 0x28) {
+                  if (*(int *)(&DAT_0041e8a0 + local_c * 0x14) == 6) {
+                    FUN_00404d6e(DAT_0041495c,
+                                 *(HGDIOBJ *)
+                                  (&DAT_0041ec08 +
+                                  (4 - *(int *)(&DAT_0041e8a4 + local_c * 0x14)) * 4),
+                                 *(int *)(&DAT_0041e898 + local_c * 0x14),
+                                 *(int *)(&DAT_0041e89c + local_c * 0x14),0x14,0x14);
+                  }
+                  else if (*(int *)(&DAT_0041e8a0 + local_c * 0x14) == 0) {
+                    FUN_00404d6e(DAT_0041495c,
+                                 *(HGDIOBJ *)
+                                  (&DAT_0041e874 + *(int *)(&DAT_0041e8a4 + local_c * 0x14) * 4),
+                                 *(int *)(&DAT_0041e898 + local_c * 0x14),
+                                 *(int *)(&DAT_0041e89c + local_c * 0x14),0x14,0x14);
+                  }
+                  else if ((&DAT_004149e8)
+                           [*(int *)(&DAT_0041e898 + local_c * 0x14) / 0x14 +
+                            (*(int *)(&DAT_0041e89c + local_c * 0x14) / 0x14) * 0x20] == '\0') {
+                    FUN_00404d6e(DAT_0041495c,
+                                 *(HGDIOBJ *)
+                                  (&DAT_00415638 + *(int *)(&DAT_0041e8a0 + local_c * 0x14) * 4),
+                                 *(int *)(&DAT_0041e898 + local_c * 0x14),
+                                 *(int *)(&DAT_0041e89c + local_c * 0x14),0x14,0x14);
+                  }
+                  else if (((&DAT_004149e8)
+                            [*(int *)(&DAT_0041e898 + local_c * 0x14) / 0x14 +
+                             (*(int *)(&DAT_0041e89c + local_c * 0x14) / 0x14) * 0x20] == '\x02') &&
+                          (*(int *)(&DAT_0041e8a0 + local_c * 0x14) == 1)) {
+                    local_8 = *(int *)(&DAT_0041e898 + local_c * 0x14) / 0x14;
+                    local_10 = *(int *)(&DAT_0041e89c + local_c * 0x14) / 0x14;
+                    if ((&DAT_004149e7)[local_10 * 0x20 + local_8] == '\0') {
+                      FUN_00404d6e(DAT_0041495c,DAT_0041ebd0,local_8 * 0x14,local_10 * 0x14,0x14,
+                                   0x14);
+                    }
+                    else if ((&DAT_004149e9)[local_10 * 0x20 + local_8] == '\0') {
+                      FUN_00404d6e(DAT_0041495c,DAT_0041ebd4,local_8 * 0x14,local_10 * 0x14,0x14,
+                                   0x14);
+                    }
+                    else if ((&DAT_004149e8)[local_8 + (local_10 + -1) * 0x20] == '\0') {
+                      FUN_00404d6e(DAT_0041495c,DAT_0041ebc8,local_8 * 0x14,local_10 * 0x14,0x14,
+                                   0x14);
+                    }
+                    else if ((&DAT_004149e8)[local_8 + (local_10 + 1) * 0x20] == '\0') {
+                      FUN_00404d6e(DAT_0041495c,DAT_0041ebcc,local_8 * 0x14,local_10 * 0x14,0x14,
+                                   0x14);
+                    }
+                  }
+                  local_c = local_c + 1;
+                }
+                else {
+                  DAT_00414df4 = DAT_00414df4 + 1;
+                  local_c = 0;
+                }
+                break;
+              case 3:
+                for (; (*(int *)(&DAT_0041e7d0 + local_c * 0x10) == 999 && (local_c < 10));
+                    local_c = local_c + 1) {
+                }
+                if (local_c < 10) {
+                  FUN_00404d6e(DAT_0041495c,
+                               *(HGDIOBJ *)
+                                (&DAT_004149a0 + *(int *)(&DAT_0041e7d0 + local_c * 0x10) * 4),
+                               *(int *)(&DAT_0041e7c8 + local_c * 0x10) + -6,
+                               *(int *)(&DAT_0041e7cc + local_c * 0x10) + -5,0xd,10);
+                  local_c = local_c + 1;
+                }
+                else {
+                  DAT_00414df4 = DAT_00414df4 + 1;
+                  local_c = 0;
+                }
+                break;
+              case 4:
+                DAT_00414df4 = 0;
+                if (DAT_00414954 == 0x32) {
+                  DAT_0041ec24 = 1;
+                  if ((DAT_00415624 == 1) && (DAT_004149e0 == 1)) {
+                    sndPlaySoundA(s_WEWIN_WAV_00412364,1);
+                  }
+                  DialogBoxParamA(DAT_00414980,s_DLG_LOSE_00412370,DAT_00414978,FUN_00405db8,0);
+                  FUN_0040250c();
+                  DAT_0041e888 = 1;
+                  InvalidateRect(DAT_00414978,(RECT *)0x0,1);
+                }
+                else if (((DAT_0041494c == 0) && (DAT_00414948 == 0)) &&
+                        (DAT_004149bc = DAT_004149bc + 1, 7 < DAT_004149bc)) {
+                  if (DAT_0041e86c < 7) {
+                    FUN_00402205();
+                  }
+                  else {
+                    FUN_00402205();
+                    DAT_0041ec24 = 1;
+                    DialogBoxParamA(DAT_00414980,s_DLG_DEMO_0041237c,DAT_00414978,FUN_00405f72,0);
+                    FUN_0040250c();
+                    DAT_0041e888 = 1;
+                    InvalidateRect(DAT_00414978,(RECT *)0x0,1);
+                  }
+                }
+                else {
+                  if ((DAT_0041494c == 0) || (DAT_00414948 == 0)) {
+                    local_14 = 0;
+                    for (local_c = 0; local_c < 7; local_c = local_c + 1) {
+                      if (*(int *)(&DAT_004155e8 + local_c * 4) != 4) {
+                        *(undefined4 *)(&DAT_004155e8 + local_c * 4) = 4;
+                        local_14 = 1;
+                      }
+                    }
+                    if (local_14 == 1) {
+                      FUN_0040525d();
+                    }
+                  }
+                  pHVar1 = DAT_0041495c;
+                  DAT_00415628 = DAT_0041495c;
+                  DAT_0041495c = DAT_00414940;
+                  DAT_00414940 = pHVar1;
+                  FUN_00404ece();
+                }
+              }
+            }
+          } while( true );
+        }
+        iVar4 = MessageBoxA(DAT_00414978,s_Too_many_clocks__00412344,&DAT_00412050,0x35);
+      } while (iVar4 != 2);
+      return 0;
+    }
+    iVar4 = MessageBoxA(DAT_00414978,s_Too_many_clocks__00412330,&DAT_00412050,0x35);
+  } while (iVar4 != 2);
+  return 0;
+}
+
+

@@ -1,5 +1,6 @@
-#include <windows.h>
+#include "rats.h"
 
+/* Function start: 0x401000 */
 int WINAPI WinMain(
     HINSTANCE instance,
     HINSTANCE previous_instance,

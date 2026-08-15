@@ -1,0 +1,23 @@
+Function: __cinit
+Address: 0x0040AA30
+
+
+/* Library Function - Single Match
+    __cinit
+   
+   Library: Visual Studio 1998 Release */
+
+int __cdecl __cinit(int param_1)
+
+{
+  int iVar1;
+  
+  if (PTR___fpmath_00412f30 != (undefined *)0x0) {
+    (*(code *)PTR___fpmath_00412f30)();
+  }
+  __initterm((undefined4 *)&DAT_00412008,(undefined4 *)&DAT_00412010);
+  iVar1 = __initterm((undefined4 *)&DAT_00412000,(undefined4 *)&DAT_00412004);
+  return iVar1;
+}
+
+

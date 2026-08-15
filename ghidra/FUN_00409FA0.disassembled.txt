@@ -1,0 +1,7 @@
+Function: FUN_00409fa0
+Address: 0x00409FA0
+
+CALL 0x0040A2D0
+MOV ECX,dword ptr [ESP + 0x4]
+MOV dword ptr [EAX + 0x14],ECX
+RET

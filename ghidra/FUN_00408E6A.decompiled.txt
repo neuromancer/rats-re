@@ -1,0 +1,24 @@
+Function: FUN_00408e6a
+Address: 0x00408E6A
+
+
+bool FUN_00408e6a(void)
+
+{
+  HFILE hFile;
+  UINT UVar1;
+  _OFSTRUCT local_8c;
+  
+  hFile = OpenFile(s_level_dat_00412720,&local_8c,0x2800);
+  UVar1 = _lread(hFile,&DAT_004167c0,0x8000);
+  if (UVar1 == 0x8000) {
+    _lclose(hFile);
+  }
+  else {
+    _lclose(hFile);
+    MessageBoxA(DAT_00414978,s_Can_t_find_valid_file_00412738,s_LEVEL_DAT_0041272c,0x30);
+  }
+  return UVar1 == 0x8000;
+}
+
+

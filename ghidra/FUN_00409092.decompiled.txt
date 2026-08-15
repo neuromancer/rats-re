@@ -1,0 +1,21 @@
+Function: FUN_00409092
+Address: 0x00409092
+
+
+void FUN_00409092(void)
+
+{
+  HFILE hFile;
+  UINT UVar1;
+  _OFSTRUCT local_8c;
+  
+  hFile = OpenFile(s_scores_dat_0041275c,&local_8c,0x3800);
+  UVar1 = _lwrite(hFile,&DAT_00416690,0x118);
+  if (UVar1 != 0x118) {
+    MessageBoxA(DAT_00414978,s_File_Save_Error____00412774,s_High_Scores_00412768,0x10);
+  }
+  _lclose(hFile);
+  return;
+}
+
+

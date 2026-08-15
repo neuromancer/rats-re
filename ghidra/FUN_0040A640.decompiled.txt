@@ -1,0 +1,24 @@
+Function: __cftoe
+Address: 0x0040A640
+
+
+/* Library Function - Single Match
+    __cftoe
+   
+   Library: Visual Studio 1998 Release */
+
+errno_t __cdecl __cftoe(double *_Value,char *_Buf,size_t _SizeInBytes,int _Dec,int _Caps)
+
+{
+  STRFLT unaff_EDI;
+  _strflt local_28;
+  char local_18 [24];
+  
+  __fltout2((_CRT_DOUBLE)*_Value,&local_28,local_18,(size_t)unaff_EDI);
+  __fptostr(_Buf + (uint)(0 < (int)_SizeInBytes) + (uint)(local_28.sign == 0x2d),_SizeInBytes + 1,
+            (int)&local_28,unaff_EDI);
+  __cftoe2(_Buf,_SizeInBytes,_Dec,&local_28.sign,'\0');
+  return (errno_t)_Buf;
+}
+
+

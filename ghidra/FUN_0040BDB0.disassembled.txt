@@ -1,0 +1,25 @@
+Function: __control87
+Address: 0x0040BDB0
+
+SUB ESP,0x4
+PUSH ESI
+FSTCW word ptr [ESP + 0x6]
+MOV EAX,dword ptr [ESP + 0x6]
+PUSH EAX
+CALL 0x0040BE10
+MOV ECX,dword ptr [ESP + 0x14]
+ADD ESP,0x4
+MOV ESI,ECX
+AND ECX,dword ptr [ESP + 0xc]
+NOT ESI
+AND ESI,EAX
+OR ESI,ECX
+PUSH ESI
+CALL 0x0040BEC0
+MOV word ptr [ESP + 0x8],AX
+ADD ESP,0x4
+FLDCW word ptr [ESP + 0x4]
+MOV EAX,ESI
+POP ESI
+ADD ESP,0x4
+RET

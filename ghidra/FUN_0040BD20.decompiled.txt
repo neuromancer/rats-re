@@ -1,0 +1,22 @@
+Function: FID_conflict:__lock_file
+Address: 0x0040BD20
+
+
+/* Library Function - Multiple Matches With Different Base Names
+    __lock_file
+    __unlock_file
+   
+   Library: Visual Studio 1998 Release */
+
+void __cdecl FID_conflict___lock_file(FILE *_File)
+
+{
+  if (((FILE *)0x413677 < _File) && (_File < (FILE *)0x4138d9)) {
+    FUN_0040bc90(((int)&_File[-0x209b4]._base >> 5) + 0x1c);
+    return;
+  }
+  LeaveCriticalSection((LPCRITICAL_SECTION)(_File + 1));
+  return;
+}
+
+

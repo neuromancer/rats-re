@@ -1,0 +1,24 @@
+Function: getSystemCP
+Address: 0x0040B590
+
+MOV dword ptr [0x00413174],0x0
+MOV EAX,dword ptr [ESP + 0x4]
+CMP EAX,-0x2
+JNZ      LAB_0040B5B3
+MOV dword ptr [0x00413174],0x1
+JMP dword ptr [0x00420318]
+
+LAB_0040B5B3:
+CMP EAX,-0x3
+JNZ      LAB_0040B5C8
+MOV dword ptr [0x00413174],0x1
+JMP dword ptr [0x0042031c]
+
+LAB_0040B5C8:
+CMP EAX,-0x4
+JNZ      LAB_0040B5DC
+MOV dword ptr [0x00413174],0x1
+MOV EAX,[0x00413658]
+
+LAB_0040B5DC:
+RET

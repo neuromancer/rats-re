@@ -1,0 +1,56 @@
+Function: FUN_00408854
+Address: 0x00408854
+
+
+void FUN_00408854(void)
+
+{
+  HDC hdc;
+  HDC hdc_00;
+  int iMode;
+  HBITMAP local_24;
+  int local_1c;
+  tagRECT local_14;
+  
+  GetClientRect(DAT_00414978,&local_14);
+  if (DAT_0041e86c == 0) {
+    local_1c = 0;
+    local_24 = LoadBitmapA(DAT_004149b8,s_BMP_START_1_DOWN_004126d0);
+  }
+  else if (DAT_0041e86c == 8) {
+    local_1c = 1;
+    local_24 = LoadBitmapA(DAT_004149b8,s_BMP_START_2_DOWN_004126e4);
+  }
+  else if (DAT_0041e86c == 0x10) {
+    local_1c = 2;
+    local_24 = LoadBitmapA(DAT_004149b8,s_BMP_START_3_DOWN_004126f8);
+  }
+  else if (DAT_0041e86c == 0x18) {
+    local_1c = 3;
+    local_24 = LoadBitmapA(DAT_004149b8,s_BMP_START_4_DOWN_0041270c);
+  }
+  hdc = GetDC(DAT_00414978);
+  hdc_00 = CreateCompatibleDC(hdc);
+  iMode = GetMapMode(hdc);
+  SetMapMode(hdc_00,iMode);
+  SelectObject(hdc_00,local_24);
+  BitBlt(hdc,(local_14.right + -0x84) / 2 + local_1c * 0x40 + -0x74,local_14.bottom + -0x49,0x28,
+         0x28,hdc_00,0,0,0xcc0020);
+  DeleteDC(hdc_00);
+  ReleaseDC(DAT_00414978,hdc);
+  DeleteObject(local_24);
+  FUN_00408ad3();
+  FUN_00403840();
+  DAT_0041e888 = 0;
+  DAT_0041ec24 = 0;
+  FUN_00404764();
+  DAT_00415630 = 0;
+  EnableMenuItem(DAT_0041497c,0xd2,1);
+  EnableMenuItem(DAT_0041497c,0xd3,1);
+  EnableMenuItem(DAT_0041497c,0xd4,1);
+  EnableMenuItem(DAT_0041497c,0xd5,1);
+  EnableMenuItem(DAT_0041497c,0xdc,0);
+  return;
+}
+
+

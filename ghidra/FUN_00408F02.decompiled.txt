@@ -1,0 +1,40 @@
+Function: FUN_00408f02
+Address: 0x00408F02
+
+
+undefined4 FUN_00408f02(void)
+
+{
+  HFILE hFile;
+  UINT UVar1;
+  undefined4 uVar2;
+  int local_90;
+  _OFSTRUCT local_8c;
+  
+  hFile = OpenFile(s_scores_dat_00412750,&local_8c,0x2000);
+  UVar1 = _lread(hFile,&DAT_00416690,0x118);
+  if (UVar1 == 0x118) {
+    _lclose(hFile);
+    for (local_90 = 0; local_90 < 9; local_90 = local_90 + 1) {
+      if (((*(int *)(&DAT_004166a8 + local_90 * 0x1c) <
+            *(int *)(&DAT_004166a8 + (local_90 + 1) * 0x1c)) ||
+          (((*(short *)(&DAT_004166a6 + local_90 * 0x1c) <
+             *(short *)(&DAT_004166a6 + (local_90 + 1) * 0x1c) &&
+            (*(int *)(&DAT_004166a8 + local_90 * 0x1c) ==
+             *(int *)(&DAT_004166a8 + (local_90 + 1) * 0x1c))) ||
+           (*(int *)(&DAT_004166a8 + local_90 * 0x1c) < 0)))) ||
+         ((*(short *)(&DAT_004166a6 + local_90 * 0x1c) < 0 ||
+          (100 < *(short *)(&DAT_004166a6 + local_90 * 0x1c))))) {
+        return 0;
+      }
+    }
+    uVar2 = 1;
+  }
+  else {
+    _lclose(hFile);
+    uVar2 = 0;
+  }
+  return uVar2;
+}
+
+

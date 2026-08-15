@@ -1,0 +1,122 @@
+Function: FUN_00402fd5
+Address: 0x00402FD5
+
+
+int __cdecl FUN_00402fd5(int param_1)
+
+{
+  bool bVar1;
+  int iVar2;
+  undefined3 extraout_var;
+  int local_28;
+  int local_24;
+  int local_20 [4];
+  int local_10;
+  int local_c;
+  int local_8;
+  
+  iVar2 = *(int *)(&DAT_00414df8 + param_1 * 0x28);
+  if ((iVar2 % 0x14 == 10) && (iVar2 = *(int *)(&DAT_00414dfc + param_1 * 0x28), iVar2 % 0x14 == 10)
+     ) {
+    for (local_24 = 0; local_24 < 0x28; local_24 = local_24 + 1) {
+      if (((*(int *)(&DAT_0041e8a0 + local_24 * 0x14) != 999) &&
+          (*(int *)(&DAT_0041e898 + local_24 * 0x14) + 10 ==
+           *(int *)(&DAT_00414df8 + param_1 * 0x28))) &&
+         (*(int *)(&DAT_0041e89c + local_24 * 0x14) + 10 == *(int *)(&DAT_00414dfc + param_1 * 0x28)
+         )) {
+        if (*(int *)(&DAT_0041e8a0 + local_24 * 0x14) == 3) {
+          if ((DAT_00415624 == 1) && (DAT_004149e0 == 1)) {
+            sndPlaySoundA(s_POISON_WAV_00412454,1);
+          }
+          *(undefined4 *)(&DAT_00414e0c + param_1 * 0x28) = 0;
+          FUN_0040507f();
+          DAT_0041560c = DAT_0041560c + DAT_004155e0 * 5;
+          FUN_00402bf3(5,*(undefined4 *)(&DAT_00414df8 + param_1 * 0x28),
+                       *(undefined4 *)(&DAT_00414dfc + param_1 * 0x28));
+          FUN_00404f8b();
+          *(undefined4 *)(&DAT_0041e8a0 + local_24 * 0x14) = 999;
+          return local_24 * 4;
+        }
+        if (*(int *)(&DAT_0041e8a0 + local_24 * 0x14) == 1) {
+          *(int *)(&DAT_00414e0c + param_1 * 0x28) = *(int *)(&DAT_00414e0c + param_1 * 0x28) + -8;
+          if (*(int *)(&DAT_00414e0c + param_1 * 0x28) < 1) {
+            if ((DAT_00415624 == 1) && (DAT_004149e0 == 1)) {
+              sndPlaySoundA(s_CHOKE_WAV_00412460,1);
+            }
+            FUN_0040507f();
+            DAT_0041560c = DAT_0041560c + DAT_004155e0 * 0x14;
+            FUN_00402bf3(0x14,*(undefined4 *)(&DAT_00414df8 + param_1 * 0x28),
+                         *(undefined4 *)(&DAT_00414dfc + param_1 * 0x28));
+            iVar2 = FUN_00404f8b();
+            return iVar2;
+          }
+        }
+        else if (*(int *)(&DAT_0041e8a0 + local_24 * 0x14) == 4) {
+          if ((DAT_00415624 == 1) && (DAT_004149e0 == 1)) {
+            sndPlaySoundA(s_NEWSEX_WAV_0041246c,1);
+          }
+          *(undefined4 *)(&DAT_00414e08 + param_1 * 0x28) = 0;
+          *(undefined4 *)(&DAT_00414e10 + param_1 * 0x28) = 0;
+          *(int *)(&DAT_0041e8a4 + local_24 * 0x14) = *(int *)(&DAT_0041e8a4 + local_24 * 0x14) + -1
+          ;
+          if (*(int *)(&DAT_0041e8a4 + local_24 * 0x14) == 0) {
+            *(undefined4 *)(&DAT_0041e8a0 + local_24 * 0x14) = 999;
+          }
+          FUN_0040507f();
+        }
+        else if (*(int *)(&DAT_0041e8a0 + local_24 * 0x14) == 5) {
+          if ((DAT_00415624 == 1) && (DAT_004149e0 == 1)) {
+            sndPlaySoundA(s_NEWSEX_WAV_00412478,1);
+          }
+          *(undefined4 *)(&DAT_00414e08 + param_1 * 0x28) = 1;
+          *(int *)(&DAT_0041e8a4 + local_24 * 0x14) = *(int *)(&DAT_0041e8a4 + local_24 * 0x14) + -1
+          ;
+          if (*(int *)(&DAT_0041e8a4 + local_24 * 0x14) == 0) {
+            *(undefined4 *)(&DAT_0041e8a0 + local_24 * 0x14) = 999;
+          }
+          FUN_0040507f();
+        }
+      }
+    }
+    switch(*(undefined4 *)(&DAT_00414e00 + param_1 * 0x28)) {
+    case 0:
+      local_8 = 2;
+      break;
+    case 1:
+      local_8 = 3;
+      break;
+    case 2:
+      local_8 = 0;
+      break;
+    case 3:
+      local_8 = 1;
+    }
+    local_10 = 0;
+    for (local_28 = 0; local_28 < 4; local_28 = local_28 + 1) {
+      if ((local_8 != local_28) &&
+         (bVar1 = FUN_00403430(param_1,local_28), CONCAT31(extraout_var,bVar1) == 1)) {
+        local_20[local_10] = local_28;
+        local_10 = local_10 + 1;
+      }
+    }
+    if (local_10 == 0) {
+      *(int *)(&DAT_00414e00 + param_1 * 0x28) = local_8;
+    }
+    else if (local_10 == 1) {
+      *(int *)(&DAT_00414e00 + param_1 * 0x28) = local_20[0];
+      local_8 = local_20[0];
+    }
+    else {
+      iVar2 = _rand();
+      local_c = iVar2 % local_10;
+      local_8 = local_20[iVar2 % local_10];
+      *(int *)(&DAT_00414e00 + param_1 * 0x28) = local_8;
+    }
+  }
+  else {
+    local_8 = iVar2 / 0x14;
+  }
+  return local_8;
+}
+
+

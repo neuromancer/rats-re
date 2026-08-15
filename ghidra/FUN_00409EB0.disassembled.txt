@@ -1,0 +1,71 @@
+Function: FID_conflict:__mbscpy
+Address: 0x00409EB0
+
+PUSH EDI
+MOV EDI,dword ptr [ESP + 0x8]
+JMP      LAB_00409F21
+
+LAB_00409F21:
+MOV ECX,dword ptr [ESP + 0xc]
+TEST ECX,0x3
+JZ       LAB_00409F46
+
+LAB_00409F2D:
+MOV DL,byte ptr [ECX]
+INC ECX
+TEST DL,DL
+JZ       LAB_00409F98
+MOV byte ptr [EDI],DL
+INC EDI
+TEST ECX,0x3
+JNZ      LAB_00409F2D
+JMP      LAB_00409F46
+
+LAB_00409F41:
+MOV dword ptr [EDI],EDX
+ADD EDI,0x4
+
+LAB_00409F46:
+MOV EDX,0x7efefeff
+MOV EAX,dword ptr [ECX]
+ADD EDX,EAX
+XOR EAX,0xffffffff
+XOR EAX,EDX
+MOV EDX,dword ptr [ECX]
+ADD ECX,0x4
+TEST EAX,0x81010100
+JZ       LAB_00409F41
+TEST DL,DL
+JZ       LAB_00409F98
+TEST DH,DH
+JZ       LAB_00409F8F
+TEST EDX,0xff0000
+JZ       LAB_00409F82
+TEST EDX,0xff000000
+JZ       LAB_00409F7A
+JMP      LAB_00409F41
+
+LAB_00409F7A:
+MOV dword ptr [EDI],EDX
+MOV EAX,dword ptr [ESP + 0x8]
+POP EDI
+RET
+
+LAB_00409F82:
+MOV word ptr [EDI],DX
+MOV EAX,dword ptr [ESP + 0x8]
+MOV byte ptr [EDI + 0x2],0x0
+POP EDI
+RET
+
+LAB_00409F8F:
+MOV word ptr [EDI],DX
+MOV EAX,dword ptr [ESP + 0x8]
+POP EDI
+RET
+
+LAB_00409F98:
+MOV byte ptr [EDI],DL
+MOV EAX,dword ptr [ESP + 0x8]
+POP EDI
+RET

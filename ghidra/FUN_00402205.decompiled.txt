@@ -1,0 +1,68 @@
+Function: FUN_00402205
+Address: 0x00402205
+
+
+void FUN_00402205(void)
+
+{
+  HDC hDC;
+  HBRUSH pHVar1;
+  RECT local_44;
+  CHAR local_34 [20];
+  int local_20;
+  int local_1c;
+  int local_18;
+  tagRECT local_14;
+  
+  SetCursor(DAT_0041ec4c);
+  DAT_0041ec24 = 1;
+  hDC = GetDC(DAT_00414978);
+  GetClientRect(DAT_00414978,&local_14);
+  local_44.left = (local_14.right + -0xb2) / 2 + -0x49;
+  local_44.top = (local_14.bottom + -0x2e) / 2 + -0x21;
+  local_44.right = (local_14.right + -0xb2) / 2 + 0x7f;
+  local_44.bottom = (local_14.bottom + -0x2e) / 2 + 0x57;
+  pHVar1 = GetStockObject(4);
+  FillRect(hDC,&local_44,pHVar1);
+  local_44.left = (local_14.right + -0xb2) / 2 + -0x4d;
+  local_44.top = (local_14.bottom + -0x2e) / 2 + -0x25;
+  local_44.right = (local_14.right + -0xb2) / 2 + 0x7b;
+  local_44.bottom = (local_14.bottom + -0x2e) / 2 + 0x53;
+  pHVar1 = GetStockObject(0);
+  FillRect(hDC,&local_44,pHVar1);
+  if ((DAT_00415624 == 1) && (DAT_004149e0 == 1)) {
+    sndPlaySoundA(s_WELLDONE_WAV_00412388,1);
+  }
+  SetTextAlign(hDC,6);
+  local_1c = wsprintfA(local_34,s_Well_Done__00412398);
+  TextOutA(hDC,(local_14.right + -0xb2) / 2 + 0x17,(local_14.bottom + -0x2e) / 2 + -0x11,local_34,
+           local_1c);
+  local_1c = wsprintfA(local_34,s_That_took__d_seconds_004123a4,DAT_00415630);
+  TextOutA(hDC,(local_14.right + -0xb2) / 2 + 0x17,(local_14.bottom + -0x2e) / 2 + 0xd,local_34,
+           local_1c);
+  local_18 = ((DAT_0041e86c * 5 + 100) - DAT_00415630) * 10;
+  if (local_18 < 1) {
+    local_1c = wsprintfA(local_34,s_No_bonus____004123bc);
+    TextOutA(hDC,(local_14.right + -0xb2) / 2 + 0x17,(local_14.bottom + -0x2e) / 2 + 0x2b,local_34,
+             local_1c);
+  }
+  else {
+    for (local_20 = 1; local_20 <= local_18; local_20 = local_20 + 1) {
+      local_1c = wsprintfA(local_34,s__d_bonus_points_004123c8,local_20 * DAT_004155e0);
+      TextOutA(hDC,(local_14.right + -0xb2) / 2 + 0x17,(local_14.bottom + -0x2e) / 2 + 0x2b,local_34
+               ,local_1c);
+      DAT_0041560c = DAT_0041560c + DAT_004155e0;
+      FUN_00404f8b();
+    }
+  }
+  ReleaseDC(DAT_00414978,hDC);
+  DAT_0041e86c = DAT_0041e86c + 1;
+  FUN_00408ad3();
+  FUN_00403840();
+  DAT_0041ec24 = 0;
+  FUN_00404764();
+  DAT_00415630 = 0;
+  return;
+}
+
+

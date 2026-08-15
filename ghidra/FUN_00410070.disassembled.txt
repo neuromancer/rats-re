@@ -1,0 +1,26 @@
+Function: FUN_00410070
+Address: 0x00410070
+
+MOV ECX,dword ptr [ESP + 0x4]
+CMP dword ptr [0x0041ffa0],ECX
+JBE      LAB_0041009E
+MOV EAX,ECX
+AND ECX,0x1f
+SHL ECX,0x2
+AND EAX,0xffffffe7
+SAR EAX,0x3
+LEA EDX,[ECX + ECX*0x8]
+MOV EAX,dword ptr [EAX + 0x41fea0]
+ADD EAX,EDX
+TEST byte ptr [EAX + 0x4],0x1
+JZ       LAB_0041009E
+MOV EAX,dword ptr [EAX]
+RET
+
+LAB_0041009E:
+CALL 0x0040E210
+MOV dword ptr [EAX],0x9
+CALL 0x0040E220
+MOV dword ptr [EAX],0x0
+MOV EAX,0xffffffff
+RET

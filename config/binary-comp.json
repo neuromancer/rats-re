@@ -1,0 +1,19 @@
+{
+  "targets": {
+    "rats": {
+      "original_exe": "../RATS.EXE",
+      "rebuilt_exe": "../out/RATS_RE.EXE",
+      "map": "../out/RATS_RE.map",
+      "source_dirs": ["../src"],
+      "code_export_dir": "../ghidra",
+      "asm_dir": "../out",
+      "globals_source": "../src/globals.c",
+      "globals_header": "../include/globals.h",
+      "code_globals_header": "../ghidra/globals.h",
+      "build": {
+        "clean": "make clean",
+        "build": "make build"
+      }
+    }
+  }
+}

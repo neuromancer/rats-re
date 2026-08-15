@@ -1,0 +1,4 @@
+Function: RtlUnwind
+Address: 0x0041036C
+
+JMP dword ptr [0x00420374]

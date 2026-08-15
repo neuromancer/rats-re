@@ -1,0 +1,40 @@
+Function: __cftog
+Address: 0x0040A8E0
+
+
+/* Library Function - Single Match
+    __cftog
+   
+   Library: Visual Studio 1998 Release */
+
+void __cdecl __cftog(double *param_1,char *param_2,size_t param_3,int param_4)
+
+{
+  char *pcVar1;
+  int iVar2;
+  STRFLT unaff_EBP;
+  char *pcVar3;
+  _strflt local_28;
+  char local_18 [24];
+  
+  __fltout2((_CRT_DOUBLE)*param_1,&local_28,local_18,(size_t)unaff_EBP);
+  iVar2 = local_28.decpt + -1;
+  __fptostr(param_2 + (local_28.sign == 0x2d),param_3,(int)&local_28,unaff_EBP);
+  local_28.decpt = local_28.decpt + -1;
+  if ((-5 < local_28.decpt) && (local_28.decpt < (int)param_3)) {
+    pcVar1 = param_2 + (local_28.sign == 0x2d);
+    if (iVar2 < local_28.decpt) {
+      do {
+        pcVar3 = pcVar1;
+        pcVar1 = pcVar3 + 1;
+      } while (*pcVar3 != '\0');
+      pcVar3[-1] = '\0';
+    }
+    __cftof2(param_2,param_3,&local_28.sign,'\x01');
+    return;
+  }
+  __cftoe2(param_2,param_3,param_4,&local_28.sign,'\x01');
+  return;
+}
+
+

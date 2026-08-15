@@ -1,0 +1,23 @@
+Function: __FF_MSGBANNER
+Address: 0x0040B960
+
+
+/* Library Function - Single Match
+    __FF_MSGBANNER
+   
+   Library: Visual Studio 1998 Release */
+
+void __cdecl __FF_MSGBANNER(void)
+
+{
+  if ((DAT_00412f48 == 1) || ((DAT_00412f48 == 0 && (DAT_00412f4c == 1)))) {
+    FUN_0040b9a0(0xfc);
+    if (DAT_00413320 != (code *)0x0) {
+      (*DAT_00413320)();
+    }
+    FUN_0040b9a0(0xff);
+  }
+  return;
+}
+
+

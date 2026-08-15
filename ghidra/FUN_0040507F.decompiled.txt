@@ -1,0 +1,37 @@
+Function: FUN_0040507f
+Address: 0x0040507F
+
+
+void FUN_0040507f(void)
+
+{
+  HDC hdc;
+  int local_18;
+  tagRECT local_14;
+  
+  for (local_18 = 0; local_18 < 2; local_18 = local_18 + 1) {
+    (&DAT_00414948)[local_18] = 0;
+  }
+  for (local_18 = 0; local_18 < 0x32; local_18 = local_18 + 1) {
+    if (0 < *(int *)(&DAT_00414e0c + local_18 * 0x28)) {
+      (&DAT_00414948)[*(int *)(&DAT_00414e08 + local_18 * 0x28)] =
+           (&DAT_00414948)[*(int *)(&DAT_00414e08 + local_18 * 0x28)] + 1;
+    }
+  }
+  DAT_00414954 = DAT_0041494c + DAT_00414948;
+  GetClientRect(DAT_00414978,&local_14);
+  hdc = GetDC(DAT_00414978);
+  SelectObject(hdc,DAT_0041ec18);
+  SelectObject(hdc,DAT_00415618);
+  Rectangle(hdc,local_14.right + -0x1e,0xa8,local_14.right + -10,400 - (DAT_00414954 * 0xe8) / 0x32)
+  ;
+  SelectObject(hdc,DAT_0041ebc0);
+  Rectangle(hdc,local_14.right + -0x1e,400 - (DAT_00414954 * 0xe8) / 0x32,local_14.right + -10,
+            400 - (DAT_00414948 * 0xe8) / 0x32);
+  SelectObject(hdc,DAT_00415604);
+  Rectangle(hdc,local_14.right + -0x1e,400 - (DAT_00414948 * 0xe8) / 0x32,local_14.right + -10,400);
+  ReleaseDC(DAT_00414978,hdc);
+  return;
+}
+
+

@@ -1,0 +1,17 @@
+Function: __CopyMan
+Address: 0x0040C2F0
+
+MOV EAX,dword ptr [ESP + 0x8]
+PUSH ESI
+MOV ECX,dword ptr [ESP + 0x8]
+MOV EDX,0x3
+
+LAB_0040C2FE:
+MOV ESI,dword ptr [EAX]
+ADD EAX,0x4
+MOV dword ptr [ECX],ESI
+ADD ECX,0x4
+DEC EDX
+JNZ      LAB_0040C2FE
+POP ESI
+RET

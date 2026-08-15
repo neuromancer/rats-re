@@ -27,6 +27,7 @@ CFLAGS = \
 	/MT \
 	/Od \
 	/G3 \
+	/Iinclude \
 	/W3
 
 LINKFLAGS = \
@@ -52,8 +53,13 @@ ORIGINAL_EXE = RATS.EXE
 OUT_DIR = out
 TARGET = $(OUT_DIR)/RATS_RE.EXE
 MAPFILE = $(OUT_DIR)/RATS_RE.map
-OBJECT = $(OUT_DIR)/rats.obj
-ASSEMBLY = $(OUT_DIR)/rats.asm
+SOURCES = \
+	src/rats.c \
+	src/scores.c \
+	src/globals.c
+OBJECTS = $(patsubst src/%.c,$(OUT_DIR)/%.obj,$(SOURCES))
+ASSEMBLIES = $(patsubst src/%.c,$(OUT_DIR)/%.asm,$(SOURCES))
+PROJECT_HEADERS = $(wildcard include/*.h)
 
 RUN_DIR = $(OUT_DIR)/run
 RUN_EXE = $(RUN_DIR)/RATS.EXE
@@ -113,17 +119,39 @@ all: $(TARGET)
 
 build: $(TARGET)
 
-$(TARGET): $(OBJECT) | $(MSVCRT_DLL)
+$(TARGET): $(OBJECTS) | $(MSVCRT_DLL)
 	@mkdir -p $(OUT_DIR)
 	env LIB='$(MSVC_LIB)' $(LINK) $(LINKFLAGS) /MAP:$(MAPFILE) \
-		$(OBJECT) $(GAME_LIBS) /OUT:$@
+		$(OBJECTS) $(GAME_LIBS) /OUT:$@
 
-$(OBJECT) $(ASSEMBLY): src/rats.c | $(WIBO) $(MSVCRT_DLL)
+$(OUT_DIR)/%.obj: src/%.c $(PROJECT_HEADERS) | $(WIBO) $(MSVCRT_DLL)
 	@mkdir -p $(OUT_DIR)
 	@env INCLUDE='$(MSVC_INC)' $(CC) $(CFLAGS) $< \
-		/Fo$(OBJECT) \
-		/Fa$(ASSEMBLY) \
-		> $(OUT_DIR)/rats.stdout
+		/Fo$@ \
+		/Fa$(OUT_DIR)/$*.asm \
+		> $(OUT_DIR)/$*.stdout
+
+# ---------------------------------------------------------------------------
+# Assembly comparison
+# ---------------------------------------------------------------------------
+
+BINARY_COMP ?= binary-comp
+BC_CONFIG = config/binary-comp.json
+BC_TARGET = rats
+
+compare-func: $(TARGET)
+	@test -n "$(FUNC)" || \
+		(echo "usage: make compare-func FUNC=<name> ADDR=<8-hex-address>" >&2; exit 1)
+	@test -n "$(ADDR)" || \
+		(echo "usage: make compare-func FUNC=<name> ADDR=<8-hex-address>" >&2; exit 1)
+	@test -f "ghidra/FUN_$(ADDR).disassembled.txt" || \
+		(echo "missing Ghidra export for $(ADDR)" >&2; exit 1)
+	@$(BINARY_COMP) compare \
+		--config $(BC_CONFIG) \
+		--target $(BC_TARGET) \
+		--no-build \
+		$(FUNC) \
+		ghidra/FUN_$(ADDR).disassembled.txt
 
 # ---------------------------------------------------------------------------
 # DREAMM runtime
@@ -245,12 +273,14 @@ help:
 	@echo "make test            smoke-test the rebuilt executable in DREAMM"
 	@echo "make test-original   smoke-test the original executable in DREAMM"
 	@echo "make debug           launch the rebuilt executable in DREAMM's debugger"
+	@echo "make compare-func FUNC=Name ADDR=00401000"
 
 .PHONY: \
 	all \
 	build \
 	clean \
 	clean-dreamm \
+	compare-func \
 	debug \
 	dreamm \
 	help \

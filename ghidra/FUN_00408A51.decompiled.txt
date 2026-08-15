@@ -1,0 +1,17 @@
+Function: FUN_00408a51
+Address: 0x00408A51
+
+
+void FUN_00408a51(void)
+
+{
+  EnableMenuItem(DAT_0041497c,0xd2,0);
+  EnableMenuItem(DAT_0041497c,0xd2,0);
+  EnableMenuItem(DAT_0041497c,0xd3,1);
+  EnableMenuItem(DAT_0041497c,0xd4,1);
+  EnableMenuItem(DAT_0041497c,0xd5,1);
+  EnableMenuItem(DAT_0041497c,0xdc,1);
+  return;
+}
+
+

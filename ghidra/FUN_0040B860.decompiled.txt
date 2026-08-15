@@ -1,0 +1,12 @@
+Function: FUN_0040b860
+Address: 0x0040B860
+
+
+void FUN_0040b860(void)
+
+{
+  DAT_0041fe94 = HeapCreate(0,0x1000,0);
+  return;
+}
+
+

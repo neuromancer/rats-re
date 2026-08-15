@@ -1,0 +1,65 @@
+Function: FUN_00405f72
+Address: 0x00405F72
+
+
+undefined4 FUN_00405f72(HWND param_1,int param_2,int param_3)
+
+{
+  HDC hdc;
+  int iVar1;
+  longlong lVar2;
+  CHAR *pCVar3;
+  CHAR local_50 [40];
+  int local_28;
+  tagRECT local_24;
+  tagRECT local_14;
+  
+  if (param_2 == 0xf) {
+    hdc = GetDC(param_1);
+    GetClientRect(param_1,&local_14);
+    SetTextAlign(hdc,6);
+    SetTextColor(hdc,0);
+    SetBkMode(hdc,1);
+    iVar1 = wsprintfA(local_50,s_You_have_completed_the_demo_vers_004124d8);
+    pCVar3 = local_50;
+    local_28 = iVar1;
+    lVar2 = __ftol();
+    TextOutA(hdc,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    iVar1 = wsprintfA(local_50,s_Click_on_the__Order__button_for_00412500);
+    pCVar3 = local_50;
+    local_28 = iVar1;
+    lVar2 = __ftol();
+    TextOutA(hdc,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    iVar1 = wsprintfA(local_50,s_details_on_buying_the_full_versi_00412520);
+    pCVar3 = local_50;
+    local_28 = iVar1;
+    lVar2 = __ftol();
+    TextOutA(hdc,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    ReleaseDC(DAT_00414978,hdc);
+  }
+  else {
+    if (param_2 == 0x110) {
+      GetWindowRect(DAT_00414978,&local_24);
+      GetWindowRect(param_1,&local_14);
+      MoveWindow(param_1,(local_24.left + (local_24.right - local_24.left) / 2) -
+                         (local_14.right - local_14.left) / 2,
+                 (local_24.top + (local_24.bottom - local_24.top) / 2) -
+                 (local_14.bottom - local_14.top) / 2,local_14.right - local_14.left,
+                 local_14.bottom - local_14.top,1);
+      return 1;
+    }
+    if (param_2 == 0x111) {
+      if (param_3 == 1) {
+        EndDialog(param_1,1);
+        return 1;
+      }
+      if (param_3 == 800) {
+        WinHelpA(DAT_00414978,s_rats_hlp_00412544,1,0x104);
+        return 1;
+      }
+    }
+  }
+  return 0;
+}
+
+

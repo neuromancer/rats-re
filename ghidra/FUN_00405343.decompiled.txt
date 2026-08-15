@@ -1,0 +1,35 @@
+Function: FUN_00405343
+Address: 0x00405343
+
+
+void FUN_00405343(void)
+
+{
+  HDC hdc;
+  HGDIOBJ h;
+  uint uVar1;
+  tagRECT local_14;
+  
+  GetClientRect(DAT_00414978,&local_14);
+  FUN_00404e3b(DAT_0041665c,local_14.right + -0x72,0x3c,0x60,0x60);
+  if (DAT_0041e888 == 0) {
+    hdc = GetDC(DAT_00414978);
+    uVar1 = (int)DAT_0041e86c >> 0x1f;
+    if (((int)(((DAT_0041e86c ^ uVar1) - uVar1 & 0x1f ^ uVar1) - uVar1) < 0x10) ||
+       (0x17 < (int)(((DAT_0041e86c ^ uVar1) - uVar1 & 0x1f ^ uVar1) - uVar1))) {
+      SelectObject(hdc,DAT_00414964);
+    }
+    else {
+      SelectObject(hdc,DAT_0041e88c);
+    }
+    h = GetStockObject(5);
+    SelectObject(hdc,h);
+    Rectangle(hdc,local_14.right + DAT_004149d4 * 3 + -0x71,DAT_004149d8 * 3 + 0x3d,
+              (DAT_0041e7c4 + DAT_004149d4) * 3 + local_14.right + -0x72,
+              (DAT_0041496c + DAT_004149d8) * 3 + 0x3c);
+    ReleaseDC(DAT_00414978,hdc);
+  }
+  return;
+}
+
+

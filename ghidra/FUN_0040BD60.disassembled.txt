@@ -1,0 +1,22 @@
+Function: FID_conflict:__lock_file2
+Address: 0x0040BD60
+
+PUSH EBP
+MOV EAX,dword ptr [ESP + 0x8]
+MOV EBP,ESP
+CMP EAX,0x14
+JGE      LAB_0040BD79
+ADD EAX,0x1c
+PUSH EAX
+CALL 0x0040BC90
+MOV ESP,EBP
+POP EBP
+RET
+
+LAB_0040BD79:
+MOV EAX,dword ptr [EBP + 0xc]
+ADD EAX,0x20
+PUSH EAX
+CALL dword ptr [0x004202f0]
+POP EBP
+RET

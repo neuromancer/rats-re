@@ -1,0 +1,35 @@
+Function: FUN_00404f8b
+Address: 0x00404F8B
+
+
+void FUN_00404f8b(void)
+
+{
+  HBRUSH hbr;
+  RECT local_40;
+  HDC local_30;
+  CHAR local_2c [20];
+  int local_18;
+  tagRECT local_14;
+  
+  if (DAT_0041560c < 0) {
+    DAT_0041560c = 0;
+  }
+  local_30 = GetDC(DAT_00414978);
+  GetClientRect(DAT_00414978,&local_14);
+  SetTextAlign(local_30,6);
+  local_40.left = local_14.right + -0x80;
+  local_40.top = 0x1c;
+  local_40.right = local_14.right + -4;
+  local_40.bottom = 0x3b;
+  hbr = GetStockObject(2);
+  FillRect(local_30,&local_40,hbr);
+  SetTextColor(local_30,0xffffff);
+  SetBkMode(local_30,1);
+  local_18 = wsprintfA(local_2c,s__ld_004124b0,DAT_0041560c);
+  TextOutA(local_30,local_14.right + -0x42,local_14.top + 0x1c,local_2c,local_18);
+  ReleaseDC(DAT_00414978,local_30);
+  return;
+}
+
+

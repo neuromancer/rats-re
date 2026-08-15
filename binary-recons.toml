@@ -1,0 +1,15 @@
+schema_version = 1
+language = "C"
+compiler = "Microsoft Visual C++ 4.20 with /Od"
+exports_dir = "ghidra"
+output_dir = "out/binary-recons"
+strings_file = "ghidra/strings.txt"
+source_dirs = ["src"]
+declaration_files = ["include/*.h"]
+rule_profiles = ["c89", "msvc4-od"]
+compare_command = ["make", "compare-func", "FUNC={symbol}", "ADDR={address_hex}"]
+
+[[source_units]]
+path = "src/scores.c"
+start = 0x00408f02
+end = 0x0040910b

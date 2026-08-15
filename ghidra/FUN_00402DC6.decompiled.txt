@@ -1,0 +1,52 @@
+Function: FUN_00402dc6
+Address: 0x00402DC6
+
+
+void FUN_00402dc6(void)
+
+{
+  switch(DAT_0041ec1c) {
+  case 0:
+    if (DAT_004149d4 < 1) {
+      DAT_0041ec1c = 10;
+      FUN_00405343();
+    }
+    else {
+      DAT_004149d4 = DAT_004149d4 + -1;
+      FUN_00404ece();
+    }
+    break;
+  case 1:
+    if (DAT_004149d8 < 0x20 - DAT_0041496c) {
+      DAT_004149d8 = DAT_004149d8 + 1;
+      FUN_00404ece();
+    }
+    else {
+      DAT_0041ec1c = 10;
+      FUN_00405343();
+    }
+    break;
+  case 2:
+    if (DAT_004149d4 < 0x20 - DAT_0041e7c4) {
+      DAT_004149d4 = DAT_004149d4 + 1;
+      FUN_00404ece();
+    }
+    else {
+      DAT_0041ec1c = 10;
+      FUN_00405343();
+    }
+    break;
+  case 3:
+    if (DAT_004149d8 < 1) {
+      DAT_0041ec1c = 10;
+      FUN_00405343();
+    }
+    else {
+      DAT_004149d8 = DAT_004149d8 + -1;
+      FUN_00404ece();
+    }
+  }
+  return;
+}
+
+

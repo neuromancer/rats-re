@@ -1,0 +1,26 @@
+Function: xcptlookup
+Address: 0x0040ADE0
+
+MOV EAX,dword ptr [ESP + 0x8]
+PUSH ESI
+MOV ESI,EAX
+MOV EDX,dword ptr [ESP + 0x8]
+
+LAB_0040ADEB:
+CMP dword ptr [ESI],EDX
+JZ       LAB_0040AE02
+ADD ESI,0xc
+MOV ECX,dword ptr [0x0041304c]
+LEA ECX,[ECX + ECX*0x2]
+LEA ECX,[EAX + ECX*0x4]
+CMP ECX,ESI
+JA       LAB_0040ADEB
+
+LAB_0040AE02:
+MOV EAX,dword ptr [ESI]
+SUB EAX,EDX
+CMP EAX,0x1
+SBB EAX,EAX
+AND EAX,ESI
+POP ESI
+RET

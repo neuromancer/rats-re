@@ -1,0 +1,98 @@
+Function: FUN_004026d0
+Address: 0x004026D0
+
+
+void FUN_004026d0(void)
+
+{
+  HBITMAP h;
+  HDC hdc;
+  int iMode;
+  HBRUSH hbr;
+  RECT local_68;
+  CHAR local_58 [32];
+  HDC local_38;
+  int local_34;
+  int local_30;
+  int local_2c;
+  int local_28;
+  HBITMAP local_24 [4];
+  tagRECT local_14;
+  
+  SetCursor(DAT_0041ec4c);
+  FUN_00408a51();
+  local_24[0] = LoadBitmapA(DAT_004149b8,s_BMP_START_1_004123f0);
+  local_24[1] = LoadBitmapA(DAT_004149b8,s_BMP_START_2_SHADED_004123fc);
+  local_24[2] = LoadBitmapA(DAT_004149b8,s_BMP_START_3_SHADED_00412410);
+  local_24[3] = LoadBitmapA(DAT_004149b8,s_BMP_START_4_SHADED_00412424);
+  h = LoadBitmapA(DAT_004149b8,s_BMP_VERMINATORS_00412438);
+  hdc = GetDC(DAT_00414978);
+  GetClientRect(DAT_00414978,&local_14);
+  local_38 = CreateCompatibleDC(hdc);
+  iMode = GetMapMode(hdc);
+  SetMapMode(local_38,iMode);
+  local_68.left = 0x17;
+  local_68.top = 0x17;
+  local_68.right = local_14.right + -0x9b;
+  local_68.bottom = local_14.bottom + -0x17;
+  hbr = GetStockObject(4);
+  FillRect(hdc,&local_68,hbr);
+  SetBkMode(hdc,1);
+  SetTextColor(hdc,0xffff00);
+  for (local_34 = 0; local_34 < 10; local_34 = local_34 + 1) {
+    if (0 < *(int *)(&DAT_004166a8 + local_34 * 0x1c)) {
+      if (*(short *)(&DAT_004166a6 + local_34 * 0x1c) < 8) {
+        SetTextColor(hdc,0xff00);
+      }
+      else if (*(short *)(&DAT_004166a6 + local_34 * 0x1c) < 0x10) {
+        SetTextColor(hdc,0xffff);
+      }
+      else if (*(short *)(&DAT_004166a6 + local_34 * 0x1c) < 0x18) {
+        SetTextColor(hdc,0xc4c4c4);
+      }
+      else {
+        SetTextColor(hdc,0xff);
+      }
+      local_30 = ((local_14.bottom + -0xa6) * local_34) / 10 + 0x50;
+      SetTextAlign(hdc,2);
+      local_28 = wsprintfA(local_58,&DAT_00412448,local_34 + 1);
+      TextOutA(hdc,(local_14.right + -0xb2) / 2 + -0x7f,local_30,local_58,local_28);
+      local_28 = wsprintfA(local_58,&DAT_0041244c,*(short *)(&DAT_004166a6 + local_34 * 0x1c) + 1);
+      TextOutA(hdc,(local_14.right + -0xb2) / 2 + 0x6c,local_30,local_58,local_28);
+      local_28 = wsprintfA(local_58,&DAT_00412450,*(undefined4 *)(&DAT_004166a8 + local_34 * 0x1c));
+      TextOutA(hdc,(local_14.right + -0xb2) / 2 + 0xad,local_30,local_58,local_28);
+      SetTextAlign(hdc,0);
+      local_28 = wsprintfA(local_58,&DAT_00416690 + local_34 * 0x1c);
+      TextOutA(hdc,(local_14.right + -0xb2) / 2 + -0x61,local_30,local_58,local_28);
+    }
+  }
+  for (local_34 = 0; local_34 < 4; local_34 = local_34 + 1) {
+    SelectObject(local_38,local_24[local_34]);
+    BitBlt(hdc,(local_14.right + -0x84) / 2 + local_34 * 0x40 + -0x74,local_14.bottom + -0x49,0x28,
+           0x28,local_38,0,0,0xcc0020);
+  }
+  SelectObject(local_38,h);
+  BitBlt(hdc,(local_14.right + -0x84) / 2 + -0x62,0x21,0xc4,0x18,local_38,0,0,0xcc0020);
+  ReleaseDC(DAT_00414978,hdc);
+  DeleteDC(local_38);
+  for (local_34 = 0; local_34 < 4; local_34 = local_34 + 1) {
+    DeleteObject(local_24[local_34]);
+  }
+  DeleteObject(h);
+  for (local_34 = 0; local_34 < 0x28; local_34 = local_34 + 1) {
+    *(undefined4 *)(&DAT_0041e8a0 + local_34 * 0x14) = 999;
+  }
+  for (local_2c = 0; local_2c < 4; local_2c = local_2c + 1) {
+    for (local_30 = 0; local_30 < 7; local_30 = local_30 + 1) {
+      FUN_0040546b(local_2c,local_30);
+    }
+  }
+  DAT_0041e888 = 1;
+  FUN_00408ad3();
+  FUN_00404d6e(DAT_00414940,DAT_00415620,0,0,0x280,0x280);
+  FUN_00404d6e(DAT_0041495c,DAT_00415620,0,0,0x280,0x280);
+  DAT_0041560c = 0;
+  return;
+}
+
+

@@ -1,0 +1,23 @@
+Function: __cftof
+Address: 0x0040A7B0
+
+
+/* Library Function - Single Match
+    __cftof
+   
+   Library: Visual Studio 1998 Release */
+
+errno_t __cdecl __cftof(double *_Value,char *_Buf,size_t _SizeInBytes,int _Dec)
+
+{
+  STRFLT unaff_EDI;
+  _strflt local_28;
+  char local_18 [24];
+  
+  __fltout2((_CRT_DOUBLE)*_Value,&local_28,local_18,(size_t)unaff_EDI);
+  __fptostr(_Buf + (local_28.sign == 0x2d),local_28.decpt + _SizeInBytes,(int)&local_28,unaff_EDI);
+  __cftof2(_Buf,_SizeInBytes,&local_28.sign,'\0');
+  return (errno_t)_Buf;
+}
+
+

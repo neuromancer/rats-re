@@ -1,0 +1,39 @@
+Function: _tolower
+Address: 0x0040C000
+
+
+// WARNING: Globals starting with '_' overlap smaller symbols at the same address
+/* Library Function - Single Match
+    _tolower
+   
+   Library: Visual Studio 1998 Release */
+
+int __cdecl _tolower(int _C)
+
+{
+  bool bVar1;
+  
+  if (DAT_00413648 == 0) {
+    if ((0x40 < _C) && (_C < 0x5b)) {
+      return _C + 0x20;
+    }
+  }
+  else {
+    bVar1 = DAT_0041ee84 == 0;
+    if (bVar1) {
+      _DAT_0041ee88 = _DAT_0041ee88 + 1;
+    }
+    else {
+      __lock(0x13);
+    }
+    _C = __tolower_lk(_C);
+    if (!bVar1) {
+      FUN_0040bc90(0x13);
+      return _C;
+    }
+    _DAT_0041ee88 = _DAT_0041ee88 + -1;
+  }
+  return _C;
+}
+
+

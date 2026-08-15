@@ -1,0 +1,77 @@
+Function: ___init_numeric
+Address: 0x0040E9A0
+
+
+// WARNING: Globals starting with '_' overlap smaller symbols at the same address
+/* Library Function - Single Match
+    ___init_numeric
+   
+   Library: Visual Studio 1998 Release */
+
+int __cdecl ___init_numeric(threadlocinfo *_LocInfo)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  undefined4 uVar4;
+  void *unaff_EDI;
+  uint _Lc_type;
+  
+  _Lc_type = (uint)DAT_00413c3a;
+  if (DAT_00413650 != 0) {
+    iVar1 = ___getlocaleinfo((_locale_t)0x1,_Lc_type,(LPCWSTR)0xe,0x413bfc,unaff_EDI);
+    iVar2 = ___getlocaleinfo((_locale_t)0x1,_Lc_type,(LPCWSTR)0xf,0x413c00,unaff_EDI);
+    iVar3 = ___getlocaleinfo((_locale_t)0x1,_Lc_type,(LPCWSTR)0x10,0x413c04,unaff_EDI);
+    fix_grouping(DAT_00413c04);
+    if ((iVar1 != 0 || iVar2 != 0) || iVar3 != 0) {
+      FUN_0040bd90(DAT_00413bfc);
+      FUN_0040bd90(DAT_00413c00);
+      FUN_0040bd90(DAT_00413c04);
+      DAT_00413bfc = (LPVOID)0x0;
+      DAT_00413c00 = (LPVOID)0x0;
+      DAT_00413c04 = (char *)0x0;
+      return -1;
+    }
+    if (*(undefined **)PTR_PTR_00414530 != &DAT_004144f8) {
+      FUN_0040bd90(*(undefined **)PTR_PTR_00414530);
+      FUN_0040bd90(*(LPVOID *)(PTR_PTR_00414530 + 4));
+      FUN_0040bd90(*(LPVOID *)(PTR_PTR_00414530 + 8));
+    }
+    *(LPVOID *)PTR_PTR_00414530 = DAT_00413bfc;
+    *(LPVOID *)(PTR_PTR_00414530 + 4) = DAT_00413c00;
+    *(char **)(PTR_PTR_00414530 + 8) = DAT_00413c04;
+    _DAT_004133f0 = 1;
+    DAT_004133ec = **(undefined1 **)PTR_PTR_00414530;
+    return 0;
+  }
+  FUN_0040bd90(DAT_00413bfc);
+  FUN_0040bd90(DAT_00413c00);
+  FUN_0040bd90(DAT_00413c04);
+  DAT_00413bfc = (LPVOID)0x0;
+  DAT_00413c00 = (LPVOID)0x0;
+  DAT_00413c04 = (char *)0x0;
+  uVar4 = FUN_0040c9b0(2);
+  *(undefined4 *)PTR_PTR_00414530 = uVar4;
+  if (*(undefined2 **)PTR_PTR_00414530 == (undefined2 *)0x0) {
+    return -1;
+  }
+  **(undefined2 **)PTR_PTR_00414530 = 0x2e;
+  uVar4 = FUN_0040c9b0(2);
+  *(undefined4 *)(PTR_PTR_00414530 + 4) = uVar4;
+  if (*(undefined1 **)(PTR_PTR_00414530 + 4) == (undefined1 *)0x0) {
+    return -1;
+  }
+  **(undefined1 **)(PTR_PTR_00414530 + 4) = 0;
+  uVar4 = FUN_0040c9b0(2);
+  *(undefined4 *)(PTR_PTR_00414530 + 8) = uVar4;
+  if (*(undefined1 **)(PTR_PTR_00414530 + 8) == (undefined1 *)0x0) {
+    return -1;
+  }
+  **(undefined1 **)(PTR_PTR_00414530 + 8) = 0;
+  _DAT_004133f0 = 1;
+  DAT_004133ec = **(undefined1 **)PTR_PTR_00414530;
+  return 0;
+}
+
+

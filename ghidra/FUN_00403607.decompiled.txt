@@ -1,0 +1,56 @@
+Function: FUN_00403607
+Address: 0x00403607
+
+
+void __cdecl FUN_00403607(int param_1)
+
+{
+  int iVar1;
+  int local_8;
+  
+  for (local_8 = 0; (0 < *(int *)(&DAT_00414e0c + local_8 * 0x28) && (local_8 < 0x32));
+      local_8 = local_8 + 1) {
+  }
+  if (local_8 < 0x32) {
+    *(int *)(&DAT_00414df8 + local_8 * 0x28) =
+         (int)(*(int *)(&DAT_00414df8 + param_1 * 0x28) + -10 +
+              (*(int *)(&DAT_00414df8 + param_1 * 0x28) + -10 >> 0x1f & 3U)) >> 2;
+    *(int *)(&DAT_00414df8 + local_8 * 0x28) = *(int *)(&DAT_00414df8 + local_8 * 0x28) * 4 + 10;
+    *(int *)(&DAT_00414dfc + local_8 * 0x28) =
+         (int)(*(int *)(&DAT_00414dfc + param_1 * 0x28) + -10 +
+              (*(int *)(&DAT_00414dfc + param_1 * 0x28) + -10 >> 0x1f & 3U)) >> 2;
+    *(int *)(&DAT_00414dfc + local_8 * 0x28) = *(int *)(&DAT_00414dfc + local_8 * 0x28) * 4 + 10;
+    iVar1 = FUN_0040215c(local_8);
+    if (((iVar1 != 0) && (DAT_00415624 == 1)) && (DAT_004149e0 == 1)) {
+      sndPlaySoundA(s_BIRTH_WAV_00412484,1);
+    }
+    *(undefined4 *)(&DAT_00414e0c + local_8 * 0x28) = 0x14;
+    *(undefined4 *)(&DAT_00414e1c + local_8 * 0x28) = 0;
+    *(undefined4 *)(&DAT_00414e18 + local_8 * 0x28) = 0x14;
+    if (DAT_0041494c < DAT_00414948) {
+      *(undefined4 *)(&DAT_00414e08 + local_8 * 0x28) = 1;
+    }
+    else {
+      *(undefined4 *)(&DAT_00414e08 + local_8 * 0x28) = 0;
+    }
+    *(undefined4 *)(&DAT_00414e04 + local_8 * 0x28) = 0;
+    *(undefined4 *)(&DAT_00414e10 + local_8 * 0x28) = 0;
+    switch(*(undefined4 *)(&DAT_00414e00 + param_1 * 0x28)) {
+    case 0:
+      *(undefined4 *)(&DAT_00414e00 + local_8 * 0x28) = 2;
+      break;
+    case 1:
+      *(undefined4 *)(&DAT_00414e00 + local_8 * 0x28) = 3;
+      break;
+    case 2:
+      *(undefined4 *)(&DAT_00414e00 + local_8 * 0x28) = 0;
+      break;
+    case 3:
+      *(undefined4 *)(&DAT_00414e00 + local_8 * 0x28) = 1;
+    }
+    FUN_0040507f();
+  }
+  return;
+}
+
+

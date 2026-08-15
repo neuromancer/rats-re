@@ -1,0 +1,38 @@
+Function: FUN_00409db6
+Address: 0x00409DB6
+
+
+undefined4 FUN_00409db6(void)
+
+{
+  HFILE hFile;
+  undefined4 uVar1;
+  char local_a0;
+  char local_9f;
+  char local_9e;
+  char local_9d;
+  char local_9c;
+  char local_9b;
+  char local_9a;
+  _OFSTRUCT local_8c;
+  
+  hFile = OpenFile(s_rats_hlp_00412f08,&local_8c,0x2000);
+  if (hFile == 0) {
+    uVar1 = 0;
+  }
+  else {
+    _llseek(hFile,0x382a,0);
+    _lread(hFile,&local_a0,7);
+    if ((((local_a0 == 't') && (local_9f == 'o')) && (local_9e == ' ')) &&
+       (((local_9d == 'S' && (local_9c == 'e')) && ((local_9b == 'a' && (local_9a == 'n')))))) {
+      _lclose(hFile);
+      uVar1 = 1;
+    }
+    else {
+      uVar1 = 0;
+    }
+  }
+  return uVar1;
+}
+
+

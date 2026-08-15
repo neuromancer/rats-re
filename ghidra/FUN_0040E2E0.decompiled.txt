@@ -1,0 +1,113 @@
+Function: __get_lc_time
+Address: 0x0040E2E0
+
+
+/* Library Function - Single Match
+    __get_lc_time
+   
+   Library: Visual Studio 1998 Release */
+
+uint __cdecl __get_lc_time(LCTYPE param_1)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  uint uVar5;
+  uint uVar6;
+  uint uVar7;
+  uint uVar8;
+  uint uVar9;
+  uint uVar10;
+  uint uVar11;
+  uint uVar12;
+  uint uVar13;
+  uint uVar14;
+  uint uVar15;
+  uint uVar16;
+  uint uVar17;
+  uint uVar18;
+  uint uVar19;
+  uint uVar20;
+  uint uVar21;
+  uint uVar22;
+  uint uVar23;
+  uint uVar24;
+  uint uVar25;
+  uint uVar26;
+  uint uVar27;
+  uint uVar28;
+  uint uVar29;
+  uint uVar30;
+  uint uVar31;
+  uint uVar32;
+  uint uVar33;
+  uint uVar34;
+  uint uVar35;
+  uint uVar36;
+  uint uVar37;
+  uint uVar38;
+  uint uVar39;
+  uint uVar40;
+  uint uVar41;
+  uint uVar42;
+  uint uVar43;
+  void *unaff_EBP;
+  
+  uVar43 = (uint)DAT_00413c40;
+  uVar40 = (uint)DAT_00413c3e;
+  if (param_1 == 0) {
+    return 0xffffffff;
+  }
+  uVar1 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x31,param_1 + 4,unaff_EBP);
+  uVar2 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x32,param_1 + 8,unaff_EBP);
+  uVar3 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x33,param_1 + 0xc,unaff_EBP);
+  uVar4 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x34,param_1 + 0x10,unaff_EBP);
+  uVar5 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x35,param_1 + 0x14,unaff_EBP);
+  uVar6 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x36,param_1 + 0x18,unaff_EBP);
+  uVar7 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x37,param_1,unaff_EBP);
+  uVar8 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x2a,param_1 + 0x20,unaff_EBP);
+  uVar9 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x2b,param_1 + 0x24,unaff_EBP);
+  uVar10 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x2c,param_1 + 0x28,unaff_EBP);
+  uVar11 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x2d,param_1 + 0x2c,unaff_EBP);
+  uVar12 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x2e,param_1 + 0x30,unaff_EBP);
+  uVar13 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x2f,param_1 + 0x34,unaff_EBP);
+  uVar14 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x30,param_1 + 0x1c,unaff_EBP);
+  uVar15 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x44,param_1 + 0x38,unaff_EBP);
+  uVar16 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x45,param_1 + 0x3c,unaff_EBP);
+  uVar17 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x46,param_1 + 0x40,unaff_EBP);
+  uVar18 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x47,param_1 + 0x44,unaff_EBP);
+  uVar19 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x48,param_1 + 0x48,unaff_EBP);
+  uVar20 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x49,param_1 + 0x4c,unaff_EBP);
+  uVar21 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x4a,param_1 + 0x50,unaff_EBP);
+  uVar22 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x4b,param_1 + 0x54,unaff_EBP);
+  uVar23 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x4c,param_1 + 0x58,unaff_EBP);
+  uVar24 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x4d,param_1 + 0x5c,unaff_EBP);
+  uVar25 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x4e,param_1 + 0x60,unaff_EBP);
+  uVar26 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x4f,param_1 + 100,unaff_EBP);
+  uVar27 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x38,param_1 + 0x68,unaff_EBP);
+  uVar28 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x39,param_1 + 0x6c,unaff_EBP);
+  uVar29 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x3a,param_1 + 0x70,unaff_EBP);
+  uVar30 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x3b,param_1 + 0x74,unaff_EBP);
+  uVar31 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x3c,param_1 + 0x78,unaff_EBP);
+  uVar32 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x3d,param_1 + 0x7c,unaff_EBP);
+  uVar33 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x3e,param_1 + 0x80,unaff_EBP);
+  uVar34 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x3f,param_1 + 0x84,unaff_EBP);
+  uVar35 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x40,param_1 + 0x88,unaff_EBP);
+  uVar36 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x41,param_1 + 0x8c,unaff_EBP);
+  uVar37 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x42,param_1 + 0x90,unaff_EBP);
+  uVar38 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x43,param_1 + 0x94,unaff_EBP);
+  uVar39 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x28,param_1 + 0x98,unaff_EBP);
+  uVar40 = ___getlocaleinfo((_locale_t)0x1,uVar40,(LPCWSTR)0x29,param_1 + 0x9c,unaff_EBP);
+  uVar41 = ___getlocaleinfo((_locale_t)0x1,uVar43,(LPCWSTR)0x1f,param_1 + 0xa0,unaff_EBP);
+  uVar42 = ___getlocaleinfo((_locale_t)0x1,uVar43,(LPCWSTR)0x20,param_1 + 0xa4,unaff_EBP);
+  uVar43 = storeTimeFmt(uVar43,param_1);
+  return uVar1 | uVar2 | uVar3 | uVar4 | uVar5 | uVar6 | uVar7 | uVar8 | uVar9 | uVar10 | uVar11 |
+         uVar12 | uVar13 | uVar14 | uVar15 | uVar16 | uVar17 | uVar18 | uVar19 | uVar20 | uVar21 |
+         uVar22 | uVar23 | uVar24 | uVar25 | uVar26 | uVar27 | uVar28 | uVar29 | uVar30 | uVar31 |
+         uVar32 | uVar33 | uVar34 | uVar35 | uVar36 | uVar37 | uVar38 | uVar39 | uVar40 | uVar41 |
+         uVar42 | uVar43;
+}
+
+

@@ -1,0 +1,40 @@
+Function: ___crtMessageBoxA
+Address: 0x0040CA30
+
+
+/* Library Function - Single Match
+    ___crtMessageBoxA
+   
+   Library: Visual Studio 1998 Release */
+
+int __cdecl ___crtMessageBoxA(LPCSTR _LpText,LPCSTR _LpCaption,UINT _UType)
+
+{
+  HMODULE hModule;
+  int iVar1;
+  
+  iVar1 = 0;
+  if (DAT_0041365c != (FARPROC)0x0) {
+LAB_0040ca7f:
+    if (DAT_00413660 != (FARPROC)0x0) {
+      iVar1 = (*DAT_00413660)();
+    }
+    if ((iVar1 != 0) && (DAT_00413664 != (FARPROC)0x0)) {
+      iVar1 = (*DAT_00413664)(iVar1);
+    }
+    iVar1 = (*DAT_0041365c)(iVar1,_LpText,_LpCaption,_UType);
+    return iVar1;
+  }
+  hModule = LoadLibraryA("user32.dll");
+  if (hModule != (HMODULE)0x0) {
+    DAT_0041365c = GetProcAddress(hModule,"MessageBoxA");
+    if (DAT_0041365c != (FARPROC)0x0) {
+      DAT_00413660 = GetProcAddress(hModule,"GetActiveWindow");
+      DAT_00413664 = GetProcAddress(hModule,"GetLastActivePopup");
+      goto LAB_0040ca7f;
+    }
+  }
+  return 0;
+}
+
+

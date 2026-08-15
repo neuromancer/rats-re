@@ -1,0 +1,26 @@
+Function: FUN_00404ece
+Address: 0x00404ECE
+
+
+void FUN_00404ece(void)
+
+{
+  HDC hdc;
+  HDC hdc_00;
+  int iMode;
+  tagRECT local_14;
+  
+  GetClientRect(DAT_00414978,&local_14);
+  hdc = GetDC(DAT_00414978);
+  hdc_00 = CreateCompatibleDC(hdc);
+  SelectObject(hdc_00,DAT_00414940);
+  iMode = GetMapMode(hdc);
+  SetMapMode(hdc_00,iMode);
+  BitBlt(hdc,0x17,0x17,local_14.right + -0xb2,local_14.bottom + -0x2e,hdc_00,DAT_004149d4 * 0x14,
+         DAT_004149d8 * 0x14,0xcc0020);
+  DeleteDC(hdc_00);
+  ReleaseDC(DAT_00414978,hdc);
+  return;
+}
+
+

@@ -1,0 +1,10 @@
+Function: FUN_0040ca10
+Address: 0x0040CA10
+
+MOV EAX,dword ptr [ESP + 0x4]
+MOV ECX,dword ptr [0x0041fe94]
+PUSH EAX
+PUSH 0x0
+PUSH ECX
+CALL dword ptr [0x004202fc]
+RET

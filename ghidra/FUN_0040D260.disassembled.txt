@@ -1,0 +1,21 @@
+Function: ___addl
+Address: 0x0040D260
+
+PUSH ESI
+XOR EAX,EAX
+MOV EDX,dword ptr [ESP + 0xc]
+MOV ECX,dword ptr [ESP + 0x8]
+LEA ESI,[ECX + EDX*0x1]
+CMP ECX,ESI
+JA       LAB_0040D276
+CMP EDX,ESI
+JBE      LAB_0040D27B
+
+LAB_0040D276:
+MOV EAX,0x1
+
+LAB_0040D27B:
+MOV ECX,dword ptr [ESP + 0x10]
+MOV dword ptr [ECX],ESI
+POP ESI
+RET

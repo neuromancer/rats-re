@@ -1,0 +1,47 @@
+Function: fix_grouping
+Address: 0x0040EBC0
+
+MOV EAX,dword ptr [ESP + 0x4]
+PUSH EBX
+CMP byte ptr [EAX],0x0
+JZ       LAB_0040EC05
+
+LAB_0040EBCA:
+MOV CL,byte ptr [EAX]
+CMP CL,0x30
+JL       LAB_0040EBE3
+CMP CL,0x39
+JG       LAB_0040EBE3
+SUB CL,0x30
+MOV byte ptr [EAX],CL
+INC EAX
+CMP byte ptr [EAX],0x0
+JNZ      LAB_0040EBCA
+POP EBX
+RET
+
+LAB_0040EBE3:
+CMP CL,0x3b
+JNZ      LAB_0040EBFF
+MOV EDX,EAX
+
+LAB_0040EBEA:
+LEA ECX,[EDX + 0x1]
+MOV BL,byte ptr [ECX]
+MOV byte ptr [EDX],BL
+MOV EDX,ECX
+CMP byte ptr [ECX],0x0
+JNZ      LAB_0040EBEA
+CMP byte ptr [EAX],0x0
+JNZ      LAB_0040EBCA
+POP EBX
+RET
+
+LAB_0040EBFF:
+INC EAX
+CMP byte ptr [EAX],0x0
+JNZ      LAB_0040EBCA
+
+LAB_0040EC05:
+POP EBX
+RET

@@ -1,0 +1,181 @@
+Function: FUN_0040910c
+Address: 0x0040910C
+
+
+// WARNING: Globals starting with '_' overlap smaller symbols at the same address
+
+void __cdecl FUN_0040910c(int param_1)
+
+{
+  int iVar1;
+  uint uVar2;
+  int local_c;
+  
+  uVar2 = (int)DAT_0041e86c >> 0x1f;
+  iVar1 = ((DAT_0041e86c ^ uVar2) - uVar2 & 0x1f ^ uVar2) - uVar2;
+  iVar1 = (int)(iVar1 + (iVar1 >> 0x1f & 7U)) >> 3;
+  if ((param_1 != 0) || (iVar1 != DAT_0041e890)) {
+    if (param_1 == 0) {
+      DeleteObject(DAT_00414970);
+      DeleteObject(DAT_00414998);
+      DeleteObject(DAT_00414984);
+      DeleteObject(DAT_00414974);
+      DeleteObject(DAT_00415654);
+      DeleteObject(DAT_004167b4);
+      DeleteObject(DAT_004167ac);
+      DeleteObject(DAT_004167b8);
+      DeleteObject(DAT_00416658);
+      DeleteObject(DAT_00416670);
+      DeleteObject(DAT_004167a8);
+      DeleteObject(DAT_004167b0);
+      for (local_c = 0; local_c < 4; local_c = local_c + 1) {
+        DeleteObject((&DAT_00416660)[local_c]);
+        DeleteObject(*(HGDIOBJ *)(&DAT_004149c0 + local_c * 4));
+        DeleteObject((&DAT_004155d0)[local_c]);
+        DeleteObject((&DAT_0041ebc8)[local_c]);
+        DeleteObject((&DAT_00416678)[local_c]);
+      }
+    }
+    DAT_0041e890 = iVar1;
+    switch(iVar1) {
+    case 0:
+      DAT_00416660 = LoadBitmapA(DAT_004149b8,s_BMP_1_GRASS_1_00412788);
+      _DAT_00416664 = LoadBitmapA(DAT_004149b8,s_BMP_1_GRASS_2_00412798);
+      _DAT_00416668 = LoadBitmapA(DAT_004149b8,s_BMP_1_GRASS_3_004127a8);
+      _DAT_0041666c = LoadBitmapA(DAT_004149b8,s_BMP_1_GRASS_4_004127b8);
+      DAT_00414984 = LoadBitmapA(DAT_004149b8,s_BMP_1_S_004127c8);
+      DAT_00414998 = LoadBitmapA(DAT_004149b8,s_BMP_1_E_004127d0);
+      DAT_00414974 = LoadBitmapA(DAT_004149b8,s_BMP_1_W_004127d8);
+      DAT_00415654 = LoadBitmapA(DAT_004149b8,s_BMP_1_NE_004127e0);
+      DAT_004167b4 = LoadBitmapA(DAT_004149b8,s_BMP_1_SE_004127ec);
+      DAT_004167ac = LoadBitmapA(DAT_004149b8,s_BMP_1_SW_004127f8);
+      DAT_004167b8 = LoadBitmapA(DAT_004149b8,s_BMP_1_NW_00412804);
+      DAT_00416658 = LoadBitmapA(DAT_004149b8,s_BMP_1_EN_00412810);
+      DAT_00416670 = LoadBitmapA(DAT_004149b8,s_BMP_1_ES_0041281c);
+      DAT_004167a8 = LoadBitmapA(DAT_004149b8,s_BMP_1_WS_00412828);
+      DAT_004167b0 = LoadBitmapA(DAT_004149b8,s_BMP_1_WN_00412834);
+      DAT_00414970 = LoadBitmapA(DAT_004149b8,s_BMP_1_N_00412840);
+      DAT_004155d0 = LoadBitmapA(DAT_004149b8,s_BMP_1_CAVE_UP_00412848);
+      DAT_004155d4 = LoadBitmapA(DAT_004149b8,s_BMP_1_CAVE_DOWN_00412858);
+      DAT_004155d8 = LoadBitmapA(DAT_004149b8,s_BMP_1_CAVE_LEFT_00412868);
+      DAT_004155dc = LoadBitmapA(DAT_004149b8,s_BMP_1_CAVE_RIGHT_00412878);
+      _DAT_004149c0 = LoadBitmapA(DAT_004149b8,s_BMP_1_FLOWER_1_0041288c);
+      _DAT_004149c4 = LoadBitmapA(DAT_004149b8,s_BMP_1_FLOWER_2_0041289c);
+      _DAT_004149c8 = LoadBitmapA(DAT_004149b8,s_BMP_1_FLOWER_3_004128ac);
+      _DAT_004149cc = LoadBitmapA(DAT_004149b8,s_BMP_1_FLOWER_4_004128bc);
+      DAT_0041ebc8 = LoadBitmapA(DAT_004149b8,s_BMP_1_GAS_UP_004128cc);
+      DAT_0041ebcc = LoadBitmapA(DAT_004149b8,s_BMP_1_GAS_DOWN_004128dc);
+      DAT_0041ebd0 = LoadBitmapA(DAT_004149b8,s_BMP_1_GAS_LEFT_004128ec);
+      DAT_0041ebd4 = LoadBitmapA(DAT_004149b8,s_BMP_1_GAS_RIGHT_004128fc);
+      DAT_00416678 = LoadBitmapA(DAT_004149b8,s_BMP_1_EXPLOSION_UP_0041290c);
+      DAT_0041667c = LoadBitmapA(DAT_004149b8,s_BMP_1_EXPLOSION_DOWN_00412920);
+      DAT_00416680 = LoadBitmapA(DAT_004149b8,s_BMP_1_EXPLOSION_LEFT_00412938);
+      DAT_00416684 = LoadBitmapA(DAT_004149b8,s_BMP_1_EXPLOSION_RIGHT_00412950);
+      break;
+    case 1:
+      DAT_00416660 = LoadBitmapA(DAT_004149b8,s_BMP_2_GRASS_1_00412968);
+      _DAT_00416664 = LoadBitmapA(DAT_004149b8,s_BMP_2_GRASS_2_00412978);
+      _DAT_00416668 = LoadBitmapA(DAT_004149b8,s_BMP_2_GRASS_3_00412988);
+      _DAT_0041666c = LoadBitmapA(DAT_004149b8,s_BMP_2_GRASS_4_00412998);
+      DAT_00414970 = LoadBitmapA(DAT_004149b8,s_BMP_2_N_004129a8);
+      DAT_00414984 = LoadBitmapA(DAT_004149b8,s_BMP_2_S_004129b0);
+      DAT_00414998 = LoadBitmapA(DAT_004149b8,s_BMP_2_E_004129b8);
+      DAT_00414974 = LoadBitmapA(DAT_004149b8,s_BMP_2_W_004129c0);
+      DAT_00415654 = LoadBitmapA(DAT_004149b8,s_BMP_2_NE_004129c8);
+      DAT_004167b4 = LoadBitmapA(DAT_004149b8,s_BMP_2_SE_004129d4);
+      DAT_004167ac = LoadBitmapA(DAT_004149b8,s_BMP_2_SW_004129e0);
+      DAT_004167b8 = LoadBitmapA(DAT_004149b8,s_BMP_2_NW_004129ec);
+      DAT_00416658 = LoadBitmapA(DAT_004149b8,s_BMP_2_EN_004129f8);
+      DAT_00416670 = LoadBitmapA(DAT_004149b8,s_BMP_2_ES_00412a04);
+      DAT_004167a8 = LoadBitmapA(DAT_004149b8,s_BMP_2_WS_00412a10);
+      DAT_004167b0 = LoadBitmapA(DAT_004149b8,s_BMP_2_WN_00412a1c);
+      DAT_004155d0 = LoadBitmapA(DAT_004149b8,s_BMP_2_CAVE_UP_00412a28);
+      DAT_004155d4 = LoadBitmapA(DAT_004149b8,s_BMP_2_CAVE_DOWN_00412a38);
+      DAT_004155d8 = LoadBitmapA(DAT_004149b8,s_BMP_2_CAVE_LEFT_00412a48);
+      DAT_004155dc = LoadBitmapA(DAT_004149b8,s_BMP_2_CAVE_RIGHT_00412a58);
+      _DAT_004149c0 = LoadBitmapA(DAT_004149b8,s_BMP_2_FLOWER_1_00412a6c);
+      _DAT_004149c4 = LoadBitmapA(DAT_004149b8,s_BMP_2_FLOWER_2_00412a7c);
+      _DAT_004149c8 = LoadBitmapA(DAT_004149b8,s_BMP_2_FLOWER_3_00412a8c);
+      _DAT_004149cc = LoadBitmapA(DAT_004149b8,s_BMP_2_FLOWER_4_00412a9c);
+      DAT_0041ebc8 = LoadBitmapA(DAT_004149b8,s_BMP_2_GAS_UP_00412aac);
+      DAT_0041ebcc = LoadBitmapA(DAT_004149b8,s_BMP_2_GAS_DOWN_00412abc);
+      DAT_0041ebd0 = LoadBitmapA(DAT_004149b8,s_BMP_2_GAS_LEFT_00412acc);
+      DAT_0041ebd4 = LoadBitmapA(DAT_004149b8,s_BMP_2_GAS_RIGHT_00412adc);
+      DAT_00416678 = LoadBitmapA(DAT_004149b8,s_BMP_2_EXPLOSION_UP_00412aec);
+      DAT_0041667c = LoadBitmapA(DAT_004149b8,s_BMP_2_EXPLOSION_DOWN_00412b00);
+      DAT_00416680 = LoadBitmapA(DAT_004149b8,s_BMP_2_EXPLOSION_LEFT_00412b18);
+      DAT_00416684 = LoadBitmapA(DAT_004149b8,s_BMP_2_EXPLOSION_RIGHT_00412b30);
+      break;
+    case 2:
+      DAT_00416660 = LoadBitmapA(DAT_004149b8,s_BMP_3_GRASS_1_00412b48);
+      _DAT_00416664 = LoadBitmapA(DAT_004149b8,s_BMP_3_GRASS_2_00412b58);
+      _DAT_00416668 = LoadBitmapA(DAT_004149b8,s_BMP_3_GRASS_3_00412b68);
+      _DAT_0041666c = LoadBitmapA(DAT_004149b8,s_BMP_3_GRASS_4_00412b78);
+      DAT_00414970 = LoadBitmapA(DAT_004149b8,s_BMP_3_N_00412b88);
+      DAT_00414984 = LoadBitmapA(DAT_004149b8,s_BMP_3_S_00412b90);
+      DAT_00414998 = LoadBitmapA(DAT_004149b8,s_BMP_3_E_00412b98);
+      DAT_00414974 = LoadBitmapA(DAT_004149b8,s_BMP_3_W_00412ba0);
+      DAT_00415654 = LoadBitmapA(DAT_004149b8,s_BMP_3_NE_00412ba8);
+      DAT_004167b4 = LoadBitmapA(DAT_004149b8,s_BMP_3_SE_00412bb4);
+      DAT_004167ac = LoadBitmapA(DAT_004149b8,s_BMP_3_SW_00412bc0);
+      DAT_004167b8 = LoadBitmapA(DAT_004149b8,s_BMP_3_NW_00412bcc);
+      DAT_00416658 = LoadBitmapA(DAT_004149b8,s_BMP_3_EN_00412bd8);
+      DAT_00416670 = LoadBitmapA(DAT_004149b8,s_BMP_3_ES_00412be4);
+      DAT_004167a8 = LoadBitmapA(DAT_004149b8,s_BMP_3_WS_00412bf0);
+      DAT_004167b0 = LoadBitmapA(DAT_004149b8,s_BMP_3_WN_00412bfc);
+      DAT_004155d0 = LoadBitmapA(DAT_004149b8,s_BMP_3_CAVE_UP_00412c08);
+      DAT_004155d4 = LoadBitmapA(DAT_004149b8,s_BMP_3_CAVE_DOWN_00412c18);
+      DAT_004155d8 = LoadBitmapA(DAT_004149b8,s_BMP_3_CAVE_LEFT_00412c28);
+      DAT_004155dc = LoadBitmapA(DAT_004149b8,s_BMP_3_CAVE_RIGHT_00412c38);
+      _DAT_004149c0 = LoadBitmapA(DAT_004149b8,s_BMP_3_FLOWER_1_00412c4c);
+      _DAT_004149c4 = LoadBitmapA(DAT_004149b8,s_BMP_3_FLOWER_2_00412c5c);
+      _DAT_004149c8 = LoadBitmapA(DAT_004149b8,s_BMP_3_FLOWER_3_00412c6c);
+      _DAT_004149cc = LoadBitmapA(DAT_004149b8,s_BMP_3_FLOWER_4_00412c7c);
+      DAT_0041ebc8 = LoadBitmapA(DAT_004149b8,s_BMP_3_GAS_UP_00412c8c);
+      DAT_0041ebcc = LoadBitmapA(DAT_004149b8,s_BMP_3_GAS_DOWN_00412c9c);
+      DAT_0041ebd0 = LoadBitmapA(DAT_004149b8,s_BMP_3_GAS_LEFT_00412cac);
+      DAT_0041ebd4 = LoadBitmapA(DAT_004149b8,s_BMP_3_GAS_RIGHT_00412cbc);
+      DAT_00416678 = LoadBitmapA(DAT_004149b8,s_BMP_3_EXPLOSION_UP_00412ccc);
+      DAT_0041667c = LoadBitmapA(DAT_004149b8,s_BMP_3_EXPLOSION_DOWN_00412ce0);
+      DAT_00416680 = LoadBitmapA(DAT_004149b8,s_BMP_3_EXPLOSION_LEFT_00412cf8);
+      DAT_00416684 = LoadBitmapA(DAT_004149b8,s_BMP_3_EXPLOSION_RIGHT_00412d10);
+      break;
+    case 3:
+      DAT_00416660 = LoadBitmapA(DAT_004149b8,s_BMP_4_GRASS_1_00412d28);
+      _DAT_00416664 = LoadBitmapA(DAT_004149b8,s_BMP_4_GRASS_2_00412d38);
+      _DAT_00416668 = LoadBitmapA(DAT_004149b8,s_BMP_4_GRASS_3_00412d48);
+      _DAT_0041666c = LoadBitmapA(DAT_004149b8,s_BMP_4_GRASS_4_00412d58);
+      DAT_00414970 = LoadBitmapA(DAT_004149b8,s_BMP_4_N_00412d68);
+      DAT_00414984 = LoadBitmapA(DAT_004149b8,s_BMP_4_S_00412d70);
+      DAT_00414998 = LoadBitmapA(DAT_004149b8,s_BMP_4_E_00412d78);
+      DAT_00414974 = LoadBitmapA(DAT_004149b8,s_BMP_4_W_00412d80);
+      DAT_00415654 = LoadBitmapA(DAT_004149b8,s_BMP_4_NE_00412d88);
+      DAT_004167b4 = LoadBitmapA(DAT_004149b8,s_BMP_4_SE_00412d94);
+      DAT_004167ac = LoadBitmapA(DAT_004149b8,s_BMP_4_SW_00412da0);
+      DAT_004167b8 = LoadBitmapA(DAT_004149b8,s_BMP_4_NW_00412dac);
+      DAT_00416658 = LoadBitmapA(DAT_004149b8,s_BMP_4_EN_00412db8);
+      DAT_00416670 = LoadBitmapA(DAT_004149b8,s_BMP_4_ES_00412dc4);
+      DAT_004167a8 = LoadBitmapA(DAT_004149b8,s_BMP_4_WS_00412dd0);
+      DAT_004167b0 = LoadBitmapA(DAT_004149b8,s_BMP_4_WN_00412ddc);
+      DAT_004155d0 = LoadBitmapA(DAT_004149b8,s_BMP_4_CAVE_UP_00412de8);
+      DAT_004155d4 = LoadBitmapA(DAT_004149b8,s_BMP_4_CAVE_DOWN_00412df8);
+      DAT_004155d8 = LoadBitmapA(DAT_004149b8,s_BMP_4_CAVE_LEFT_00412e08);
+      DAT_004155dc = LoadBitmapA(DAT_004149b8,s_BMP_4_CAVE_RIGHT_00412e18);
+      _DAT_004149c0 = LoadBitmapA(DAT_004149b8,s_BMP_4_FLOWER_1_00412e2c);
+      _DAT_004149c4 = LoadBitmapA(DAT_004149b8,s_BMP_4_FLOWER_2_00412e3c);
+      _DAT_004149c8 = LoadBitmapA(DAT_004149b8,s_BMP_4_FLOWER_2_00412e4c);
+      _DAT_004149cc = LoadBitmapA(DAT_004149b8,s_BMP_4_FLOWER_2_00412e5c);
+      DAT_0041ebc8 = LoadBitmapA(DAT_004149b8,s_BMP_4_GAS_UP_00412e6c);
+      DAT_0041ebcc = LoadBitmapA(DAT_004149b8,s_BMP_4_GAS_DOWN_00412e7c);
+      DAT_0041ebd0 = LoadBitmapA(DAT_004149b8,s_BMP_4_GAS_LEFT_00412e8c);
+      DAT_0041ebd4 = LoadBitmapA(DAT_004149b8,s_BMP_4_GAS_RIGHT_00412e9c);
+      DAT_00416678 = LoadBitmapA(DAT_004149b8,s_BMP_4_EXPLOSION_UP_00412eac);
+      DAT_0041667c = LoadBitmapA(DAT_004149b8,s_BMP_4_EXPLOSION_DOWN_00412ec0);
+      DAT_00416680 = LoadBitmapA(DAT_004149b8,s_BMP_4_EXPLOSION_LEFT_00412ed8);
+      DAT_00416684 = LoadBitmapA(DAT_004149b8,s_BMP_4_EXPLOSION_RIGHT_00412ef0);
+    }
+  }
+  return;
+}
+
+

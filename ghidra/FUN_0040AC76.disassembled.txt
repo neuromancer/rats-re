@@ -1,0 +1,13 @@
+Function: FUN_0040ac76
+Address: 0x0040AC76
+
+PUSH EBX
+PUSH ECX
+MOV EBX,0x412fb4
+MOV ECX,dword ptr [EBP + 0x8]
+MOV dword ptr [EBX + 0x8],ECX
+MOV dword ptr [EBX + 0x4],EAX
+MOV dword ptr [EBX + 0xc],EBP
+POP ECX
+POP EBX
+RET 0x4
