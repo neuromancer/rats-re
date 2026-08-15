@@ -1,14 +1,20 @@
-# RATS.EXE reconstruction
+# Rats! source reconstruction with local LLMs
 
-This repository is a minimal base for reconstructing `RATS.EXE`, the original
-Windows version of [*Rats!*](https://www.windowsgames.co.uk/rats.html) by Sean
-O'Connor. It builds a Win32 executable with Microsoft Visual C++ 4.1 under
-[wibo](https://github.com/neuromancer/wibo), and runs it in
+This repository is a work-in-progress reconstruction of the source code for
+`RATS.EXE`, the original Windows version of
+[*Rats!*](https://www.windowsgames.co.uk/rats.html) by Sean O'Connor. It builds
+a Win32 executable with Microsoft Visual C++ 4.1 under
+[wibo](https://github.com/neuromancer/wibo) and can be tested in
 [DREAMM](https://dreamm.aarongiles.com/).
 
-The original executable appears to have been built with Visual C++ 4.1. The
-reconstruction now uses that compiler directly: C/C++ compiler version
-10.10.6038 and linker version 3.10.6038.
+The experiment explores how far local LLMs can take source reconstruction on a
+small but realistic codebase rather than a toy example. Match fidelity remains
+uneven, which is useful here: the aim is to present a realistic view of the
+process and its current limitations, not to hide difficult functions.
+
+Function reconstruction is restricted to local LLMs. Codex and Claude are used
+for repository setup and benchmark orchestration, but they are not allowed to
+write or edit the reconstructed source.
 
 ## Setup
 
@@ -23,14 +29,7 @@ from the [official *Rats!* page](https://www.windowsgames.co.uk/rats.html) and
 place its `RATS.EXE` in the repository root to use the original-executable and
 binary-comparison targets.
 
-The host needs CMake, Ninja, `curl`, `tar`, and a C/C++ compiler to build wibo.
-On macOS, the DREAMM smoke target also uses GNU `gtimeout` from `coreutils`:
-
-```sh
-brew install cmake ninja coreutils
-```
-
-## Commands
+## Common commands
 
 ```sh
 make                 # build out/RATS_RE.EXE, .map, .obj, and .asm
@@ -47,43 +46,59 @@ The checksum-pinned
 [MSVC 4.1 archive](https://github.com/decompme/compilers/releases/download/compilers/msvc4.1.tar.gz),
 the required MSVC 4.1 libraries, wibo's compatible `msvcrt40.dll`, and DREAMM
 `4.0x21` are downloaded on demand. They remain ignored local build dependencies
-and are not committed. A locally supplied `RATS.EXE` is never overwritten;
-rebuilt programs are placed under `out/`.
+and are not committed.
 
-## Function reconstruction
+## Reconstruction workflow
 
 The checked-in `ghidra/` directory contains assembly and decompiler exports for
 all 177 internal functions discovered in the executable. Assembly is the
-comparison authority; decompiler output is supplied to weaker local models as a
-semantic hint.
+comparison authority; decompiler output is included as a semantic hint for the
+model.
 
-Install [`binary-recons`](https://github.com/gg-sl-oss/binary-recons) once, then
-it can be run from this or any other directory:
+Unlike a cloud coding agent, the local model is not expected to explore the
+repository or choose among a large collection of tools. That agentic workflow
+proved too slow and allowed the context to grow before the model reached the
+actual code. Instead,
+[`binary-recons`](https://github.com/gg-sl-oss/binary-recons) runs a bounded loop
+around one function at a time. It builds a focused prompt from the project
+rules, relevant declarations, disassembly, and decompiler output; parses the
+model's structured response; applies the candidate transactionally; compiles
+it; and measures its assembly similarity. Validation or compiler failures are
+returned to the model in a focused repair step, and failed changes are rolled
+back.
+
+Install `binary-recons` once, select a local GGUF model, and run it from this or
+any other directory:
 
 ```sh
 python3 -m pip install -e /path/to/binary-recons
-binary-recons --project-root /path/to/rats-re --address 0x409092 --dry-run-prompt
+export BINARY_RECONS_MODEL_PATH=/path/to/model.gguf
+binary-recons --project-root /path/to/rats-re --address 0x409092
 ```
+
+Add `--dry-run-prompt` to inspect the collected evidence and generated prompt
+without loading a model.
 
 `binary-recons.toml` selects the shared `c89` and `msvc4-od` rule profiles and
 connects the model loop to the project's `binary-comp` target. It also
-allowlists the shared type and global files, so a model can return any required
-declarations and definitions as part of the same compiled, rollback-safe change
-set as the function and prototype. No local model is needed for prompt
-inspection or for the package's CI tests.
+allowlists the shared type and global files, allowing a model to return required
+declarations and definitions in the same compiled, rollback-safe change set as
+the function and its prototype. Prompt inspection and the package's CI tests do
+not require a local model.
 
-Measured local-model runs are recorded in [docs/MODEL_RESULTS.md](docs/MODEL_RESULTS.md).
+Measured local-model runs are recorded in
+[docs/MODEL_RESULTS.md](docs/MODEL_RESULTS.md).
 
 <details>
-<summary>Current function similarity and reconstruction timings (25 retained, 8 deferred)</summary>
+<summary>Model results: 25 retained functions and 8 deferred addresses</summary>
 
-The retained candidates were produced with Unsloth's
+The retained candidates were generated with Unsloth's
 [Qwen3.8 27B GGUF](https://unsloth.ai/docs/models/qwen3.8) in BF16
 (`Qwen3.8-27B-BF16`, served as `qwen3.8-27b-bf16`) through llama.cpp with a
 32,768-token context and the `qwen` model preset. Gemma 4 31B IT BF16 was also
-benchmarked, but no Gemma-generated candidate is retained in the source tree.
+benchmarked, but none of its candidates is retained in the source tree.
 
-Similarity was remeasured from the current MSVC 4.1 source tree with
+The scores below were remeasured from the current source tree with MSVC 4.1 and
 `binary-comp` on 2026-08-15. Logged time is the complete elapsed time of the
 successful retained run, including managed-server startup, generation, any
 compile repair, build, and comparison. It excludes earlier unsuccessful
@@ -117,8 +132,9 @@ exploratory runs.
 | `0x00409092` | `SaveHighScores` | 94.12% | 1m 25.9s |
 | `0x00409DB6` | `IsRatsHelpFile` | 91.67% | 41.5 s |
 
-The following addresses exhausted their bounded attempts without leaving a
-source implementation. Time spent is cumulative across all logged attempts.
+Reconstruction attempts for the following addresses were exhausted without
+retaining a source implementation. Time spent is cumulative across all logged
+attempts.
 
 | Deferred address | Time spent | Outcome |
 | --- | ---: | --- |
