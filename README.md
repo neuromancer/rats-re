@@ -57,7 +57,10 @@ binary-recons --project-root /path/to/rats-re --address 0x409092 --dry-run-promp
 ```
 
 `binary-recons.toml` selects the shared `c89` and `msvc4-od` rule profiles and
-connects the model loop to the project's `binary-comp` target. No local model
-is needed for prompt inspection or for the package's CI tests.
+connects the model loop to the project's `binary-comp` target. It also
+allowlists the shared type and global files, so a model can return any required
+declarations and definitions as part of the same compiled, rollback-safe change
+set as the function and prototype. No local model is needed for prompt
+inspection or for the package's CI tests.
 
 Measured local-model runs are recorded in [docs/MODEL_RESULTS.md](docs/MODEL_RESULTS.md).

@@ -10,6 +10,18 @@ prototype_file = "include/functions.h"
 rule_profiles = ["c89", "msvc4-od"]
 compare_command = ["make", "compare-func", "FUNC={symbol}", "ADDR={address_hex}"]
 
+[[support_files]]
+path = "include/types.h"
+purpose = "Shared source-level type declarations inferred from binary evidence."
+
+[[support_files]]
+path = "include/globals.h"
+purpose = "Extern declarations for globals evidenced by the target function."
+
+[[support_files]]
+path = "src/globals.c"
+purpose = "Definitions matching newly added global declarations."
+
 [[source_units]]
 path = "src/graphics.c"
 start = 0x00404d6e

@@ -48,3 +48,13 @@ The live batch led to two general driver improvements. Python now supplies an
 omitted address marker mechanically, and prompts expose existing function names
 as a reserved-name list without revealing their interfaces. These changes do
 not influence the model's proposed contract or C implementation.
+
+## Restricted multi-file workflow validation
+
+The transactional change-set workflow was validated on a disposable copy of
+the project with the unimplemented function at `0x00404ECE`. Qwen received one
+structured request with no agentic tools. Its first candidate selected the name
+and interface, supplied matching declarations and definitions for three
+previously undeclared globals, compiled, and reached 95.59% similarity. No
+repair call was needed. The managed llama.cpp process stopped normally, and the
+disposable candidate was not copied into the retained source tree.
