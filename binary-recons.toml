@@ -25,12 +25,22 @@ purpose = "Definitions matching newly added global declarations."
 [[source_units]]
 path = "src/graphics.c"
 start = 0x00404d6e
-end = 0x00404ecd
+end = 0x0040546a
 
 [[source_units]]
 path = "src/graphics.c"
 start = 0x0040546b
 end = 0x0040552d
+
+[[source_units]]
+path = "src/graphics.c"
+start = 0x0040552e
+end = 0x0040560d
+
+[[source_units]]
+path = "src/graphics.c"
+start = 0x00405af5
+end = 0x00405c51
 
 [[source_units]]
 path = "src/menu.c"

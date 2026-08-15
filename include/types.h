@@ -7,4 +7,9 @@ typedef struct HighScore {
     long score;
 } HighScore;
 
+typedef struct BombData {
+    int x;
+    int y;
+} BombData;
+
 #endif
