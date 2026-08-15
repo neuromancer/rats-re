@@ -1,1 +1,41 @@
-# rats-re
+# RATS.EXE reconstruction
+
+This repository is a minimal base for reconstructing `RATS.EXE`. It builds a
+Win32 executable with Microsoft Visual C++ 4.20 under
+[wibo](https://github.com/neuromancer/wibo), and runs it in
+[DREAMM](https://dreamm.aarongiles.com/).
+
+The original executable appears to have been built with Visual C++ 4.1. The
+4.20 toolchain is a deliberate starting approximation; compiler flags and
+source structure will be refined from binary comparisons as reconstruction
+progresses.
+
+## Setup
+
+Clone with submodules, or initialise them after cloning:
+
+```sh
+git submodule update --init --recursive
+```
+
+The host needs CMake, Ninja, `curl`, and a C/C++ compiler to build wibo. On
+macOS, the DREAMM smoke target also uses GNU `gtimeout` from `coreutils`:
+
+```sh
+brew install cmake ninja coreutils
+```
+
+## Commands
+
+```sh
+make                 # build out/RATS_RE.EXE, .map, .obj, and .asm
+make run             # launch the rebuilt executable in DREAMM
+make run-original    # launch the preserved original RATS.EXE
+make test            # bounded DREAMM smoke test of the rebuilt executable
+make test-original   # bounded DREAMM smoke test of the original executable
+make debug           # start the rebuilt executable in DREAMM's debugger
+```
+
+wibo's compatible `msvcrt40.dll` and DREAMM `4.0x21` are downloaded on demand.
+They remain local build dependencies and are not committed. The checked-in
+`RATS.EXE` is never overwritten; rebuilt programs are placed under `out/`.
