@@ -233,6 +233,108 @@ void __cdecl ExplodeBomb(int index)
     DrawScorePanel();
 }
 
+/* Function start: 0x40560E */
+void __cdecl RenderExplosionWave(int x, int y, int step_x, int step_y)
+{
+    int i;
+
+    for (; g_levelData_004167c0[x + y * 0x20] != '\x01'; x = x + step_x) {
+        if (g_levelData_004167c0[x + y * 0x20] == '\0') {
+            DrawBitmapPair(g_memBitmap_00414940, g_bombFrame1_0041ebbc, x * 0x14, y * 0x14, 0x14, 0x14);
+        }
+        else if (g_levelData_004167c0[x + y * 0x20] == '\x02') {
+            DrawBitmapPair(g_memBitmap_00414940, g_bombFrame2_00416680, x * 0x14, y * 0x14, 0x14, 0x14);
+        }
+        else if (g_levelData_004167c0[x + y * 0x20] == '\x03') {
+            DrawBitmapPair(g_memBitmap_00414940, g_bombFrame3_00416684, x * 0x14, y * 0x14, 0x14, 0x14);
+        }
+        else if (g_levelData_004167c0[x + (y - 1) * 0x20] == '\0') {
+            DrawBitmapPair(g_memBitmap_00414940, g_bombFrame4_00416688, x * 0x14, y * 0x14, 0x14, 0x14);
+        }
+        else if (g_levelData_004167c0[x + (y + 1) * 0x20] == '\0') {
+            DrawBitmapPair(g_memBitmap_00414940, g_bombFrame5_0041668c, x * 0x14, y * 0x14, 0x14, 0x14);
+        }
+
+        for (i = 0; i < 0x32; i = i + 1) {
+            if ((g_levelScores_00414e0c[i] > 0) &&
+                (g_bombData_0041e898[i].x / 0x14 == x) &&
+                (g_bombData_0041e898[i].y / 0x14 == y)) {
+                g_levelScores_00414e0c[i] = 0;
+
+                if (g_bombActive_0041668c == 0) {
+                    g_bombActive_0041668c = 10;
+                }
+                else if (g_bombActive_0041668c < 0xa0) {
+                    g_bombActive_0041668c = g_bombActive_0041668c << 1;
+                }
+
+                g_score_0041560c = g_score_0041560c + g_bombActive_0041668c * g_baseScore_0041494c;
+                DrawBitmapPair(g_memBitmap_00414940, g_bombFrame5_0041668c, g_bombData_0041e898[i].x, g_bombData_0041e898[i].y, 0x14, 0x14);
+            }
+        }
+
+        for (i = 0; i < 0x28; i = i + 1) {
+            if ((g_bombData_0041e898[i].x / 0x14 == x) &&
+                (g_bombData_0041e898[i].y / 0x14 == y)) {
+                g_bombData_0041e898[i].x = 999;
+            }
+        }
+
+        y = y + step_y;
+    }
+}
+
+/* Function start: 0x40591A */
+void __cdecl DrawBombExplosion(int index)
+{
+    int radius;
+    HDC hdc;
+    HDC memDC;
+    HGDIOBJ oldBitmap;
+    int mapMode;
+    int i;
+
+    radius = g_bombData_0041e898[index].x * 8 + 0x1e;
+    hdc = GetDC(g_mainWindow_00414978);
+    memDC = CreateCompatibleDC(hdc);
+    oldBitmap = SelectObject(memDC, g_memBitmap_00414940);
+    mapMode = GetMapMode(hdc);
+    SetMapMode(memDC, mapMode);
+    SelectObject(memDC, g_fontLarge_0041ebc0);
+    Ellipse(memDC,
+            g_bombData_0041e898[index].x + 10 - radius,
+            g_bombData_0041e898[index].y + 10 - radius,
+            g_bombData_0041e898[index].x + 10 + radius,
+            g_bombData_0041e898[index].y + 10 + radius);
+    DeleteDC(memDC);
+    ReleaseDC(g_mainWindow_00414978, hdc);
+    DrawBitmapToWindow();
+
+    if (g_soundEnabled_00415624 == 1) {
+        if (g_musicEnabled_004149e0 == 1) {
+            sndPlaySoundA("NUCLEAR.WAV", SND_ASYNC);
+        }
+        else {
+            MessageBeep(MB_ICONASTERISK);
+        }
+    }
+
+    for (i = 0; i < 50; i++) {
+        int dx;
+        int dy;
+
+        dx = g_bombData_0041e898[index].x + 10 - g_levelIndices_00414e08[i];
+        dy = g_bombData_0041e898[index].y + 10 - g_levelScores_00414e0c[i];
+
+        if ((-radius < dx && dx < radius) && (-radius < dy && dy < radius)) {
+            g_levelIndices_00414e08[i] = 1;
+            g_levelScores_00414e0c[i] = 0;
+        }
+    }
+
+    return;
+}
+
 /* Function start: 0x405AF5 */
 void DrawPausedOverlay(void)
 {
@@ -268,4 +370,160 @@ void DrawPausedOverlay(void)
     TextOutA(hDC, (clientRect.right - 178) / 2 + 23, (clientRect.bottom - 46) / 2 + 13, buffer, textLen);
 
     ReleaseDC(g_mainWindow_00414978, hDC);
+}
+
+/* Function start: 0x405DB8 */
+int CALLBACK ScorePanelDialogProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    RECT rcRef;
+    RECT rcWin;
+    HDC hdc;
+    HDC hdcMem;
+    int mapMode;
+
+    if (message == 0xf) {
+        hdc = GetDC(hWnd);
+        GetClientRect(hWnd, &rcWin);
+        hdcMem = CreateCompatibleDC(hdc);
+        mapMode = GetMapMode(hdc);
+        SetMapMode(hdcMem, mapMode);
+        SelectObject(hdcMem, g_scorePanelDefaultBitmap_004149dc);
+        StretchBlt(hdc,
+                   (rcWin.right - rcWin.left) / 2 - 0x20,
+                   (int)lParam - 0x20,
+                   0x40,
+                   0x40,
+                   hdcMem,
+                   0,
+                   0,
+                   0x20,
+                   0x20,
+                   0xcc0020);
+        DeleteDC(hdcMem);
+        ReleaseDC(hWnd, hdc);
+    }
+    else {
+        if (message == 0x110) {
+            GetWindowRect(g_mainWindow_00414978, &rcRef);
+            GetWindowRect(hWnd, &rcWin);
+            MoveWindow(
+                hWnd,
+                (rcRef.left + (rcRef.right - rcRef.left) / 2) - ((rcWin.right - rcWin.left) / 2),
+                (rcRef.top + (rcRef.bottom - rcRef.top) / 2) - ((rcWin.bottom - rcWin.top) / 2),
+                rcWin.right - rcWin.left,
+                rcWin.bottom - rcWin.top,
+                1);
+            return 1;
+        }
+
+        if (message == 0x111 && wParam == 1) {
+            EndDialog(hWnd, 1);
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+/* Function start: 0x405F72 */
+
+int CALLBACK DemoVersionDialogProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    HDC hdc;
+    RECT parentRect;
+    RECT childRect;
+    char buffer[64];
+    int len;
+    double temp;
+
+    if (message == WM_INITDIALOG) {
+        hdc = GetDC(hWnd);
+        GetClientRect(hWnd, &childRect);
+        SetTextAlign(hdc, TA_CENTER | TA_TOP);
+        SetTextColor(hdc, 0);
+        SetBkMode(hdc, TRANSPARENT);
+
+        len = wsprintfA(buffer, "You have completed the demo version.");
+        temp = (double)childRect.right * 0.5;
+        TextOutA(hdc, childRect.right / 2, (int)floor(temp), buffer, len);
+
+        len = wsprintfA(buffer, "Click on the 'Order' button for");
+        temp = (double)childRect.right * 1.0;
+        TextOutA(hdc, childRect.right / 2, (int)floor(temp), buffer, len);
+
+        len = wsprintfA(buffer, "details on buying the full version.");
+        temp = (double)childRect.right * 1.5;
+        TextOutA(hdc, childRect.right / 2, (int)floor(temp), buffer, len);
+
+        ReleaseDC(hWnd, hdc);
+    }
+    else if (message == WM_MOVE) {
+        GetWindowRect(g_mainWindow_00414978, &parentRect);
+        GetWindowRect(hWnd, &childRect);
+        MoveWindow(hWnd,
+            (parentRect.left + (parentRect.right - parentRect.left) / 2) - (childRect.right - childRect.left) / 2,
+            (parentRect.top + (parentRect.bottom - parentRect.top) / 2) - (childRect.bottom - childRect.top) / 2,
+            childRect.right - childRect.left,
+            childRect.bottom - childRect.top,
+            TRUE);
+        return 1;
+    }
+    else if (message == WM_COMMAND) {
+        if (wParam == IDOK) {
+            EndDialog(hWnd, 1);
+            return 1;
+        }
+        if (wParam == 800) {
+            WinHelpA(g_mainWindow_00414978, "rats.hlp", HELP_CONTEXT, 0x104);
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+/* Function start: 0x408854 */
+void DrawStartButton(void)
+{
+    RECT rc;
+    int iMode;
+    HBITMAP hBitmap;
+    HDC hdc;
+    HDC hdcMem;
+
+    GetClientRect(g_mainWindow_00414978, &rc);
+
+    if (g_currentScoreValue == 0) {
+        iMode = 0;
+        hBitmap = LoadBitmapA(NULL, "BMP_START_1_DOWN");
+    } else if (g_currentScoreValue == 8) {
+        iMode = 1;
+        hBitmap = LoadBitmapA(NULL, "BMP_START_2_DOWN");
+    } else if (g_currentScoreValue == 0x10) {
+        iMode = 2;
+        hBitmap = LoadBitmapA(NULL, "BMP_START_3_DOWN");
+    } else if (g_currentScoreValue == 0x18) {
+        iMode = 3;
+        hBitmap = LoadBitmapA(NULL, "BMP_START_4_DOWN");
+    } else {
+        return;
+    }
+
+    hdc = GetDC(g_mainWindow_00414978);
+    hdcMem = CreateCompatibleDC(hdc);
+    iMode = GetMapMode(hdc);
+    SetMapMode(hdcMem, iMode);
+    SelectObject(hdcMem, hBitmap);
+    BitBlt(hdc,
+           (rc.right - 0x84) / 2 + iMode * 0x40 - 0x74,
+           rc.bottom - 0x49,
+           0x28,
+           0x28,
+           hdcMem,
+           0,
+           0,
+           SRCCOPY);
+    DeleteDC(hdcMem);
+    ReleaseDC(g_mainWindow_00414978, hdc);
+    DeleteObject(hBitmap);
 }

@@ -39,3 +39,9 @@ HGDIOBJ g_bombFrame3_00416684;
 HGDIOBJ g_bombFrame4_00416688;
 int g_soundEnabled_00415624;
 int g_musicEnabled_004149e0;
+
+HGDIOBJ g_bombFrame5_0041668c;
+
+HGDIOBJ g_scorePanelDefaultBitmap_004149dc;
+
+int g_currentScoreValue_0041e86c;

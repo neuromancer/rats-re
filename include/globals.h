@@ -45,4 +45,10 @@ extern HGDIOBJ g_bombFrame4_00416688;
 extern int g_soundEnabled_00415624;
 extern int g_musicEnabled_004149e0;
 
+extern HGDIOBJ g_bombFrame5_0041668c;
+
+extern HGDIOBJ g_scorePanelDefaultBitmap_004149dc;
+
+extern int g_currentScoreValue_0041e86c;
+
 #endif
