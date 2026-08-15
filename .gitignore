@@ -2,5 +2,8 @@
 /wibo
 /.dreamm/
 /3rdparty/msvcrt40.dll
+/compilers/.cache/
+/compilers/msvc41/
+/compilers/msvc41.tmp/
 /RATS.EXE
 .DS_Store

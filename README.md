@@ -2,14 +2,13 @@
 
 This repository is a minimal base for reconstructing `RATS.EXE`, the original
 Windows version of [*Rats!*](https://www.windowsgames.co.uk/rats.html) by Sean
-O'Connor. It builds a Win32 executable with Microsoft Visual C++ 4.20 under
+O'Connor. It builds a Win32 executable with Microsoft Visual C++ 4.1 under
 [wibo](https://github.com/neuromancer/wibo), and runs it in
 [DREAMM](https://dreamm.aarongiles.com/).
 
 The original executable appears to have been built with Visual C++ 4.1. The
-4.20 toolchain is a deliberate starting approximation; compiler flags and
-source structure will be refined from binary comparisons as reconstruction
-progresses.
+reconstruction now uses that compiler directly: C/C++ compiler version
+10.10.6038 and linker version 3.10.6038.
 
 ## Setup
 
@@ -24,8 +23,8 @@ from the [official *Rats!* page](https://www.windowsgames.co.uk/rats.html) and
 place its `RATS.EXE` in the repository root to use the original-executable and
 binary-comparison targets.
 
-The host needs CMake, Ninja, `curl`, and a C/C++ compiler to build wibo. On
-macOS, the DREAMM smoke target also uses GNU `gtimeout` from `coreutils`:
+The host needs CMake, Ninja, `curl`, `tar`, and a C/C++ compiler to build wibo.
+On macOS, the DREAMM smoke target also uses GNU `gtimeout` from `coreutils`:
 
 ```sh
 brew install cmake ninja coreutils
@@ -35,6 +34,7 @@ brew install cmake ninja coreutils
 
 ```sh
 make                 # build out/RATS_RE.EXE, .map, .obj, and .asm
+make toolchain       # download, extract, and verify Microsoft Visual C++ 4.1
 make run             # launch the rebuilt executable in DREAMM
 make run-original    # launch the preserved original RATS.EXE
 make test            # bounded DREAMM smoke test of the rebuilt executable
@@ -43,9 +43,12 @@ make debug           # start the rebuilt executable in DREAMM's debugger
 make compare-func FUNC=SaveHighScores ADDR=00409092
 ```
 
-wibo's compatible `msvcrt40.dll` and DREAMM `4.0x21` are downloaded on demand.
-They remain local build dependencies and are not committed. A locally supplied
-`RATS.EXE` is never overwritten; rebuilt programs are placed under `out/`.
+The checksum-pinned
+[MSVC 4.1 archive](https://github.com/decompme/compilers/releases/download/compilers/msvc4.1.tar.gz),
+the required MSVC 4.1 libraries, wibo's compatible `msvcrt40.dll`, and DREAMM
+`4.0x21` are downloaded on demand. They remain ignored local build dependencies
+and are not committed. A locally supplied `RATS.EXE` is never overwritten;
+rebuilt programs are placed under `out/`.
 
 ## Function reconstruction
 
@@ -80,10 +83,11 @@ The retained candidates were produced with Unsloth's
 32,768-token context and the `qwen` model preset. Gemma 4 31B IT BF16 was also
 benchmarked, but no Gemma-generated candidate is retained in the source tree.
 
-Similarity was remeasured from the current source tree with `binary-comp` on
-2026-08-15. Logged time is the complete elapsed time of the successful retained
-run, including managed-server startup, generation, any compile repair, build,
-and comparison. It excludes earlier unsuccessful exploratory runs.
+Similarity was remeasured from the current MSVC 4.1 source tree with
+`binary-comp` on 2026-08-15. Logged time is the complete elapsed time of the
+successful retained run, including managed-server startup, generation, any
+compile repair, build, and comparison. It excludes earlier unsuccessful
+exploratory runs.
 
 | Address | Function | Current similarity | Logged time |
 | --- | --- | ---: | ---: |
@@ -97,7 +101,7 @@ and comparison. It excludes earlier unsuccessful exploratory runs.
 | `0x00404ECE` | `DrawBitmapToWindow` | 95.59% | 59.3 s |
 | `0x00404F8B` | `DrawScore` | 96.20% | 1m 32.4s |
 | `0x0040507F` | `DrawScorePanel` | 97.97% | 2m 45.0s |
-| `0x0040525D` | `DrawScoreDigits` | 97.10% | 2m 13.7s |
+| `0x0040525D` | `DrawScoreDigits` | 94.20% | 2m 13.7s |
 | `0x00405343` | `RenderScoreOverlay` | 76.77% | 1m 28.1s |
 | `0x0040546B` | `DrawFrameBorder` | 86.30% | 37.0 s |
 | `0x0040552E` | `ExplodeBomb` | 64.71% | 1m 50.9s |

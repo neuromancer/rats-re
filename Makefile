@@ -1,8 +1,7 @@
 # Minimal RATS.EXE reconstruction scaffold.
 #
-# The original binary was most likely built with Visual C++ 4.1.  MSVC 4.20 is
-# close enough to start the reconstruction and is the oldest complete compiler
-# kit currently used by the surrounding projects.
+# The original binary was built with Microsoft Visual C++ 4.1. The compiler
+# archive is downloaded on demand and run under wibo.
 
 UNAME_S := $(shell uname -s)
 UNAME_M := $(shell uname -m)
@@ -12,11 +11,19 @@ UNAME_M := $(shell uname -m)
 # ---------------------------------------------------------------------------
 
 WIBO = ./wibo
-CC = $(WIBO) compilers/msvc420/bin/CL.EXE
-LINK = $(WIBO) compilers/msvc420/bin/LINK.EXE
+MSVC_DIR = compilers/msvc41
+MSVC_BIN_DIR = $(MSVC_DIR)/Bin
+MSVC_LIB_DIR = $(MSVC_DIR)/Lib
+MSVC_CACHE_DIR = compilers/.cache
+MSVC_ARCHIVE = $(MSVC_CACHE_DIR)/msvc4.1.tar.gz
+MSVC_STAMP = $(MSVC_DIR)/.extracted
+MSVC_LIB_STAMP = $(MSVC_LIB_DIR)/.downloaded
 
-MSVC_INC = compilers\msvc420\include
-MSVC_LIB = compilers\msvc420\lib
+CC = $(WIBO) $(MSVC_BIN_DIR)/CL.EXE
+LINK = $(WIBO) $(MSVC_BIN_DIR)/LINK.EXE
+
+MSVC_INC = compilers\msvc41\Include
+MSVC_LIB = compilers\msvc41\Lib
 
 # Initial evidence points to an unoptimised, static release CRT build targeting
 # a 386-class CPU.  These flags are a starting point and should change only as
@@ -85,7 +92,12 @@ endif
 MSVCRT40_URL = https://raw.githubusercontent.com/neuromancer/my-teacher-is-an-alien-re/3d1bfe60522ae05b86bbd2252fd01c8d0a11c3df/3rdparty/msvcrt40.dll
 MSVCRT40_SHA256 = ab55a2de2b6faf3daacd3e69473d385ceaead8033f7c79beb6bbf802f230f030
 MSVCRT_SOURCE = 3rdparty/msvcrt40.dll
-MSVCRT_DLL = compilers/msvc420/bin/msvcrt40.dll
+MSVCRT_DLL = $(MSVC_BIN_DIR)/msvcrt40.dll
+
+MSVC41_URL = https://github.com/decompme/compilers/releases/download/compilers/msvc4.1.tar.gz
+MSVC41_SHA256 = ba2a100dad6b5f1f097860c8cb5e0d3b5f78881e69f96f16168b174e12af80b0
+MSVC41_LIB_COMMIT = 373f5e621ac8fb7b219873b37334ef1d0a2149e6
+MSVC41_LIB_BASE_URL = https://raw.githubusercontent.com/archaic-msvc/msvc410/$(MSVC41_LIB_COMMIT)/lib
 
 $(WIBO): wibo-src/CMakeLists.txt
 	cd wibo-src && cmake --preset $(WIBO_PRESET) && cmake --build --preset $(WIBO_PRESET)
@@ -96,12 +108,49 @@ wibo-src/CMakeLists.txt:
 	@echo "Run: git submodule update --init --recursive" >&2
 	@exit 1
 
-compilers/msvc420/bin/CL.EXE:
-	@echo "Error: MSVC 4.20 submodule is missing." >&2
-	@echo "Run: git submodule update --init --recursive" >&2
-	@exit 1
+$(MSVC_ARCHIVE):
+	@mkdir -p $(dir $@)
+	@echo "Downloading Microsoft Visual C++ 4.1..."
+	@curl -fL --retry 3 -o "$@.tmp" "$(MSVC41_URL)"
+	@printf '%s  %s\n' "$(MSVC41_SHA256)" "$@.tmp" | \
+		shasum -a 256 -c - >/dev/null || \
+		(rm -f "$@.tmp"; echo "Error: MSVC 4.1 checksum mismatch." >&2; exit 1)
+	@mv "$@.tmp" "$@"
 
-$(MSVCRT_DLL): $(MSVCRT_SOURCE) | compilers/msvc420/bin/CL.EXE
+$(MSVC_STAMP): $(MSVC_ARCHIVE)
+	@echo "Extracting Microsoft Visual C++ 4.1..."
+	@rm -rf "$(MSVC_DIR).tmp"
+	@mkdir -p "$(MSVC_DIR).tmp"
+	@tar xzf "$<" -C "$(MSVC_DIR).tmp"
+	@test -f "$(MSVC_DIR).tmp/Bin/CL.EXE" || \
+		(echo "Error: MSVC 4.1 archive has no Bin/CL.EXE." >&2; exit 1)
+	@test -f "$(MSVC_DIR).tmp/Bin/LINK.EXE" || \
+		(echo "Error: MSVC 4.1 archive has no Bin/LINK.EXE." >&2; exit 1)
+	@rm -rf "$(MSVC_DIR)"
+	@mv "$(MSVC_DIR).tmp" "$(MSVC_DIR)"
+	@touch "$@"
+
+# The decomp.me compiler archive contains Bin/ and Include/ but no Lib/. Fetch
+# only the six MSVC 4.1 libraries required by this executable from a pinned
+# revision of the archival msvc410 repository.
+$(MSVC_LIB_STAMP): config/msvc41-libs.sha256 $(MSVC_STAMP)
+	@mkdir -p "$(MSVC_LIB_DIR)"
+	@set -e; while read -r library_hash library_name; do \
+		library_target="$(MSVC_LIB_DIR)/$$library_name"; \
+		echo "Downloading MSVC 4.1 $$library_name..."; \
+		curl -fL --retry 3 -o "$$library_target.tmp" \
+			"$(MSVC41_LIB_BASE_URL)/$$library_name"; \
+		printf '%s  %s\n' "$$library_hash" "$$library_target.tmp" | \
+			shasum -a 256 -c - >/dev/null || { \
+				rm -f "$$library_target.tmp"; \
+				echo "Error: $$library_name checksum mismatch." >&2; \
+				exit 1; \
+			}; \
+		mv "$$library_target.tmp" "$$library_target"; \
+	done < config/msvc41-libs.sha256
+	@touch "$@"
+
+$(MSVCRT_DLL): $(MSVCRT_SOURCE) $(MSVC_STAMP)
 	cp -f $< $@
 
 $(MSVCRT_SOURCE):
@@ -113,7 +162,12 @@ $(MSVCRT_SOURCE):
 		(rm -f "$@.tmp"; echo "Error: msvcrt40.dll checksum mismatch." >&2; exit 1)
 	@mv "$@.tmp" "$@"
 
-toolchain: $(WIBO) $(MSVCRT_DLL)
+toolchain: $(WIBO) $(MSVCRT_DLL) $(MSVC_LIB_STAMP)
+	@$(CC) /nologo "/?" >/dev/null
+	@# LINK.EXE 3.10 prints valid help and then returns its historical code 6.
+	@$(LINK) "/?" >/dev/null 2>&1; linker_status=$$?; \
+		test $$linker_status -eq 0 -o $$linker_status -eq 6
+	@echo "Microsoft Visual C++ 4.1 toolchain is ready."
 
 # ---------------------------------------------------------------------------
 # Build
@@ -123,12 +177,12 @@ all: $(TARGET)
 
 build: $(TARGET)
 
-$(TARGET): $(OBJECTS) | $(MSVCRT_DLL)
+$(TARGET): $(OBJECTS) $(MSVC_LIB_STAMP) | $(MSVCRT_DLL)
 	@mkdir -p $(OUT_DIR)
 	env LIB='$(MSVC_LIB)' $(LINK) $(LINKFLAGS) /MAP:$(MAPFILE) \
 		$(OBJECTS) $(GAME_LIBS) /OUT:$@
 
-$(OUT_DIR)/%.obj: src/%.c $(PROJECT_HEADERS) | $(WIBO) $(MSVCRT_DLL)
+$(OUT_DIR)/%.obj: src/%.c $(PROJECT_HEADERS) $(MSVC_STAMP) | $(WIBO) $(MSVCRT_DLL)
 	@mkdir -p $(OUT_DIR)
 	@env INCLUDE='$(MSVC_INC)' $(CC) $(CFLAGS) $< \
 		/Fo$@ \
@@ -267,6 +321,9 @@ test-original: $(ORIGINAL_RUN_EXE) | $(DREAMM_BIN)
 clean:
 	rm -rf $(OUT_DIR)
 
+clean-toolchain:
+	rm -rf $(MSVC_DIR) "$(MSVC_DIR).tmp" $(MSVC_CACHE_DIR)
+
 clean-dreamm:
 	rm -rf $(DREAMM_DIR)
 
@@ -278,11 +335,13 @@ help:
 	@echo "make test-original   smoke-test the original executable in DREAMM"
 	@echo "make debug           launch the rebuilt executable in DREAMM's debugger"
 	@echo "make compare-func FUNC=Name ADDR=00401000"
+	@echo "make toolchain       download, extract, and verify MSVC 4.1"
 
 .PHONY: \
 	all \
 	build \
 	clean \
+	clean-toolchain \
 	clean-dreamm \
 	compare-func \
 	debug \

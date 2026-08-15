@@ -1,6 +1,6 @@
 schema_version = 1
 language = "C"
-compiler = "Microsoft Visual C++ 4.20 with /Od"
+compiler = "Microsoft Visual C++ 4.1 with /Od"
 exports_dir = "ghidra"
 output_dir = "out/binary-recons"
 strings_file = "ghidra/strings.txt"
