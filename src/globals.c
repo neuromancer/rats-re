@@ -45,3 +45,19 @@ HGDIOBJ g_bombFrame5_0041668c;
 HGDIOBJ g_scorePanelDefaultBitmap_004149dc;
 
 int g_currentScoreValue_0041e86c;
+
+int g_levelXs_0041e7c8[10];
+int g_levelYs_0041e7cc[10];
+int g_levelIndices_0041e7d0[10] = { 999, 999, 999, 999, 999, 999, 999, 999, 999, 999 };
+
+int g_displayState_0041ec1c;
+
+int g_levelTypes_00414e00[50];
+int g_levelSizes_00414e04[50];
+int g_displayTable_0041ebd8[16];
+
+int g_levelXs_00414df8[50];
+int g_levelYs_00414dfc[50];
+int g_levelFlags_00414e18[50];
+int g_levelFlags_00414e1c[50];
+int g_levelFlags_00414e10[50];

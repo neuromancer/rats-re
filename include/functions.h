@@ -1,6 +1,11 @@
 #ifndef RATS_FUNCTIONS_H
 #define RATS_FUNCTIONS_H
 
+int __cdecl IsLevelIndexInRange(int index); /* 0x0040215C */
+void __cdecl AddLevelToTable(int index, int x, int y); /* 0x00402BF3 */
+void UpdateGameDisplay(void); /* 0x00402DC6 */
+int __cdecl GetLevelDisplayInfo(int index); /* 0x00402EE7 */
+void __cdecl PlaceLevel(int source_index); /* 0x00403607 */
 void __cdecl DrawBitmapPair(HGDIOBJ hObj1, HGDIOBJ hObj2, int x, int y, int cx, int cy); /* 0x00404D6E */
 void __cdecl RenderBitmapToWindow(HGDIOBJ hObject, int x, int y, int cx, int cy); /* 0x00404E3B */
 void DrawBitmapToWindow(void); /* 0x00404ECE */

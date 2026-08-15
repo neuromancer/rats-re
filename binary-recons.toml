@@ -23,6 +23,11 @@ path = "src/globals.c"
 purpose = "Definitions matching newly added global declarations."
 
 [[source_units]]
+path = "src/rats.c"
+start = 0x00401000
+end = 0x00404d6d
+
+[[source_units]]
 path = "src/graphics.c"
 start = 0x00404d6e
 end = 0x00408a50

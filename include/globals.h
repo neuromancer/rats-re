@@ -51,4 +51,20 @@ extern HGDIOBJ g_scorePanelDefaultBitmap_004149dc;
 
 extern int g_currentScoreValue_0041e86c;
 
+extern int g_levelXs_0041e7c8[10];
+extern int g_levelYs_0041e7cc[10];
+extern int g_levelIndices_0041e7d0[10];
+
+extern int g_displayState_0041ec1c;
+
+extern int g_levelTypes_00414e00[50];
+extern int g_levelSizes_00414e04[50];
+extern int g_displayTable_0041ebd8[16];
+
+extern int g_levelXs_00414df8[50];
+extern int g_levelYs_00414dfc[50];
+extern int g_levelFlags_00414e18[50];
+extern int g_levelFlags_00414e1c[50];
+extern int g_levelFlags_00414e10[50];
+
 #endif
