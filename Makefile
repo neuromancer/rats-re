@@ -55,7 +55,11 @@ TARGET = $(OUT_DIR)/RATS_RE.EXE
 MAPFILE = $(OUT_DIR)/RATS_RE.map
 SOURCES = \
 	src/rats.c \
+	src/graphics.c \
+	src/menu.c \
+	src/datafiles.c \
 	src/scores.c \
+	src/help.c \
 	src/globals.c
 OBJECTS = $(patsubst src/%.c,$(OUT_DIR)/%.obj,$(SOURCES))
 ASSEMBLIES = $(patsubst src/%.c,$(OUT_DIR)/%.asm,$(SOURCES))

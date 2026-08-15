@@ -6,10 +6,36 @@ output_dir = "out/binary-recons"
 strings_file = "ghidra/strings.txt"
 source_dirs = ["src"]
 declaration_files = ["include/*.h"]
+prototype_file = "include/functions.h"
 rule_profiles = ["c89", "msvc4-od"]
 compare_command = ["make", "compare-func", "FUNC={symbol}", "ADDR={address_hex}"]
+
+[[source_units]]
+path = "src/graphics.c"
+start = 0x00404d6e
+end = 0x00404ecd
+
+[[source_units]]
+path = "src/graphics.c"
+start = 0x0040546b
+end = 0x0040552d
+
+[[source_units]]
+path = "src/menu.c"
+start = 0x00408a51
+end = 0x00408ad2
+
+[[source_units]]
+path = "src/datafiles.c"
+start = 0x00408e6a
+end = 0x00408f01
 
 [[source_units]]
 path = "src/scores.c"
 start = 0x00408f02
 end = 0x0040910b
+
+[[source_units]]
+path = "src/help.c"
+start = 0x00409db6
+end = 0x00409eaf

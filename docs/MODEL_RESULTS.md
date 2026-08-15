@@ -21,3 +21,30 @@ same score substantially faster and used the project's platform type aliases.
 
 The runs used llama.cpp build 10360 (`48d22e295`). Managed serving stopped each
 owned model process before the other model was loaded.
+
+## Model-inferred contract batch
+
+Six additional functions were started without source stubs or declarations.
+The target contract contained only the address: Qwen selected each function
+name, prototype, and implementation from the assembly, decompiler hint,
+referenced strings, and mechanically matched global declarations.
+
+| Address | Model-selected name | Final similarity |
+| --- | --- | ---: |
+| `0x00404D6E` | `DrawBitmapPair` | 98.67% |
+| `0x00404E3B` | `RenderBitmapToWindow` | 94.74% |
+| `0x0040546B` | `DrawFrameBorder` | 86.30% |
+| `0x00408A51` | `UpdateMainMenuState` | 97.56% |
+| `0x00408E6A` | `LoadLevelData` | 77.50% |
+| `0x00409DB6` | `IsRatsHelpFile` | 91.67% |
+
+The final scores above were re-measured together from the retained tree. Five
+of the six fresh functions exceed 80%. Each first pass requested one candidate
+and allowed one compiler repair; only `0x00404D6E` needed a second generation
+iteration to clear a name collision, and `0x00408E6A` received one follow-up
+iteration that did not improve its retained score.
+
+The live batch led to two general driver improvements. Python now supplies an
+omitted address marker mechanically, and prompts expose existing function names
+as a reserved-name list without revealing their interfaces. These changes do
+not influence the model's proposed contract or C implementation.
