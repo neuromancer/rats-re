@@ -110,33 +110,32 @@ void ShowLevelComplete(void)
 }
 
 /* Function start: 0x40250C */
-void CheckHighScore(void)
+void SubmitHighScore(void)
 {
   int local_8;
+  int i;
 
   LoadHighScores();
-  if (((*(int *)0x004167a4) <= g_score_0041560c) &&
-     (((*(int *)0x004167a2) <= g_currentScoreValue_0041e86c || ((*(int *)0x004167a4) != g_score_0041560c)))) {
-    (*(int *)0x00416688) = 9;
-    while ((0 < (*(int *)0x00416688) &&
-           ((*(int *)((char *)0x004166a8 + ((*(int *)0x00416688) + -1) * 0x1c) < g_score_0041560c ||
-            ((*(short *)((char *)0x004166a6 + ((*(int *)0x00416688) + -1) * 0x1c) < g_currentScoreValue_0041e86c &&
-             (*(int *)((char *)0x004166a8 + ((*(int *)0x00416688) + -1) * 0x1c) == g_score_0041560c))))))) {
-      (*(int *)0x00416688) = (*(int *)0x00416688) + -1;
+  if ((g_highScores_00416690[9].score <= g_score_0041560c) &&
+     ((g_highScores_00416690[9].level <= g_currentScoreValue_0041e86c || (g_highScores_00416690[9].score != g_score_0041560c)))) {
+    local_8 = 9;
+    while ((0 < local_8 &&
+           ((g_highScores_00416690[local_8 - 1].score < g_score_0041560c ||
+            ((g_highScores_00416690[local_8 - 1].level < g_currentScoreValue_0041e86c &&
+             (g_highScores_00416690[local_8 - 1].score == g_score_0041560c))))))) {
+      local_8 = local_8 + -1;
     }
-    if ((*(int *)0x00416688) < 9) {
-      for (local_8 = 9; (*(int *)0x00416688) < local_8; local_8 = local_8 + -1) {
-        *(unsigned int *)((char *)0x004166a8 + local_8 * 0x1c) =
-             *(unsigned int *)((char *)0x004166a8 + (local_8 + -1) * 0x1c);
-        *(unsigned short *)((char *)0x004166a6 + local_8 * 0x1c) =
-             *(unsigned short *)((char *)0x004166a6 + (local_8 + -1) * 0x1c);
+    if (local_8 < 9) {
+      for (i = 9; local_8 < i; local_8 = local_8 + -1) {
+        g_highScores_00416690[local_8].score = g_highScores_00416690[local_8 - 1].score;
+        g_highScores_00416690[local_8].level = g_highScores_00416690[local_8 - 1].level;
         strcpy((char *)&g_highScores_00416690 + local_8 * 0x1c,(char *)&g_highScores_00416690 + (local_8 + -1) * 0x1c);
       }
     }
     if ((g_soundEnabled_00415624 == 1) && (g_musicEnabled_004149e0 == 1)) {
       sndPlaySoundA("VICTORY.WAV",1);
     }
-    DialogBoxParamA((*(int *)0x00414980),"DLG_NAME",g_mainWindow_00414978,HighScoreDialogProc,0);
+    DialogBoxParamA(g_hInstance_00414980,"DLG_NAME",g_mainWindow_00414978,HighScoreDialogProc,0);
     SaveHighScores();
   }
   return;
@@ -357,6 +356,122 @@ int __cdecl GetLevelDisplayInfo(int index)
     }
 
     return g_displayTable_0041ebd8[size_class * 4 + style];
+}
+
+/* Function start: 0x402FD5 */
+int __cdecl GetLevelIndex(int level_index)
+{
+  int bVar1;
+  int iVar2;
+  int local_28;
+  int local_24;
+  int local_20 [4];
+  int local_10;
+  int local_c;
+  int local_8;
+
+  iVar2 = *(int *)((char *)&g_levelXs_00414df8 + level_index * 0x28);
+  if ((iVar2 % 0x14 == 10) && (iVar2 = *(int *)((char *)&g_levelYs_00414dfc + level_index * 0x28), iVar2 % 0x14 == 10)
+     ) {
+    for (local_24 = 0; local_24 < 0x28; local_24 = local_24 + 1) {
+      if (((*(int *)((char *)&g_levelData_0041e8a0 + local_24 * 0x14) != 999) &&
+          (*(int *)((char *)&g_bombData_0041e898 + local_24 * 0x14) + 10 ==
+           *(int *)((char *)&g_levelXs_00414df8 + level_index * 0x28))) &&
+         (*(int *)((char *)0x0041e89c + local_24 * 0x14) + 10 == *(int *)((char *)&g_levelYs_00414dfc + level_index * 0x28)
+         )) {
+        if (*(int *)((char *)&g_levelData_0041e8a0 + local_24 * 0x14) == 3) {
+          if ((g_soundEnabled_00415624 == 1) && (g_musicEnabled_004149e0 == 1)) {
+            sndPlaySoundA("POISON.WAV",1);
+          }
+          *(unsigned int *)((char *)&g_levelScores_00414e0c + level_index * 0x28) = 0;
+          DrawScorePanel();
+          g_score_0041560c = g_score_0041560c + g_pointsPerBonus_004155e0 * 5;
+          AddLevelToTable(5,*(unsigned int *)((char *)&g_levelXs_00414df8 + level_index * 0x28),
+                       *(unsigned int *)((char *)&g_levelYs_00414dfc + level_index * 0x28));
+          DrawScore();
+          *(unsigned int *)((char *)&g_levelData_0041e8a0 + local_24 * 0x14) = 999;
+          return local_24 * 4;
+        }
+        if (*(int *)((char *)&g_levelData_0041e8a0 + local_24 * 0x14) == 1) {
+          *(int *)((char *)&g_levelScores_00414e0c + level_index * 0x28) = *(int *)((char *)&g_levelScores_00414e0c + level_index * 0x28) + -8;
+          if (*(int *)((char *)&g_levelScores_00414e0c + level_index * 0x28) < 1) {
+            if ((g_soundEnabled_00415624 == 1) && (g_musicEnabled_004149e0 == 1)) {
+              sndPlaySoundA("CHOKE.WAV",1);
+            }
+            DrawScorePanel();
+            g_score_0041560c = g_score_0041560c + g_pointsPerBonus_004155e0 * 0x14;
+            AddLevelToTable(0x14,*(unsigned int *)((char *)&g_levelXs_00414df8 + level_index * 0x28),
+                         *(unsigned int *)((char *)&g_levelYs_00414dfc + level_index * 0x28));
+            DrawScore();
+            return local_24 * 4;
+          }
+        }
+        else if (*(int *)((char *)&g_levelData_0041e8a0 + local_24 * 0x14) == 4) {
+          if ((g_soundEnabled_00415624 == 1) && (g_musicEnabled_004149e0 == 1)) {
+            sndPlaySoundA("NEWSEX.WAV",1);
+          }
+          *(unsigned int *)((char *)&g_levelIndices_00414e08 + level_index * 0x28) = 0;
+          *(unsigned int *)((char *)&g_levelFlags_00414e10 + level_index * 0x28) = 0;
+          *(int *)((char *)0x0041e8a4 + local_24 * 0x14) = *(int *)((char *)0x0041e8a4 + local_24 * 0x14) + -1
+          ;
+          if (*(int *)((char *)0x0041e8a4 + local_24 * 0x14) == 0) {
+            *(unsigned int *)((char *)&g_levelData_0041e8a0 + local_24 * 0x14) = 999;
+          }
+          DrawScorePanel();
+        }
+        else if (*(int *)((char *)&g_levelData_0041e8a0 + local_24 * 0x14) == 5) {
+          if ((g_soundEnabled_00415624 == 1) && (g_musicEnabled_004149e0 == 1)) {
+            sndPlaySoundA("NEWSEX.WAV",1);
+          }
+          *(unsigned int *)((char *)&g_levelIndices_00414e08 + level_index * 0x28) = 1;
+          *(int *)((char *)0x0041e8a4 + local_24 * 0x14) = *(int *)((char *)0x0041e8a4 + local_24 * 0x14) + -1
+          ;
+          if (*(int *)((char *)0x0041e8a4 + local_24 * 0x14) == 0) {
+            *(unsigned int *)((char *)&g_levelData_0041e8a0 + local_24 * 0x14) = 999;
+          }
+          DrawScorePanel();
+        }
+      }
+    }
+    switch(*(unsigned int *)((char *)&g_levelTypes_00414e00 + level_index * 0x28)) {
+    case 0:
+      local_8 = 2;
+      break;
+    case 1:
+      local_8 = 3;
+      break;
+    case 2:
+      local_8 = 0;
+      break;
+    case 3:
+      local_8 = 1;
+    }
+    local_10 = 0;
+    for (local_28 = 0; local_28 < 4; local_28 = local_28 + 1) {
+      if ((local_8 != local_28) &&
+         (bVar1 = IsBombAtLevel(level_index,local_28), bVar1 == 1)) {
+        local_20[local_10] = local_28;
+        local_10 = local_10 + 1;
+      }
+    }
+    if (local_10 == 0) {
+      *(int *)((char *)&g_levelTypes_00414e00 + level_index * 0x28) = local_8;
+    }
+    else if (local_10 == 1) {
+      *(int *)((char *)&g_levelTypes_00414e00 + level_index * 0x28) = local_20[0];
+      local_8 = local_20[0];
+    }
+    else {
+      iVar2 = rand();
+      local_c = iVar2 % local_10;
+      local_8 = local_20[iVar2 % local_10];
+      *(int *)((char *)&g_levelTypes_00414e00 + level_index * 0x28) = local_8;
+    }
+  }
+  else {
+    local_8 = iVar2 / 0x14;
+  }
+  return local_8;
 }
 
 /* Function start: 0x403430 */

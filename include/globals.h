@@ -85,4 +85,6 @@ extern int g_flag_0041e888;
 extern HBITMAP g_bitmap_00415620;
 extern HBITMAP g_memBitmap_0041495c;
 
+extern HINSTANCE g_hInstance_00414980;
+
 #endif

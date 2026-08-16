@@ -3,11 +3,12 @@
 
 int __cdecl IsLevelIndexInRange(int index); /* 0x0040215C */
 void ShowLevelComplete(void); /* 0x00402205 */
-void CheckHighScore(void); /* 0x0040250C */
+void SubmitHighScore(void); /* 0x0040250C */
 void RenderScoreboard(void); /* 0x004026D0 */
 void __cdecl AddLevelToTable(int index, int x, int y); /* 0x00402BF3 */
 void UpdateGameDisplay(void); /* 0x00402DC6 */
 int __cdecl GetLevelDisplayInfo(int index); /* 0x00402EE7 */
+int __cdecl GetLevelIndex(int level_index); /* 0x00402FD5 */
 int __cdecl IsBombAtLevel(int level_index, int direction); /* 0x00403430 */
 void __cdecl PlaceLevel(int source_index); /* 0x00403607 */
 void __cdecl DrawLevelIndicator(void); /* 0x00404764 */

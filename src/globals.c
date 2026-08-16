@@ -79,3 +79,5 @@ HINSTANCE g_hInstance_004149b8;
 int g_flag_0041e888;
 HBITMAP g_bitmap_00415620;
 HBITMAP g_memBitmap_0041495c;
+
+HINSTANCE g_hInstance_00414980;
