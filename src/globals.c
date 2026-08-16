@@ -61,3 +61,21 @@ int g_levelYs_00414dfc[50];
 int g_levelFlags_00414e18[50];
 int g_levelFlags_00414e1c[50];
 int g_levelFlags_00414e10[50];
+
+char g_levelMap_004149e8[32][32];
+int g_levelCount_00414df4;
+int g_maxLevelWidth_0041e7c4;
+int g_maxLevelHeight_0041496c;
+int g_highScoreMax_0041e894;
+int g_scoreValue_0041e868;
+int g_levelOffset_004149bc;
+int g_levelData_0041e8a0[0x28 * 0x14];
+
+int g_levelTime_00415630;
+int g_pointsPerBonus_004155e0;
+
+HCURSOR g_cursor_0041ec4c;
+HINSTANCE g_hInstance_004149b8;
+int g_flag_0041e888;
+HBITMAP g_bitmap_00415620;
+HBITMAP g_memBitmap_0041495c;

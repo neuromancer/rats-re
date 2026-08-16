@@ -90,27 +90,37 @@ Measured local-model runs are recorded in
 [docs/MODEL_RESULTS.md](docs/MODEL_RESULTS.md).
 
 <details>
-<summary>Model results: 25 retained functions and 8 deferred addresses</summary>
+<summary>Model results: 33 retained functions and 6 deferred addresses</summary>
 
-The retained candidates were generated with Unsloth's
+Most retained candidates were generated with Unsloth's
 [Qwen3.8 27B GGUF](https://unsloth.ai/docs/models/qwen3.8) in BF16
 (`Qwen3.8-27B-BF16`, served as `qwen3.8-27b-bf16`) through llama.cpp with a
-32,768-token context and the `qwen` model preset. Gemma 4 31B IT BF16 was also
-benchmarked, but none of its candidates is retained in the source tree.
+32,768-token context and the `qwen` model preset. The current workflow uses
+Ghidra's decompilation as a mechanical seed, asks Qwen only for a meaningful
+contract and bounded source edits, and accepts an edit only when it reduces
+compiler errors or improves `binary-comp` similarity. Gemma 4 31B IT BF16 was
+also benchmarked, but none of its candidates is retained in the source tree.
 
 The scores below were remeasured from the current source tree with MSVC 4.1 and
-`binary-comp` on 2026-08-15. Logged time is the complete elapsed time of the
-successful retained run, including managed-server startup, generation, any
-compile repair, build, and comparison. It excludes earlier unsuccessful
-exploratory runs.
+`binary-comp` on 2026-08-15; the five newest rows were independently verified on
+2026-08-16. Logged time is the complete elapsed time of the run that retained
+the candidate, including managed-server startup, generation or repair, build,
+and comparison. It excludes earlier unsuccessful exploratory runs, which
+remain available in the run logs.
 
 | Address | Function | Current similarity | Logged time |
 | --- | --- | ---: | ---: |
 | `0x0040215C` | `IsLevelIndexInRange` | 43.18% | 46.9 s |
+| `0x00402205` | `ShowLevelComplete` | 93.96% | 5m 26.1s |
+| `0x0040250C` | `CheckHighScore` | 86.40% | 36.8 s |
+| `0x004026D0` | `RenderScoreboard` | 95.40% | 2m 30.9s |
 | `0x00402BF3` | `AddLevelToTable` | 73.85% | 4m 04.6s |
 | `0x00402DC6` | `UpdateGameDisplay` | 78.18% | 1m 36.4s |
 | `0x00402EE7` | `GetLevelDisplayInfo` | 71.70% | 2m 15.9s |
+| `0x00403430` | `IsBombAtLevel` | 80.62% | 27.3 s |
 | `0x00403607` | `PlaceLevel` | 80.00% | 2m 32.6s |
+| `0x00404764` | `DrawLevelIndicator` | 97.33% | 1m 35.6s |
+| `0x0040499F` | `RenderCornerGlyph` | 69.83% | 1m 50.9s |
 | `0x00404D6E` | `DrawBitmapPair` | 98.67% | 1m 04.6s |
 | `0x00404E3B` | `RenderBitmapToWindow` | 94.74% | 26.4 s |
 | `0x00404ECE` | `DrawBitmapToWindow` | 95.59% | 59.3 s |
@@ -123,10 +133,12 @@ exploratory runs.
 | `0x0040560E` | `RenderExplosionWave` | 85.07% | 5m 40.0s |
 | `0x0040591A` | `DrawBombExplosion` | 89.31% | 1m 45.8s |
 | `0x00405AF5` | `DrawPausedOverlay` | 96.21% | 1m 05.1s |
+| `0x00405C52` | `HighScoreDialogProc` | 79.82% | 41.5 s |
 | `0x00405DB8` | `ScorePanelDialogProc` | 50.34% | 1m 53.1s |
 | `0x00405F72` | `DemoVersionDialogProc` | 46.31% | 4m 18.5s |
 | `0x00408854` | `DrawStartButton` | 70.80% | 1m 35.6s |
 | `0x00408A51` | `UpdateMainMenuState` | 97.56% | 28.9 s |
+| `0x00408AD3` | `InitializeGameLevel` | 83.72% | 5m 35.7s |
 | `0x00408E6A` | `LoadLevelData` | 77.50% | 52.5 s |
 | `0x00408F02` | `LoadHighScores` | 79.61% | 1m 15.0s |
 | `0x00409092` | `SaveHighScores` | 94.12% | 1m 25.9s |
@@ -138,17 +150,12 @@ attempts.
 
 | Deferred address | Time spent | Outcome |
 | --- | ---: | --- |
-| `0x00402205` | 3m 04.0s | Model request timed out |
-| `0x0040250C` | 4m 36.6s | No compilable candidate after repair |
-| `0x004026D0` | 3m 04.1s | Model request timed out |
-| `0x00402FD5` | 3m 03.7s | Model request timed out |
-| `0x00403430` | 4m 48.4s | Compile-repair request timed out |
-| `0x00405C52` | 4m 54.5s | No compilable candidate after two runs |
-| `0x004061D3` | 3m 04.2s | Model request timed out |
-| `0x00408AD3` | 3m 03.8s | Model request timed out |
-
-`WinMain` at `0x00401000` remains a minimal manual scaffold. Its current 1.13%
-similarity is not counted as an LLM reconstruction.
+| `0x00401000` | 10m 29.7s | Function too large for a bounded first pass; original 1.13% scaffold retained |
+| `0x00402FD5` | 8m 57.3s | Repairs initially reduced compiler errors, then stopped improving |
+| `0x00403840` | — | Skipped: too large for a fast bounded pass |
+| `0x004061D3` | 10m 44.7s | No compilable candidate after draft-assisted repair |
+| `0x00406674` | — | Skipped: too large for a fast bounded pass |
+| `0x0040910C` | 2m 25.2s | Compile-repair request timed out; no candidate retained |
 
 </details>
 

@@ -372,6 +372,34 @@ void DrawPausedOverlay(void)
     ReleaseDC(g_mainWindow_00414978, hDC);
 }
 
+/* Function start: 0x405C52 */
+int CALLBACK HighScoreDialogProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+  RECT local_24;
+  RECT local_14;
+
+  if (message != 0xf) {
+    if (message == 0x110) {
+      GetWindowRect(g_mainWindow_00414978,&local_24);
+      GetWindowRect(hWnd,&local_14);
+      MoveWindow(hWnd,(local_24.left + (local_24.right - local_24.left) / 2) -
+                         (local_14.right - local_14.left) / 2,
+                 (local_24.top + (local_24.bottom - local_24.top) / 2) -
+                 (local_14.bottom - local_14.top) / 2,local_14.right - local_14.left,
+                 local_14.bottom - local_14.top,1);
+      *(unsigned int *)((char *)0x004166a8 + (*(int *)0x00416688) * 0x1c) = g_score_0041560c;
+      *(short *)((char *)0x004166a6 + (*(int *)0x00416688) * 0x1c) = (short)g_currentScoreValue_0041e86c;
+      return 1;
+    }
+    if ((message == 0x111) && (wParam == 1)) {
+      GetDlgItemTextA(hWnd,0x65,(char *)&g_highScores_00416690 + (*(int *)0x00416688) * 0x1c,0x13);
+      EndDialog(hWnd,1);
+      return 1;
+    }
+  }
+  return 0;
+}
+
 /* Function start: 0x405DB8 */
 int CALLBACK ScorePanelDialogProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
 {

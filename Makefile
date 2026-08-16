@@ -66,6 +66,7 @@ SOURCES = \
 	src/menu.c \
 	src/datafiles.c \
 	src/scores.c \
+	src/bitmaps.c \
 	src/help.c \
 	src/globals.c
 OBJECTS = $(patsubst src/%.c,$(OUT_DIR)/%.obj,$(SOURCES))

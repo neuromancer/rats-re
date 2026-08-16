@@ -67,4 +67,22 @@ extern int g_levelFlags_00414e18[50];
 extern int g_levelFlags_00414e1c[50];
 extern int g_levelFlags_00414e10[50];
 
+extern char g_levelMap_004149e8[32][32];
+extern int g_levelCount_00414df4;
+extern int g_maxLevelWidth_0041e7c4;
+extern int g_maxLevelHeight_0041496c;
+extern int g_highScoreMax_0041e894;
+extern int g_scoreValue_0041e868;
+extern int g_levelOffset_004149bc;
+extern int g_levelData_0041e8a0[0x28 * 0x14];
+
+extern int g_levelTime_00415630;
+extern int g_pointsPerBonus_004155e0;
+
+extern HCURSOR g_cursor_0041ec4c;
+extern HINSTANCE g_hInstance_004149b8;
+extern int g_flag_0041e888;
+extern HBITMAP g_bitmap_00415620;
+extern HBITMAP g_memBitmap_0041495c;
+
 #endif

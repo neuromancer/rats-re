@@ -1,5 +1,44 @@
 # Local model results
 
+## WinMain size-limit POC
+
+`WinMain` at `0x00401000` was used to compare a Pcode-first pipeline with a
+compiler-led Qwen cleanup pass. AutoDecompiler reached its 6,000-token output
+limit after 185.8 seconds without completing the function, so its draft was
+discarded. Qwen produced a useful signature-only repair in 62.1 seconds, but a
+broad follow-up containing project declarations and string evidence timed out
+after 360 seconds without returning a response. A reduced first-error-cluster
+request completed model inference in 21.8 seconds, but the experiment was
+stopped before applying its output because the full function would still
+require too many serial repair clusters.
+
+No generated `WinMain` source was retained. The original 1.13% manual scaffold
+remains in place, and the function is deferred as too large for the current
+bounded first-pass workflow.
+
+## Pcode draft-assisted hard-function POC
+
+Two functions that previously timed out under Qwen-only reconstruction were
+retried with a first-pass Pcode draft from
+[`AutoDecompiler-30B-pscode`](https://huggingface.co/AutoDecompiler/AutoDecompiler-30B-pscode)
+BF16. The raw draft was treated as an untrusted hint; Qwen3.8 27B BF16 still
+received the original assembly, Ghidra decompilation, project declarations, and
+rules, and produced the only candidate eligible for compilation and retention.
+The historical Qwen-only runs were not repeated.
+
+| Address | Pcode draft | Qwen candidate | Focused resume | Outcome |
+| --- | ---: | ---: | ---: | --- |
+| `0x004026D0` | 36.0 s | 5m 50.7s | 2m 30.9s | `RenderScoreboard`, 95.40%, retained |
+| `0x004061D3` | 34.2 s | 4m 27.2s | 3m 13.3s | Did not compile; rolled back |
+
+Both first Qwen candidates reused an existing function name. This exposed that
+the name-only repair consumed the compiler-repair allowance. `binary-recons`
+now keeps those budgets separate and can resume a logged candidate directly,
+avoiding another full reconstruction request. The resumed scoreboard candidate
+needed only a C89 declaration repair and then exceeded the 90% stopping
+threshold. The second candidate still retained an invalid WinHelp constant
+after its single focused repair, so the function remains deferred.
+
 ## Function 0x00409092
 
 Both models received the same committed empty-function baseline, Ghidra
