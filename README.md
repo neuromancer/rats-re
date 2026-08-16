@@ -65,8 +65,9 @@ around one function at a time. It builds a focused prompt from the project
 rules, relevant declarations, disassembly, and decompiler output; parses the
 model's structured response; applies the candidate transactionally; compiles
 it; and measures its assembly similarity. Validation or compiler failures are
-returned to the model in a focused repair step, and failed changes are rolled
-back.
+returned to the model in a focused repair step. Valid edits advance the working
+trajectory while the best compiling result is retained separately, and unsafe
+or interrupted changes are rolled back.
 
 Install `binary-recons` once, select a local GGUF model, and run it from this or
 any other directory:
@@ -91,33 +92,33 @@ Measured local-model runs are recorded in
 [docs/MODEL_RESULTS.md](docs/MODEL_RESULTS.md).
 
 <details>
-<summary>Model results: 33 retained functions and 6 deferred addresses</summary>
+<summary>Model results: 35 retained functions and 4 deferred addresses</summary>
 
 Most retained candidates were generated with Unsloth's
 [Qwen3.8 27B GGUF](https://unsloth.ai/docs/models/qwen3.8) in BF16
 (`Qwen3.8-27B-BF16`, served as `qwen3.8-27b-bf16`) through llama.cpp with a
 32,768-token context and the `qwen` model preset. The current workflow uses
 Ghidra's decompilation as a mechanical seed, asks Qwen only for a meaningful
-contract and bounded source edits, and accepts an edit only when it reduces
-compiler errors or improves `binary-comp` similarity. Gemma 4 31B IT BF16 was
+contract and bounded source edits, follows valid edits as a repair trajectory,
+and retains the best result measured by `binary-comp`. Gemma 4 31B IT BF16 was
 also benchmarked, but none of its candidates is retained in the source tree.
 
 The scores below were remeasured from the current source tree with MSVC 4.1 and
-`binary-comp` on 2026-08-15; the five newest rows were independently verified on
-2026-08-16. Logged time is the complete elapsed time of the run that retained
-the candidate, including managed-server startup, generation or repair, build,
-and comparison. It excludes earlier unsuccessful exploratory runs, which
-remain available in the run logs.
+`binary-comp` on 2026-08-16. Logged time includes managed-server startup,
+generation or repair, build, and comparison for the retained candidate. It
+excludes unsuccessful exploratory runs and repair turns made after a resumable
+candidate had already been produced; those remain available in the run logs.
 
 | Address | Function | Current similarity | Logged time |
 | --- | --- | ---: | ---: |
 | `0x0040215C` | `IsLevelIndexInRange` | 65.31% | 3m 06.4s |
 | `0x00402205` | `ShowLevelComplete` | 93.96% | 5m 26.1s |
-| `0x0040250C` | `CheckHighScore` | 86.40% | 36.8 s |
+| `0x0040250C` | `SubmitHighScore` | 98.25% | 1m 49.7s |
 | `0x004026D0` | `RenderScoreboard` | 95.40% | 2m 30.9s |
 | `0x00402BF3` | `AddLevelToTable` | 73.85% | 4m 04.6s |
 | `0x00402DC6` | `UpdateGameDisplay` | 78.18% | 1m 36.4s |
 | `0x00402EE7` | `GetLevelDisplayInfo` | 71.70% | 2m 15.9s |
+| `0x00402FD5` | `GetLevelIndex` | 86.18% | 5m 48.3s |
 | `0x00403430` | `IsBombAtLevel` | 80.62% | 27.3 s |
 | `0x00403607` | `PlaceLevel` | 80.00% | 2m 32.6s |
 | `0x00404764` | `DrawLevelIndicator` | 97.33% | 1m 35.6s |
@@ -143,6 +144,7 @@ remain available in the run logs.
 | `0x00408E6A` | `LoadLevelData` | 77.50% | 52.5 s |
 | `0x00408F02` | `LoadHighScores` | 79.61% | 1m 15.0s |
 | `0x00409092` | `SaveHighScores` | 94.12% | 1m 25.9s |
+| `0x0040910C` | `LoadLevelBitmaps` | 98.93% | 7m 08.4s |
 | `0x00409DB6` | `IsRatsHelpFile` | 91.67% | 41.5 s |
 
 Reconstruction attempts for the following addresses were exhausted without
@@ -152,11 +154,9 @@ attempts.
 | Deferred address | Time spent | Outcome |
 | --- | ---: | --- |
 | `0x00401000` | 10m 29.7s | Function too large for a bounded first pass; original 1.13% scaffold retained |
-| `0x00402FD5` | 8m 57.3s | Repairs initially reduced compiler errors, then stopped improving |
-| `0x00403840` | — | Skipped: too large for a fast bounded pass |
+| `0x00403840` | 13m 10.0s | No compilable candidate; too large for a fast bounded pass |
 | `0x004061D3` | 10m 44.7s | No compilable candidate after draft-assisted repair |
 | `0x00406674` | — | Skipped: too large for a fast bounded pass |
-| `0x0040910C` | 2m 25.2s | Compile-repair request timed out; no candidate retained |
 
 </details>
 

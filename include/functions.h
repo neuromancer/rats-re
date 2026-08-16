@@ -34,5 +34,6 @@ int __cdecl InitializeGameLevel(void); /* 0x00408AD3 */
 BOOL LoadLevelData(void); /* 0x00408E6A */
 int LoadHighScores(void); /* 0x00408F02 */
 void SaveHighScores(void); /* 0x00409092 */
+void __cdecl LoadLevelBitmaps(int levelIndex); /* 0x0040910C */
 int IsRatsHelpFile(void); /* 0x00409DB6 */
 #endif

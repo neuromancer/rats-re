@@ -87,4 +87,24 @@ extern HBITMAP g_memBitmap_0041495c;
 
 extern HINSTANCE g_hInstance_00414980;
 
+extern int g_loadedLevelIndex_0041e890;
+
+extern HGDIOBJ g_bitmapN_00414970;
+extern HGDIOBJ g_bitmapS_00414984;
+extern HGDIOBJ g_bitmapE_00414998;
+extern HGDIOBJ g_bitmapW_00414974;
+extern HGDIOBJ g_bitmapNE_00415654;
+extern HGDIOBJ g_bitmapSE_004167b4;
+extern HGDIOBJ g_bitmapSW_004167ac;
+extern HGDIOBJ g_bitmapNW_004167b8;
+extern HGDIOBJ g_bitmapEN_00416658;
+extern HGDIOBJ g_bitmapES_00416670;
+extern HGDIOBJ g_bitmapWS_004167a8;
+extern HGDIOBJ g_bitmapWN_004167b0;
+extern HGDIOBJ g_grassBitmaps_00416660[4];
+extern HGDIOBJ g_flowerBitmaps_004149c0[4];
+extern HGDIOBJ g_caveBitmaps_004155d0[4];
+extern HGDIOBJ g_gasBitmaps_0041ebc8[4];
+extern HGDIOBJ g_explosionBitmaps_00416678[4];
+
 #endif

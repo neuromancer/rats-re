@@ -97,3 +97,20 @@ and interface, supplied matching declarations and definitions for three
 previously undeclared globals, compiled, and reached 95.59% similarity. No
 repair call was needed. The managed llama.cpp process stopped normally, and the
 disposable candidate was not copied into the retained source tree.
+
+## Address-backed global repair validation
+
+The missing function at `0x0040910C` exercised the safety-repair path on a
+large, repetitive bitmap loader. Qwen3.8 27B BF16 selected the name
+`LoadLevelBitmaps`, inferred its interface, and supplied meaningful paired
+declarations and definitions for the unresolved bitmap globals and arrays.
+The old loop retained those declarations but spent later turns renaming raw
+decompiler identifiers one at a time.
+
+`binary-recons` now propagates a model-chosen symbol only when an unambiguous
+extern/definition pair preserves the binary address suffix. Fixed-width array
+elements and Ghidra's indexed address form are resolved mechanically from the
+model-selected type, base address, and length. Replaying the exact logged Qwen
+candidate through that generic rule produced safe C and reached 98.93%
+similarity on its first successful compile. The 95% target was therefore met
+before an assembly-feedback edit was needed.

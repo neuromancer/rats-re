@@ -81,3 +81,23 @@ HBITMAP g_bitmap_00415620;
 HBITMAP g_memBitmap_0041495c;
 
 HINSTANCE g_hInstance_00414980;
+
+int g_loadedLevelIndex_0041e890;
+
+HGDIOBJ g_bitmapN_00414970;
+HGDIOBJ g_bitmapS_00414984;
+HGDIOBJ g_bitmapE_00414998;
+HGDIOBJ g_bitmapW_00414974;
+HGDIOBJ g_bitmapNE_00415654;
+HGDIOBJ g_bitmapSE_004167b4;
+HGDIOBJ g_bitmapSW_004167ac;
+HGDIOBJ g_bitmapNW_004167b8;
+HGDIOBJ g_bitmapEN_00416658;
+HGDIOBJ g_bitmapES_00416670;
+HGDIOBJ g_bitmapWS_004167a8;
+HGDIOBJ g_bitmapWN_004167b0;
+HGDIOBJ g_grassBitmaps_00416660[4];
+HGDIOBJ g_flowerBitmaps_004149c0[4];
+HGDIOBJ g_caveBitmaps_004155d0[4];
+HGDIOBJ g_gasBitmaps_0041ebc8[4];
+HGDIOBJ g_explosionBitmaps_00416678[4];
