@@ -101,3 +101,12 @@ HGDIOBJ g_flowerBitmaps_004149c0[4];
 HGDIOBJ g_caveBitmaps_004155d0[4];
 HGDIOBJ g_gasBitmaps_0041ebc8[4];
 HGDIOBJ g_explosionBitmaps_00416678[4];
+
+HBITMAP g_orderDialogBitmap_0041ebb8;
+
+int g_orderDialogActive_00414960;
+int g_orderDialogOffset_0041561c;
+HWND g_orderDialogHwnd_0041e870;
+int g_orderDialogFlag_0041ec28;
+int g_orderDialogFlag2_0041ec24;
+int g_orderDialogFlag3_0041ec20;

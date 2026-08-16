@@ -92,7 +92,7 @@ Measured local-model runs are recorded in
 [docs/MODEL_RESULTS.md](docs/MODEL_RESULTS.md).
 
 <details>
-<summary>Model results: 35 retained functions and 4 deferred addresses</summary>
+<summary>Model results: 36 retained functions and 3 deferred addresses</summary>
 
 Most retained candidates were generated with Unsloth's
 [Qwen3.8 27B GGUF](https://unsloth.ai/docs/models/qwen3.8) in BF16
@@ -113,12 +113,12 @@ candidate had already been produced; those remain available in the run logs.
 | --- | --- | ---: | ---: |
 | `0x0040215C` | `IsLevelIndexInRange` | 65.31% | 3m 06.4s |
 | `0x00402205` | `ShowLevelComplete` | 93.96% | 5m 26.1s |
-| `0x0040250C` | `SubmitHighScore` | 98.25% | 1m 49.7s |
+| `0x0040250C` | `SubmitHighScore` | 97.37% | 1m 49.7s |
 | `0x004026D0` | `RenderScoreboard` | 95.40% | 2m 30.9s |
 | `0x00402BF3` | `AddLevelToTable` | 73.85% | 4m 04.6s |
 | `0x00402DC6` | `UpdateGameDisplay` | 78.18% | 1m 36.4s |
 | `0x00402EE7` | `GetLevelDisplayInfo` | 71.70% | 2m 15.9s |
-| `0x00402FD5` | `GetLevelIndex` | 86.18% | 5m 48.3s |
+| `0x00402FD5` | `GetLevelIndex` | 87.27% | 5m 48.3s |
 | `0x00403430` | `IsBombAtLevel` | 80.62% | 27.3 s |
 | `0x00403607` | `PlaceLevel` | 80.00% | 2m 32.6s |
 | `0x00404764` | `DrawLevelIndicator` | 97.33% | 1m 35.6s |
@@ -129,8 +129,8 @@ candidate had already been produced; those remain available in the run logs.
 | `0x00404F8B` | `DrawScore` | 96.20% | 1m 32.4s |
 | `0x0040507F` | `DrawScorePanel` | 97.97% | 2m 45.0s |
 | `0x0040525D` | `DrawScoreDigits` | 94.20% | 2m 13.7s |
-| `0x00405343` | `RenderScoreOverlay` | 76.77% | 1m 28.1s |
-| `0x0040546B` | `DrawFrameBorder` | 86.30% | 37.0 s |
+| `0x00405343` | `RenderScoreOverlay` | 77.78% | 1m 28.1s |
+| `0x0040546B` | `DrawFrameBorder` | 84.93% | 37.0 s |
 | `0x0040552E` | `ExplodeBomb` | 64.71% | 1m 50.9s |
 | `0x0040560E` | `RenderExplosionWave` | 85.07% | 5m 40.0s |
 | `0x0040591A` | `DrawBombExplosion` | 89.31% | 1m 45.8s |
@@ -138,6 +138,7 @@ candidate had already been produced; those remain available in the run logs.
 | `0x00405C52` | `HighScoreDialogProc` | 79.82% | 41.5 s |
 | `0x00405DB8` | `ScorePanelDialogProc` | 50.34% | 1m 53.1s |
 | `0x00405F72` | `DemoVersionDialogProc` | 46.31% | 4m 18.5s |
+| `0x004061D3` | `OrderDialogProc` | 53.16% | 10m 46.5s |
 | `0x00408854` | `DrawStartButton` | 70.80% | 1m 35.6s |
 | `0x00408A51` | `UpdateMainMenuState` | 97.56% | 28.9 s |
 | `0x00408AD3` | `InitializeGameLevel` | 83.72% | 5m 35.7s |
@@ -155,7 +156,6 @@ attempts.
 | --- | ---: | --- |
 | `0x00401000` | 10m 29.7s | Function too large for a bounded first pass; original 1.13% scaffold retained |
 | `0x00403840` | 13m 10.0s | No compilable candidate; too large for a fast bounded pass |
-| `0x004061D3` | 10m 44.7s | No compilable candidate after draft-assisted repair |
 | `0x00406674` | — | Skipped: too large for a fast bounded pass |
 
 </details>

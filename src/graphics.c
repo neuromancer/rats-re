@@ -510,6 +510,127 @@ int CALLBACK DemoVersionDialogProc(HWND hWnd, int message, WPARAM wParam, LPARAM
     return 0;
 }
 
+/* Function start: 0x4061D3 */
+int CALLBACK OrderDialogProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+  HDC hDC;
+  HBRUSH hbr;
+  int iVar1;
+  __int64 lVar2;
+  int hDest;
+  HDC hdcSrc;
+  int xSrc;
+  int ySrc;
+  int wSrc;
+  int hSrc;
+  CHAR *pCVar3;
+  DWORD rop;
+  CHAR local_60 [52];
+  int local_2c;
+  RECT local_28;
+  HDC local_18;
+  RECT local_14;
+
+  if (message == 0xf) {
+    hDC = GetDC(hWnd);
+    GetClientRect(hWnd,&local_14);
+    hbr = GetStockObject(2);
+    FillRect(hDC,&local_14,hbr);
+    local_18 = CreateCompatibleDC(hDC);
+    iVar1 = GetMapMode(hDC);
+    SetMapMode(local_18,iVar1);
+    SelectObject(local_18,g_orderDialogBitmap_0041ebb8);
+    BitBlt(hDC,local_14.right / 2 + -0x32,6,100,0x28,local_18,0,0,0xcc0020);
+    SelectObject(local_18,g_scoreObjects_00415638[1]);
+    rop = 0xcc0020;
+    hSrc = 0x14;
+    wSrc = 0x14;
+    ySrc = 0;
+    xSrc = 0;
+    hDest = 0x3c;
+    iVar1 = 0x3c;
+    hdcSrc = local_18;
+    lVar2 = (__int64)0;
+    StretchBlt(hDC,local_14.right / 2 + -0x1e,(int)lVar2 + -0x1e,iVar1,hDest,hdcSrc,xSrc,ySrc,wSrc,
+               hSrc,rop);
+    DeleteDC(local_18);
+    SetTextAlign(hDC,6);
+    SetTextColor(hDC,0xffffff);
+    SetBkMode(hDC,1);
+    iVar1 = wsprintfA(local_60,"\xA9 Sean O'Connor, May 1996");
+    pCVar3 = local_60;
+    local_2c = iVar1;
+    lVar2 = (__int64)0;
+    TextOutA(hDC,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    iVar1 = wsprintfA(local_60,"http://www.cityscape.co.uk/users/gx96/");
+    pCVar3 = local_60;
+    local_2c = iVar1;
+    lVar2 = (__int64)0;
+    TextOutA(hDC,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    iVar1 = wsprintfA(local_60,"This is a free 8 level demo.");
+    pCVar3 = local_60;
+    local_2c = iVar1;
+    lVar2 = (__int64)0;
+    TextOutA(hDC,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    iVar1 = wsprintfA(local_60,"Click on the 'Order' button for");
+    pCVar3 = local_60;
+    local_2c = iVar1;
+    lVar2 = (__int64)0;
+    TextOutA(hDC,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    iVar1 = wsprintfA(local_60,"details on buying the full version.");
+    pCVar3 = local_60;
+    local_2c = iVar1;
+    lVar2 = (__int64)0;
+    TextOutA(hDC,local_14.right / 2,(int)lVar2,pCVar3,iVar1);
+    ReleaseDC(hWnd,hDC);
+  }
+  else {
+    if (message == 0x110) {
+      g_orderDialogActive_00414960 = 1;
+      g_orderDialogOffset_0041561c = 0x1e;
+      g_orderDialogHwnd_0041e870 = hWnd;
+      g_orderDialogFlag_0041ec28 = 1;
+      GetWindowRect(g_mainWindow_00414978,&local_28);
+      GetWindowRect(hWnd,&local_14);
+      MoveWindow(hWnd,(local_28.left + (local_28.right - local_28.left) / 2) -
+                         (local_14.right - local_14.left) / 2,
+                 (local_28.top + (local_28.bottom - local_28.top) / 2) -
+                 (local_14.bottom - local_14.top) / 2,local_14.right - local_14.left,
+                 local_14.bottom - local_14.top,1);
+      if ((g_orderDialogFlag2_0041ec24 == 0) && (g_flag_0041e888 == 0)) {
+        SendMessageA(g_mainWindow_00414978,0x102,0x50,0);
+      }
+      return 1;
+    }
+    if (message == 0x111) {
+      if (wParam == 1) {
+        EndDialog(hWnd,1);
+        g_orderDialogActive_00414960 = 0;
+        return 1;
+      }
+      if (wParam == 800) {
+        if (g_orderDialogFlag3_0041ec20 == 1) {
+          WinHelpA(g_mainWindow_00414978,"rats.hlp",1,0x104);
+        }
+        else {
+          MessageBoxA(g_mainWindow_00414978,"Help file is corrupt!","Rats",0x30);
+        }
+        return 1;
+      }
+      if (wParam == 0x321) {
+        if (g_orderDialogFlag3_0041ec20 == 1) {
+          WinHelpA(g_mainWindow_00414978,"rats.hlp",3,0);
+        }
+        else {
+          MessageBoxA(g_mainWindow_00414978,"Help file is corrupt!","Rats",0x30);
+        }
+        return 1;
+      }
+    }
+  }
+  return 0;
+}
+
 /* Function start: 0x408854 */
 void DrawStartButton(void)
 {

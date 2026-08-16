@@ -37,7 +37,8 @@ now keeps those budgets separate and can resume a logged candidate directly,
 avoiding another full reconstruction request. The resumed scoreboard candidate
 needed only a C89 declaration repair and then exceeded the 90% stopping
 threshold. The second candidate still retained an invalid WinHelp constant
-after its single focused repair, so the function remains deferred.
+after its single focused repair, so the function remained deferred at this
+stage. A later Qwen-only revisit is recorded below.
 
 ## Function 0x00409092
 
@@ -114,3 +115,19 @@ model-selected type, base address, and length. Replaying the exact logged Qwen
 candidate through that generic rule produced safe C and reached 98.93%
 similarity on its first successful compile. The 95% target was therefore met
 before an assembly-feedback edit was needed.
+
+## Function 0x004061D3 revisit
+
+The order dialog procedure was revisited with Qwen3.8 27B BF16 after the
+generic safety path learned to normalize exact-address string pointers,
+require address-backed names for new globals, and translate MSVC's unsupported
+`long long` spelling to `__int64`. The model selected `OrderDialogProc`, added
+the required address-suffixed globals, and produced a candidate that compiles
+without unresolved decompiler identifiers or raw absolute pointers.
+
+The retained candidate measures 53.16%. Two bounded assembly-feedback edits
+left that score unchanged, so the experiment stopped and retained the best
+compiling source rather than spending more GPU time on a function that had
+already resisted several fast passes. The contributing generation, repair,
+build, and first successful comparison took 10m 46.5s; discarded historical
+Pcode-assisted attempts and later no-improvement turns are excluded.

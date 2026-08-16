@@ -107,4 +107,13 @@ extern HGDIOBJ g_caveBitmaps_004155d0[4];
 extern HGDIOBJ g_gasBitmaps_0041ebc8[4];
 extern HGDIOBJ g_explosionBitmaps_00416678[4];
 
+extern HBITMAP g_orderDialogBitmap_0041ebb8;
+
+extern int g_orderDialogActive_00414960;
+extern int g_orderDialogOffset_0041561c;
+extern HWND g_orderDialogHwnd_0041e870;
+extern int g_orderDialogFlag_0041ec28;
+extern int g_orderDialogFlag2_0041ec24;
+extern int g_orderDialogFlag3_0041ec20;
+
 #endif

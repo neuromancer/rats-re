@@ -28,6 +28,7 @@ void DrawPausedOverlay(void); /* 0x00405AF5 */
 int CALLBACK HighScoreDialogProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam); /* 0x00405C52 */
 int CALLBACK ScorePanelDialogProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam); /* 0x00405DB8 */
 int CALLBACK DemoVersionDialogProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam); /* 0x00405F72 */
+int CALLBACK OrderDialogProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam); /* 0x004061D3 */
 void DrawStartButton(void); /* 0x00408854 */
 void UpdateMainMenuState(void); /* 0x00408A51 */
 int __cdecl InitializeGameLevel(void); /* 0x00408AD3 */
