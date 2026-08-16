@@ -39,6 +39,7 @@ make run-original    # launch the preserved original RATS.EXE
 make test            # bounded DREAMM smoke test of the rebuilt executable
 make test-original   # bounded DREAMM smoke test of the original executable
 make debug           # start the rebuilt executable in DREAMM's debugger
+make report          # report similarity for every reconstructed function
 make compare-func FUNC=SaveHighScores ADDR=00409092
 ```
 
@@ -110,7 +111,7 @@ remain available in the run logs.
 
 | Address | Function | Current similarity | Logged time |
 | --- | --- | ---: | ---: |
-| `0x0040215C` | `IsLevelIndexInRange` | 43.18% | 46.9 s |
+| `0x0040215C` | `IsLevelIndexInRange` | 65.31% | 3m 06.4s |
 | `0x00402205` | `ShowLevelComplete` | 93.96% | 5m 26.1s |
 | `0x0040250C` | `CheckHighScore` | 86.40% | 36.8 s |
 | `0x004026D0` | `RenderScoreboard` | 95.40% | 2m 30.9s |

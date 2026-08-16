@@ -21,22 +21,18 @@ int __cdecl IsLevelIndexInRange(int index)
     int x;
     int y;
 
-    if (index < 0) {
+    x = g_levelXs_00414df8[index * 10];
+    y = g_levelYs_00414dfc[index * 10];
+
+    if (x < g_bitmapWidth_004149d4 * 20 || y < g_bitmapHeight_004149d8 * 20) {
         return 0;
     }
 
-    x = g_levelIndices_00414e08[index];
-    y = g_levelScores_00414e0c[index];
-
-    if (x < g_bitmapWidth_004149d4 || y < g_bitmapHeight_004149d8) {
+    if (x >= (g_maxLevelWidth_0041e7c4 + g_bitmapWidth_004149d4) * 20) {
         return 0;
     }
 
-    if (x >= g_scorePanelXOffset + g_bitmapWidth_004149d4) {
-        return 0;
-    }
-
-    if (y >= g_scorePanelYOffset + g_bitmapHeight_004149d8) {
+    if (y >= (g_maxLevelHeight_0041496c + g_bitmapHeight_004149d8) * 20) {
         return 0;
     }
 

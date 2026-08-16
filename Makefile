@@ -212,6 +212,13 @@ compare-func: $(TARGET)
 		$(FUNC) \
 		ghidra/FUN_$(ADDR).disassembled.txt
 
+report: $(TARGET)
+	@$(BINARY_COMP) report \
+		--config $(BC_CONFIG) \
+		--target $(BC_TARGET) \
+		--no-build \
+		$(if $(FILTER),--filter $(FILTER))
+
 # ---------------------------------------------------------------------------
 # DREAMM runtime
 # ---------------------------------------------------------------------------
@@ -335,6 +342,7 @@ help:
 	@echo "make test            smoke-test the rebuilt executable in DREAMM"
 	@echo "make test-original   smoke-test the original executable in DREAMM"
 	@echo "make debug           launch the rebuilt executable in DREAMM's debugger"
+	@echo "make report          report similarity for all reconstructed functions"
 	@echo "make compare-func FUNC=Name ADDR=00401000"
 	@echo "make toolchain       download, extract, and verify MSVC 4.1"
 
@@ -348,6 +356,7 @@ help:
 	debug \
 	dreamm \
 	help \
+	report \
 	run \
 	run-original \
 	test \
