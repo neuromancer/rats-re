@@ -2,7 +2,7 @@
 
 This repository is a work-in-progress reconstruction of the source code for
 `RATS.EXE`, the original Windows version of
-[*Rats!*](https://www.windowsgames.co.uk/rats.html) by Sean O'Connor. It builds
+[*Rats!*](https://www.windowsgames.co.uk/rats.html) (1994) by Sean O'Connor. It builds
 a Win32 executable with Microsoft Visual C++ 4.1 under
 [wibo](https://github.com/neuromancer/wibo) and can be tested in
 [DREAMM](https://dreamm.aarongiles.com/).
@@ -15,6 +15,11 @@ process and its current limitations, not to hide difficult functions.
 Function reconstruction is restricted to local LLMs. Codex and Claude are used
 for repository setup and benchmark orchestration, but they are not allowed to
 write or edit the reconstructed source.
+
+Unless noted otherwise, all experiments used Qwen3.8 27B BF16 on a 2024
+MacBook Pro with an Apple M4 Max (16-core CPU, 40-core GPU) and 128 GB of memory.
+The approach works—imperfectly, but usefully: the 36 retained functions took an
+average logged time of 2m 32.1s each to reconstruct.
 
 ## Setup
 
@@ -52,41 +57,25 @@ and are not committed.
 ## Reconstruction workflow
 
 The checked-in `ghidra/` directory contains assembly and decompiler exports for
-all 177 internal functions discovered in the executable. Assembly is the
-comparison authority; decompiler output is included as a semantic hint for the
-model.
+all 177 internal functions. Assembly is the comparison authority; decompiled C
+is only a semantic seed.
 
-Unlike a cloud coding agent, the local model is not expected to explore the
-repository or choose among a large collection of tools. That agentic workflow
-proved too slow and allowed the context to grow before the model reached the
-actual code. Instead,
-[`binary-recons`](https://github.com/gg-sl-oss/binary-recons) runs a bounded loop
-around one function at a time. It builds a focused prompt from the project
-rules, relevant declarations, disassembly, and decompiler output; parses the
-model's structured response; applies the candidate transactionally; compiles
-it; and measures its assembly similarity. Validation or compiler failures are
-returned to the model in a focused repair step. Valid edits advance the working
-trajectory while the best compiling result is retained separately, and unsafe
-or interrupted changes are rolled back.
-
-Install `binary-recons` once, select a local GGUF model, and run it from this or
-any other directory:
+Install [`binary-recons`](https://github.com/gg-sl-oss/binary-recons) once, then
+run it from the repository root:
 
 ```sh
 python3 -m pip install -e /path/to/binary-recons
-export BINARY_RECONS_MODEL_PATH=/path/to/model.gguf
-binary-recons --project-root /path/to/rats-re --address 0x409092
+binary-recons --next-function           # reconstruct the next safe missing target
+binary-recons --address 0x409092        # reconstruct or improve a specific target
 ```
 
-Add `--dry-run-prompt` to inspect the collected evidence and generated prompt
-without loading a model.
-
-`binary-recons.toml` selects the shared `c89` and `msvc4-od` rule profiles and
-connects the model loop to the project's `binary-comp` target. It also
-allowlists the shared type and global files, allowing a model to return required
-declarations and definitions in the same compiled, rollback-safe change set as
-the function and its prototype. Prompt inspection and the package's CI tests do
-not require a local model.
+The tool discovers Qwen automatically in the standard Hugging Face cache;
+`BINARY_RECONS_MODEL_PATH` can override it. `binary-recons.toml` keeps automatic
+selection inside the game-code ranges, starts and stops llama.cpp, and defines
+the transactional files and `binary-comp` command. Each bounded run seeds one
+function from Ghidra, asks Qwen for focused compile or assembly-diff repairs,
+and retains the best safe compiling candidate. Use `--target-score 95` for a
+deeper pass or `--dry-run-prompt` to inspect the prompt without loading Qwen.
 
 Measured local-model runs are recorded in
 [docs/MODEL_RESULTS.md](docs/MODEL_RESULTS.md).
@@ -164,6 +153,5 @@ attempts.
 
 Special thanks to:
 
-- [Sean O'Connor](https://www.windowsgames.co.uk/) for creating *Rats!* and
-  continuing to make its original Windows release available from the
+- [Sean O'Connor](https://www.windowsgames.co.uk/) for creating [*Rats!*](https://www.mobygames.com/game/52495/rats/) and continuing to make its original Windows release available from the
   [official game page](https://www.windowsgames.co.uk/rats.html).
