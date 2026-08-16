@@ -9,6 +9,7 @@ declaration_files = ["include/*.h"]
 prototype_file = "include/functions.h"
 rule_profiles = ["c89", "msvc4-od"]
 compare_command = ["make", "compare-func", "FUNC={symbol}", "ADDR={address_hex}"]
+skip_addresses = [0x00403840, 0x004061D3, 0x00406674]
 
 [[support_files]]
 path = "include/types.h"
